@@ -8,7 +8,9 @@ Mapa składa się z kwadratów, na których mogą znajdować się następujące
 - źródła wody - zarówno dla drapieżników, jak i roślinożerców
 - jaskinie - kryjówki dla roślinożerców
 
-Parametry dinozaura:
+---
+
+<b>Parametry dinozaura:</b>
 - wiek
 - energia
 - prędkość
@@ -17,26 +19,27 @@ Parametry dinozaura:
 - poziom głodu
 - poziom pragnienia
 
-Dodatkowe parametry drapieżnika:
+<b>Dodatkowe parametry drapieżnika:</b>
 - siła
 - głośność
 
-Dodatkowe parametry roślinożercy:
+<b>Dodatkowe parametry roślinożercy:</b>
 - obrona
 - słuch
 - lokalizacja ostatnio widzianej kryjówki
 
+---
 
-Zachowania dinozaura:
+<b>Zachowania dinozaura:</b>
 - jeśli jest spragniony - szuka wody, ignoruje jedzenie
 - jeśli jest głodny - szuka jedzenia
 - jeśli nie jest głodny ani spragniony, a widzi innego dinozaura tego samego gatunku - reprodukcja
 - jeśli widzi jedzenie, nawet, gdy nie jest głodny - je
 
-Zachowania drapieżnika:
+<b>Zachowania drapieżnika:</b>
 - jeśli w jego polu widzenia jest roślinożerca - porusza się w jego stronę i atakuje
 - jeśli jest głodny - bardziej zdesperowany, szybciej się porusza
 
-Zachowania roślinożercy:
+<b>Zachowania roślinożercy:</b>
 - jeśli usłyszy drapieżnika - zdesperowany, szybciej się porusza, ale też szybciej traci energię, biegnie do ostatnio widzianej kryjówki (jeśli nie znalazł, to na oślep)
 - jeśli schowa się do kryjówki, wychodzi z niej gdy zgłodnieje lub z powodu pragnienia
