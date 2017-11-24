@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        applicationwindow.cpp
+        applicationwindow.cpp \
+    dinosaur.cpp
 
 HEADERS += \
-        applicationwindow.h
+        applicationwindow.h \
+    dinosaur.h
 
 FORMS += \
         applicationwindow.ui
