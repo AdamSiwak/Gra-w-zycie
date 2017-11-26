@@ -1,4 +1,4 @@
-# Gra-w-zycie
+# Gra-we-współżycie
 
 Mapa składa się z kwadratów, na których mogą znajdować się następujące typy obiektów:
 - dinozaury:
