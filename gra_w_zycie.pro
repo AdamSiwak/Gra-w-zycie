@@ -34,3 +34,6 @@ HEADERS += \
 
 FORMS += \
         applicationwindow.ui
+
+DISTFILES += \
+    dinosaur_green.png
