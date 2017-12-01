@@ -4,16 +4,16 @@
 #include <QObject>
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsItem>
 
-class Dinosaur
+class Dinosaur : public QGraphicsPixmapItem
 {
 public:
     Dinosaur();
     Dinosaur(QString);
-    QGraphicsPixmapItem* getDino();
+    void keyPressEvent(QKeyEvent *event);
 private:
 
-    QGraphicsPixmapItem *dino_;
 };
 
 #endif // DINOSAUR_H
