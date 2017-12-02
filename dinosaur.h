@@ -10,10 +10,13 @@ class Dinosaur : public QGraphicsPixmapItem
 {
 public:
     Dinosaur();
-    Dinosaur(QString);
+    Dinosaur(QString dinoName, const qreal skale);
     void keyPressEvent(QKeyEvent *event);
-private:
+    qreal mySkale() const;
+    void setMySkale(const qreal scale);
 
+private:
+    qreal scale_;
 };
 
 #endif // DINOSAUR_H
