@@ -9,7 +9,7 @@ Dinosaur::Dinosaur()
 
 Dinosaur::Dinosaur(QString dinoName){
     QPixmap *pixmap = new QPixmap();
-    pixmap->load("../pictures/"+dinoName);
+    pixmap->load(":/"+dinoName);
     this->setPixmap(*pixmap);
     if(pixmap->isNull()){
         qDebug() << "darn";

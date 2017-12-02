@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     // create a scene
     QGraphicsScene * scene = new QGraphicsScene();
 
-    Dinosaur* dino = new Dinosaur("dinosaur-brown.png");
+    Dinosaur* dino = new Dinosaur("dinosaur_green.png");
     scene->addItem(dino);
     dino->QGraphicsItem::setScale(0.15);
     dino->setFlag(QGraphicsItem::ItemIsFocusable);

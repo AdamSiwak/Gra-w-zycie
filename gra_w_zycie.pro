@@ -35,5 +35,7 @@ HEADERS += \
 FORMS += \
         applicationwindow.ui
 
-DISTFILES += \
-    dinosaur_green.png
+DISTFILES +=
+
+RESOURCES += \
+    images.qrc
