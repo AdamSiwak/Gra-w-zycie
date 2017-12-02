@@ -1,5 +1,6 @@
 #include "dinosaur.h"
 #include <QDebug>
+#include <QDir>
 #include <QKeyEvent>
 
 Dinosaur::Dinosaur()
@@ -13,6 +14,7 @@ Dinosaur::Dinosaur(QString dinoName, const qreal scale){
 
     setMySkale(scale);
     pixmap->load("../pictures/"+dinoName);
+//    pixmap->load(":/pictures/dinosaur-brown.png");
     this->setPixmap(*pixmap);
     if(pixmap->isNull()){
         qDebug() << "darn";

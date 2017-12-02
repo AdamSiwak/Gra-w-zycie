@@ -9,7 +9,6 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
     // create a scene
     QGraphicsScene * scene = new QGraphicsScene();
 
@@ -17,12 +16,8 @@ int main(int argc, char *argv[])
     scene->addItem(dino2);
 
     Dinosaur* dino = new Dinosaur("dinosaur-brown.png", 0.15);
-    scene->addItem(dino);
-//    dino->QGraphicsItem::setScale(0.25);
-//    dino->setFlag(QGraphicsItem::ItemIsFocusable);
-//    dino->setFlag(QGraphicsItem::ItemIsSelectable);
-//    dino->setFocus();
 
+    scene->addItem(dino);
     QGraphicsView * view = new QGraphicsView(scene);
     view->setSizeIncrement(1000,700);
     view->show();

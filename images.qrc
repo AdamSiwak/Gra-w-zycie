@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="dinosaur_green.png">pictures/dinosaur_green.png</file>
+        <file alias="dinosaur-brown.png">pictures/dinosaur-brown.png</file>
+    </qresource>
+</RCC>
