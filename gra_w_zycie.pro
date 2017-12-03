@@ -26,11 +26,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         applicationwindow.cpp \
+    predator.cpp \
+    dinosaurGUI.cpp \
     dinosaur.cpp
 
 HEADERS += \
         applicationwindow.h \
-    dinosaur.h
+    predator.h \
+    dinosaurGUI.h \
+    dinosaur.h \
+    visitor.h \
+    statictics_visitor.h \
+    statistics.h
 
 FORMS += \
         applicationwindow.ui

@@ -1,21 +1,27 @@
+#include <cstdlib>
+#include <ctime>
+
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
-#include "dinosaur.h"
+#include "dinosaurGUI.h"
 #include <QLabel>
 #include <QDebug>
 
+
 int main(int argc, char *argv[])
 {
+    srand(time(NULL));
+
     QApplication a(argc, argv);
     // create a scene
     QGraphicsScene * scene = new QGraphicsScene();
 
-    Dinosaur* dino2 = new Dinosaur("dinosaur_green.png",0.25);
+    DinosaurGUI* dino2 = new DinosaurGUI("dinosaur_green.png",0.25);
     scene->addItem(dino2);
 
-    Dinosaur* dino = new Dinosaur("dinosaur-brown.png", 0.15);
+    DinosaurGUI* dino = new DinosaurGUI("dinosaur-brown.png", 0.15);
 
     scene->addItem(dino);
     QGraphicsView * view = new QGraphicsView(scene);
