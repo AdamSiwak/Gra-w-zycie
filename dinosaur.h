@@ -3,11 +3,12 @@
 
 #include <QDebug>
 
+#include "object.h"
 #include "dinosaurGUI.h"
 
 class Visitor;
 
-class Dinosaur {
+class Dinosaur : public Object {
 public:
     Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), hunger_(0), thirst_(0) {qDebug() << sightAngle_;}
     virtual ~Dinosaur() {}

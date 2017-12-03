@@ -28,7 +28,8 @@ SOURCES += \
         applicationwindow.cpp \
     predator.cpp \
     dinosaurGUI.cpp \
-    dinosaur.cpp
+    dinosaur.cpp \
+    map.cpp
 
 HEADERS += \
         applicationwindow.h \
@@ -37,7 +38,10 @@ HEADERS += \
     dinosaur.h \
     visitor.h \
     statictics_visitor.h \
-    statistics.h
+    statistics.h \
+    map.h \
+    map_block.h \
+    object.h
 
 FORMS += \
         applicationwindow.ui
