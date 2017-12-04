@@ -17,8 +17,8 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale){
     QPixmap *pixmap = new QPixmap();
 
     setMySkale(scale);
-//    pixmap->load("../pictures/"+dinoName);
-    pixmap->load(":/"+dinoName);
+    pixmap->load("../pictures/"+dinoName);
+    //pixmap->load(":/"+dinoName);
     this->setPixmap(*pixmap);
     if(pixmap->isNull()){
         qDebug() << "darn";
