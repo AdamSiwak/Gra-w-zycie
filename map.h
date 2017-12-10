@@ -2,7 +2,6 @@
 #define MAP_H
 
 #include "vector"
-
 #include "predator.h"
 
 class Map {
@@ -20,6 +19,6 @@ public:
 
 private:
     std::vector<Dinosaur*> dinosaurs_;
-}
+};
 
 #endif // MAP_H

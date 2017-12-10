@@ -1,6 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="dinosaur_green.png">pictures/dinosaur_green.png</file>
-        <file alias="dinosaur-brown.png">pictures/dinosaur-brown.png</file>
+        <file>pictures/cave.png</file>
+        <file>pictures/dinosaur-brown.png</file>
+        <file>pictures/dinosaur_green.png</file>
+        <file>pictures/grass_256.png</file>
+        <file>pictures/lake.png</file>
+        <file>pictures/lime-green-grid-pattern-sketch-fabric-Timeless-Treasures--200040-2.JPG</file>
+        <file>pictures/tree.png</file>
+        <file>sounds/music.mp3</file>
+        <file>sounds/predator.mp3</file>
+        <file>sounds/prey.mp3</file>
     </qresource>
 </RCC>

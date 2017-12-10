@@ -3,6 +3,6 @@
 
 class Statistics {
 
-}
+};
 
 #endif // STATISTICS_H

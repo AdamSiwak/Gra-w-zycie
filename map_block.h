@@ -21,6 +21,6 @@ private:
     MapBlock* right;
     MapBlock* up;
     MapBlock* down;
-}
+};
 
 #endif // MAP_BLOCK_H
