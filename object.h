@@ -3,7 +3,8 @@
 
 class Object {
 public:
-    virtual ~Object();
+    Object();
+    virtual ~Object(){};
 
 private:
 

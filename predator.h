@@ -5,7 +5,9 @@
 
 class Predator : public Dinosaur {
     //Predator(QString& dinoName) : Dinosaur(dinoName) {}
-
+public:
+    void createGUIElement();
+    void accept(Visitor &v) const;
 private:
     int attack_;
     int loudness_;

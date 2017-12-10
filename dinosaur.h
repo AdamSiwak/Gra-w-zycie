@@ -28,8 +28,7 @@ public:
     void drink();
     //void reproduce();
 
-
-private:
+protected:
     virtual void createGUIElement() = 0;
 
     DinosaurGUI* gui_;
