@@ -2,19 +2,28 @@
 #define MAP_BLOCK_H
 
 #include "object.h"
+#include <vector>
 
 class MapBlock {
 public:
-    MapBlock(int size, int x, int y) : size_(size) {
-        objects = new Object**[size_];
+    MapBlock(int size) : size_(size) {
 
-        for (int i = 1; i < size_; i++)
-            objects[i] = new Object*;
+    }
+    MapBlock(MapBlock* parent) {
+        if (parent->left == this) {
+
+        } else if (parent->right == this) {
+
+        } else if (parent->up == this) {
+
+        } else if (parent->down == this) {
+
+        }
     }
 
 private:
     int size_;
-    Object*** objects;
+    std::vector<Object*> objects;
     int x;
     int y;
     MapBlock* left;

@@ -3,10 +3,13 @@
 
 class Object {
 public:
-    Object();
-    virtual ~Object(){};
+    virtual ~Object() {}
+    int x() { return x_; }
+    int y() { return y_; }
 
-private:
+protected:
+    int x_;
+    int y_;
 
 };
 
