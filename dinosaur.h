@@ -38,7 +38,7 @@ protected:
     void move_to_destination(int x = 0, int y = 0);
 
 
-    DinosaurGUI gui_;
+    DinosaurGUI* gui_;
     int age_;
     int max_energy_;
     int energy_;

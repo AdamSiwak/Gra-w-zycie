@@ -4,20 +4,30 @@
 #include "vector"
 #include "predator.h"
 
-class Map {
+class Map { // singleton
 public:
-    Map() {}
-    Map(int start_population) {
-        for (int i = 0; i < start_population; ++i) {
-            dinosaurs_.push_back(new Predator);
+    static Map& getInstance() {
+        if(!instance_) {
+            instance_ = new Map;
         }
+        return *instance_;
+    }
 
-        for (int i = 0; i < start_population; ++i) {
+    void createPopulation(int size) {
+        for (int i = 0; i < size; ++i) {
             dinosaurs_.push_back(new Predator);
         }
+//        for (int i = 0; i < size; ++i) {
+//            dinosaurs_.push_back(new Prey);
+//        }
     }
 
 private:
+    Map() {}
+    Map(const Map&) = delete;
+    Map& operator=(const Map&) = delete;
+
+    static Map* instance_;
     std::vector<Dinosaur*> dinosaurs_;
 };
 

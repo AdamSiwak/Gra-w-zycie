@@ -7,8 +7,8 @@
         <file>pictures/lake.png</file>
         <file>pictures/lime-green-grid-pattern-sketch-fabric-Timeless-Treasures--200040-2.JPG</file>
         <file>pictures/tree.png</file>
-        <file>sounds/music.mp3</file>
-        <file>sounds/predator.mp3</file>
-        <file>sounds/prey.mp3</file>
+        <file>sounds/predator.wav</file>
+        <file>sounds/music.wav</file>
+        <file>sounds/prey.wav</file>
     </qresource>
 </RCC>
