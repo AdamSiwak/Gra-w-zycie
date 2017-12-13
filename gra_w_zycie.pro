@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui\
+            multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,7 +30,8 @@ SOURCES += \
     predator.cpp \
     dinosaurGUI.cpp \
     dinosaur.cpp \
-    map.cpp
+    map.cpp \
+    sound.cpp
 
 HEADERS += \
         applicationwindow.h \
@@ -41,7 +43,8 @@ HEADERS += \
     statistics.h \
     map.h \
     map_block.h \
-    object.h
+    object.h \
+    sound.h
 
 FORMS += \
         applicationwindow.ui
