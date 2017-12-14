@@ -33,8 +33,6 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale){
         dinoSound = new Sound(PREDATOR_SOUND);
     }
 
-
-
 }
 
 void DinosaurGUI :: keyPressEvent(QKeyEvent *event){

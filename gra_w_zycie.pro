@@ -31,7 +31,8 @@ SOURCES += \
     dinosaurGUI.cpp \
     dinosaur.cpp \
     map.cpp \
-    sound.cpp
+    sound.cpp \
+    backgroundgui.cpp
 
 HEADERS += \
         applicationwindow.h \
@@ -44,7 +45,8 @@ HEADERS += \
     map.h \
     map_block.h \
     object.h \
-    sound.h
+    sound.h \
+    backgroundgui.h
 
 FORMS += \
         applicationwindow.ui
