@@ -22,6 +22,14 @@ public:
 //        }
     }
 
+    void add_new_object(Object* object);
+    void add_new_dinosaur(Dinosaur* dinosaur) {
+        dinosaurs_.push_back(dinosaur);
+    }
+
+    int get_n_dinosaurs() { return dinosaurs_.size(); }
+    int get_n_objects() { return objects_.size(); }
+
 private:
     Map() {}
     Map(const Map&) = delete;
@@ -29,6 +37,8 @@ private:
 
     static Map* instance_;
     std::vector<Dinosaur*> dinosaurs_;
+    std::vector<Object*> objects_;
+
 };
 
 #endif // MAP_H

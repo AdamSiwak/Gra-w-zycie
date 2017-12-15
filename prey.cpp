@@ -1,7 +1,7 @@
-#include "predator.h"
+#include "prey.h"
 #include "visitor.h"
 
-Predator::Predator(Predator& parent1, Predator& parent2) {
+Prey::Prey(Prey& parent1, Prey& parent2) {
     // TODO: dziedziczenie cech
     age_ = 0;
     maxEnergy_ = (parent1.maxEnergy_ + parent2.maxEnergy_)/2;
@@ -13,19 +13,16 @@ Predator::Predator(Predator& parent1, Predator& parent2) {
     hunger_ = 0;
     thirst_ = 0;
 
-    attack_ = (parent1.attack_ + parent2.attack_)/2;
-    loudness_ = (parent1.loudness_ + parent2.loudness_)/2;
+    defence_ = (parent1.defence_ + parent2.defence_)/2;
+    hearingDistance_ = (parent1.hearingDistance_ + parent2.hearingDistance_)/2;
+
+    isChased_ = false;
 }
 
-void Predator::accept(Visitor &v) {
+void Prey::createGUIElement() {
+
+}
+
+void Prey::accept(Visitor &v) {
     v.visit(*this);
-}
-
-Predator* Predator::reproduce(Predator &pred) {
-    Predator* child = new Predator(*this, pred);
-    return child;
-}
-
-void Predator::createGUIElement() {
-
 }

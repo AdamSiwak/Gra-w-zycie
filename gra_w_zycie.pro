@@ -27,12 +27,13 @@ QMAKE_CXXFLAGS += -std=c++11
 SOURCES += \
         main.cpp \
     predator.cpp \
-    dinosaurGUI.cpp \
     dinosaur.cpp \
     map.cpp \
     sound.cpp \
     backgroundgui.cpp \
-    objectgui.cpp
+    objectgui.cpp \
+    prey.cpp \
+    dinosaurGUI.cpp
 
 HEADERS += \
     predator.h \
@@ -47,7 +48,8 @@ HEADERS += \
     sound.h \
     interact_visitor.h \
     backgroundgui.h \
-    objectgui.h
+    objectgui.h\
+    prey.h
 
 FORMS += \
         applicationwindow.ui
