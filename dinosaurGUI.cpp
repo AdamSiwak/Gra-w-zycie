@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QKeyEvent>
-#include <sound.h>
+#include "sound.h"
 
 DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale){
 

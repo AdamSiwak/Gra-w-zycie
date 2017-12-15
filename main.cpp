@@ -11,8 +11,8 @@
 #include <QLabel>
 #include <QDebug>
 #include <QMediaPlayer>
+#include "backgroundgui.h"
 
-void centerAndResize(QApplication &a);
 
 int main(int argc, char *argv[])
 {
@@ -22,11 +22,16 @@ int main(int argc, char *argv[])
     // create a scene
     QGraphicsScene * scene = new QGraphicsScene();
 
+    BackgroundGUI * back = new BackgroundGUI();
+    scene->addItem(back);
+
     DinosaurGUI* dino2 = new DinosaurGUI("dinosaur_green.png",0.15);
     scene->addItem(dino2);
 
     DinosaurGUI* dino = new DinosaurGUI("dinosaur-brown.png", 0.15);
     scene->addItem(dino);
+
+
 
     QGraphicsView * view = new QGraphicsView(scene);
     view->showMaximized();

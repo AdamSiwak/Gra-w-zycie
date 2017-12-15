@@ -10,5 +10,6 @@
         <file>sounds/predator.wav</file>
         <file>sounds/music.wav</file>
         <file>sounds/prey.wav</file>
+        <file>pictures/back.JPG</file>
     </qresource>
 </RCC>

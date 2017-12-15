@@ -46,6 +46,7 @@ HEADERS += \
     map_block.h \
     object.h \
     sound.h \
+    interact_visitor.h \
     backgroundgui.h
 
 FORMS += \
@@ -54,4 +55,4 @@ FORMS += \
 DISTFILES +=
 
 RESOURCES += \
-    images.qrc
+images.qrc
