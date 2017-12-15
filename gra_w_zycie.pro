@@ -28,10 +28,11 @@ SOURCES += \
         main.cpp \
         applicationwindow.cpp \
     predator.cpp \
-    dinosaurGUI.cpp \
     dinosaur.cpp \
     map.cpp \
-    sound.cpp
+    sound.cpp \
+    prey.cpp \
+    dinosaurGUI.cpp
 
 HEADERS += \
         applicationwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
     map_block.h \
     object.h \
     sound.h \
-    interact_visitor.h
+    interact_visitor.h \
+    prey.h
 
 FORMS += \
         applicationwindow.ui

@@ -2,19 +2,28 @@
 #include <QDebug>
 
 Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(0), thirst_(0) {
-    qDebug() << sightAngle_;
+    // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
+    // TODO: ograniczenia jednych parametrów względem innych
 }
 
 void Dinosaur::move() {
     this->analyze_surroundings();
 
-    if (this->thirst_ < Dinosaur::criticalThirst) { // ruch w kierunku źródła
+    if (this->thirst_ > Dinosaur::criticalThirst) { // ruch w kierunku źródła
 
     } else if (this->target.expired() != false) { // ruch w kierunku celu
 
     } else { // ruch w losowym kierunku
         move_to_destination(0,0);
     }
+}
+
+void Dinosaur::analyze_surroundings() {
+    for (int i = x_-1; i <= x_+1; ++i)
+        for (int j = y_-1; j <= y_+1; ++j)
+            if (i != x_ || j != y_) {
+                // TODO: analiza
+            }
 }
 
 void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
