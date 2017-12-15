@@ -4,24 +4,9 @@
 #include <QKeyEvent>
 #include "sound.h"
 
-DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale){
+DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName, scale){
 
-//=======
-//Dinosaur::Dinosaur(QString dinoName) : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), hunger_(0), thirst_(0) {
-//>>>>>>> Stashed changes
-    QPixmap *pixmap = new QPixmap();
 
-    setMySkale(scale);
-    pixmap->load(":/pictures/"+dinoName);
-    this->setPixmap(*pixmap);
-    if(pixmap->isNull()){
-        qDebug() << "darn";
-    }
-    else{
-        qDebug() << "not null";
-    }
-
-    QGraphicsItem::setScale(scale);
     setFlag(QGraphicsItem::ItemIsSelectable);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
@@ -32,6 +17,7 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale){
     else if(dinoName == "dinosaur_green.png"){
         dinoSound = new Sound(PREDATOR_SOUND);
     }
+    //setTransformOriginPoint();
 
 }
 
@@ -39,6 +25,7 @@ void DinosaurGUI :: keyPressEvent(QKeyEvent *event){
     if (event -> key() == Qt::Key_Left){
         setPos(x()-10,y());
         setTransform(QTransform::fromScale(1, 1));
+
         setRotation(0);
     }
     if (event -> key() == Qt::Key_Right){
@@ -59,17 +46,9 @@ void DinosaurGUI :: keyPressEvent(QKeyEvent *event){
     }
 }
 
-qreal DinosaurGUI::mySkale() const
-{
-    return scale_;
-}
-
-void DinosaurGUI::setMySkale(const qreal scale)
-{
-    scale_ = scale;
-}
 
 void DinosaurGUI::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     dinoSound->play();
+    dinoSound->setVolume(30);
 }

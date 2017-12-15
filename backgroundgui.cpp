@@ -17,4 +17,6 @@ BackgroundGUI::BackgroundGUI()
     }
     setOffset(-300,-300);
     setScale(0.8);
+
+
 }

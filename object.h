@@ -11,6 +11,7 @@ protected:
     int x_;
     int y_;
 
+
 };
 
 #endif // OBJECT_H
