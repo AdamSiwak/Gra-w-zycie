@@ -9,4 +9,5 @@ Plik Makefile znajduje się w folderze Gra-w-zycie, natomiast plik Makefile dla 
 
 # Autorzy:
 Andrzej Dziwiński
+
 Adam Siwak
