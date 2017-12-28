@@ -33,7 +33,8 @@ SOURCES += \
     backgroundgui.cpp \
     objectgui.cpp \
     prey.cpp \
-    dinosaurGUI.cpp
+    dinosaurGUI.cpp \
+    coordinates.cpp
 
 HEADERS += \
     predator.h \
@@ -49,7 +50,8 @@ HEADERS += \
     interact_visitor.h \
     backgroundgui.h \
     objectgui.h\
-    prey.h
+    prey.h \
+    coordinates.h
 
 FORMS += \
         applicationwindow.ui
