@@ -6,17 +6,7 @@
 
 BackgroundGUI::BackgroundGUI()
 {
-    QPixmap *pixmap = new QPixmap();
-    pixmap->load(":/pictures/back.JPG");
-    this->setPixmap(*pixmap);
-    if(pixmap->isNull()){
-        qDebug() << "null";
-    }
-    else{
-        qDebug() << "not null";
-    }
-    setOffset(-300,-300);
-    setScale(0.8);
-
-
+    QPixmap pixmap;
+    pixmap.load(":/pictures/grass_256");
+    setTexture(pixmap);
 }

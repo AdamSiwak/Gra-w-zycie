@@ -1,10 +1,10 @@
 #ifndef BACKGROUNDGUI_H
 #define BACKGROUNDGUI_H
 
-#include <QGraphicsPixmapItem>
+#include <QBrush>
 #include <QDebug>
 
-class BackgroundGUI : public QGraphicsPixmapItem
+class BackgroundGUI : public QBrush
 {
 public:
     BackgroundGUI();

@@ -30,3 +30,9 @@ void Coordinates::setYcoordinate(int yCoordinate)
     y_=yCoordinate;
 }
 
+void Coordinates::setRandomCoordiantes()
+{
+    setXcoordinate((rand()%MAX_X_)-MAX_X_/2);
+    setYcoordinate((rand()%MAX_Y_)-MAX_Y_/2);
+}
+

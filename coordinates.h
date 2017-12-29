@@ -1,6 +1,7 @@
 #ifndef COORDINATES_H
 #define COORDINATES_H
 
+#include <cstdlib>
 
 class Coordinates
 {
@@ -10,9 +11,10 @@ public:
     void setXcoordinate(int xCoordinate);
     int getYcoordinate();
     void setYcoordinate(int yCoordinate);
+    void setRandomCoordiantes();
 
-    static const int MAX_X_=20;
-    static const int MAX_Y_=20;
+    static const int MAX_X_=50;
+    static const int MAX_Y_=50;
 
 private:
     int x_;
