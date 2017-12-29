@@ -25,9 +25,9 @@ void Dinosaur::move() {
 }
 
 void Dinosaur::analyze_surroundings() {
-    for (int i = x_-1; i <= x_+1; ++i)
-        for (int j = y_-1; j <= y_+1; ++j)
-            if (i != x_ || j != y_) {
+    for (int i = position_->x_-1; i <= position_->x_+1; ++i)
+        for (int j = position_->y_-1; j <= position_->y_+1; ++j)
+            if (i != position_->x_ || j != position_->y_) {
                 // TODO: analiza
             }
 }
@@ -40,23 +40,23 @@ void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
         deltaX = rand()%(2*speed_)-speed_;
         deltaY = rand()%(2*speed_)-speed_;
     } else {
-        if (x_ < x) { // określenie współrzędnych w osi OX
+        if (position_->x_ < x) { // określenie współrzędnych w osi OX
             deltaX = speed_;
-        } else if (x_ == x) {
+        } else if (position_->x_ == x) {
             deltaX = 0;
         } else { // x_ > x
             deltaX = -speed_;
         }
 
-        if (y_ < y) { // określenie współrzędnych w osi OY
+        if (position_->y_ < y) { // określenie współrzędnych w osi OY
             deltaY = speed_;
-        } else if (y_ == y) {
+        } else if (position_->y_ == y) {
             deltaY = 0;
         } else { // y_ > y
             deltaY = -speed_;
         }
     }
 
-    x_ += deltaX;
-    y_ += deltaY;
+    position_->x_ += deltaX;
+    position_->y_ += deltaY;
 }

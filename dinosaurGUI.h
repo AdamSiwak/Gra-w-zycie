@@ -14,6 +14,9 @@ class DinosaurGUI : public ObjectGUI
 {
 public:
     DinosaurGUI(QString pictureName, const qreal skale);
+    virtual ~DinosaurGUI() {}
+    virtual void accept(Visitor& v){}
+
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
@@ -22,8 +25,6 @@ public:
     void stepUp();
     void stepDown();
 
-protected:
-    Coordinates* coordinates_;
 private:
     Sound* dinoSound;
     static const int STEP_SIZE_ = 5;

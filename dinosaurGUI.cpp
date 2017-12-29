@@ -19,7 +19,7 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName
     else if(dinoName == "dinosaur_green.png"){
         dinoSound = new Sound(PREDATOR_SOUND);
     }
-    coordinates_ = new Coordinates();
+    position_ = new Coordinates();
 }
 
 void DinosaurGUI :: keyPressEvent(QKeyEvent *event){
@@ -37,7 +37,7 @@ void DinosaurGUI :: keyPressEvent(QKeyEvent *event){
             stepDown();
             break;
     }
-    qDebug()<<"X="<<coordinates_->getXcoordinate()<<", Y="<<coordinates_->getYcoordinate();
+    qDebug()<<"X="<<position_->getXcoordinate()<<", Y="<<position_->getYcoordinate();
 }
 
 
@@ -49,9 +49,9 @@ void DinosaurGUI::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void DinosaurGUI::stepRight()
 {
-    if(coordinates_->getXcoordinate()<(coordinates_->MAX_X_/2)){
+    if(position_->getXcoordinate()<(position_->MAX_X_/2)){
         setPos(x()+STEP_SIZE_,y());
-        coordinates_->setXcoordinate(coordinates_->getXcoordinate()+1);
+        position_->setXcoordinate(position_->getXcoordinate()+1);
         setRotation(0);
         setTransform(QTransform::fromScale(-1, 1));
     }
@@ -59,9 +59,9 @@ void DinosaurGUI::stepRight()
 
 void DinosaurGUI::stepLeft()
 {
-    if(coordinates_->getXcoordinate()>-(coordinates_->MAX_X_/2)){
+    if(position_->getXcoordinate()>-(position_->MAX_X_/2)){
         setPos(x()-STEP_SIZE_,y());
-        coordinates_->setXcoordinate(coordinates_->getXcoordinate()-1);
+        position_->setXcoordinate(position_->getXcoordinate()-1);
         setTransform(QTransform::fromScale(1, 1));
         setRotation(0);
     }
@@ -69,8 +69,8 @@ void DinosaurGUI::stepLeft()
 
 void DinosaurGUI::stepUp()
 {
-    if(coordinates_->getYcoordinate()>-(coordinates_->MAX_Y_/2)){
-        coordinates_->setYcoordinate(coordinates_->getYcoordinate()-1);
+    if(position_->getYcoordinate()>-(position_->MAX_Y_/2)){
+        position_->setYcoordinate(position_->getYcoordinate()-1);
         setPos(x(),y()-STEP_SIZE_);
         setTransform(QTransform::fromScale(1, 1));
         setRotation(90);
@@ -79,8 +79,8 @@ void DinosaurGUI::stepUp()
 
 void DinosaurGUI::stepDown()
 {
-    if(coordinates_->getYcoordinate()<coordinates_->MAX_Y_/2){
-        coordinates_->setYcoordinate(coordinates_->getYcoordinate()+1);
+    if(position_->getYcoordinate()<position_->MAX_Y_/2){
+        position_->setYcoordinate(position_->getYcoordinate()+1);
         setPos(x(),y()+STEP_SIZE_);
         setTransform(QTransform::fromScale(1, -1));
         setRotation(90);

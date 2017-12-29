@@ -5,7 +5,9 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 
-class ObjectGUI : public QGraphicsPixmapItem
+#include "object.h"
+
+class ObjectGUI : public QGraphicsPixmapItem, public Object
 {
 public:
     ObjectGUI(QString pictureName, const qreal skale);

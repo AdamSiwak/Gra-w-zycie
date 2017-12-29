@@ -30,8 +30,6 @@ public:
     int get_n_dinosaurs() { return dinosaurs_.size(); }
     int get_n_objects() { return objects_.size(); }
 
-
-
 };
 
 #endif // MAP_H

@@ -11,12 +11,12 @@ public:
     void setXcoordinate(int xCoordinate);
     int getYcoordinate();
     void setYcoordinate(int yCoordinate);
+
     void setRandomCoordiantes();
 
     static const int MAX_X_=50;
     static const int MAX_Y_=50;
 
-private:
     int x_;
     int y_;
     int xRealCoordinate_;
