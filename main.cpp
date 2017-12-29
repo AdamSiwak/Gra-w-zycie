@@ -6,13 +6,16 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
-#include "dinosaurGUI.h"
-#include "sound.h"
 #include <QLabel>
 #include <QDebug>
 #include <QMediaPlayer>
-#include "backgroundgui.h"
 
+#include "dinosaurGUI.h"
+#include "sound.h"
+#include "backgroundgui.h"
+#include "map.h"
+#include "dinosaur.h"
+#include "prey.h"
 
 int main(int argc, char *argv[])
 {
@@ -27,6 +30,9 @@ int main(int argc, char *argv[])
 
     DinosaurGUI* dino2 = new DinosaurGUI("dinosaur_green.png",0.15);
     scene->addItem(dino2);
+
+    Prey* dinoo = new Prey();
+    Map::getInstance().add_new_dinosaur(dinoo);
 
     DinosaurGUI* dino = new DinosaurGUI("dinosaur-brown.png", 0.15);
     scene->addItem(dino);

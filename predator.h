@@ -8,6 +8,7 @@ class Prey;
 class Predator : public Dinosaur {
 public:
     Predator() : Dinosaur(), attack_(rand()%100), loudness_(rand()%100) {}
+    virtual ~Predator(){};
     Predator(Predator& parent1, Predator& parent2);
     virtual void accept(Visitor &v);
     Predator* reproduce(Predator& pred);

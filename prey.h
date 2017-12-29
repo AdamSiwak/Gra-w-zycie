@@ -10,6 +10,7 @@ class Prey : public Dinosaur {
 public:
     Prey() : Dinosaur(), defence_(rand()%100), hearingDistance_(rand()%10), isChased_(false) {}
     Prey(Prey& parent1, Prey& parent2);
+    virtual ~Prey(){}
     virtual void accept(Visitor &v);
 
     Prey* reproduce(Prey& prey);

@@ -14,6 +14,7 @@ class Dinosaur : public Object {
 public:
     Dinosaur();
     virtual ~Dinosaur() {}
+    virtual void accept(Visitor& v){}
     
     int age() const { return age_; }
     int maxEnergy() const { return maxEnergy_; }
@@ -29,7 +30,6 @@ public:
     void drink() {
         thirst_ = 0;
     }
-
 protected:
     virtual void createGUIElement() = 0;
     void analyze_surroundings();
