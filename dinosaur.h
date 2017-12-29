@@ -38,14 +38,13 @@ public:
     void drink() {
         thirst_ = 0;
     }
+
+    DinosaurGUI* gui_;
 protected:
     virtual void createGUIElement() = 0;
     void analyze_surroundings();
 
-    void move_to_destination(int x = 0, int y = 0);
-
-
-    DinosaurGUI* gui_;
+    void move_to_destination(int x = 0, int y = 0); 
 
     int maxEnergy_;
     int speed_;

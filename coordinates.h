@@ -14,8 +14,8 @@ public:
 
     void setRandomCoordiantes();
 
-    static const int MAX_X_=50;
-    static const int MAX_Y_=50;
+    static const int MAX_X_=1000;
+    static const int MAX_Y_=1000;
 
     int x_;
     int y_;

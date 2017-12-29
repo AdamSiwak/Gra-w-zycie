@@ -1,6 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <QGraphicsScene>
+
 #include "vector"
 #include "predator.h"
 
@@ -14,6 +16,8 @@ private:
     static Map* instance_;
     std::vector<Dinosaur*> dinosaurs_;
     std::vector<Object*> objects_;
+
+    QGraphicsScene * scene_;
 
 public:
     static Map* getInstance(){

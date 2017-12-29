@@ -7,7 +7,9 @@ class Prey;
 
 class Predator : public Dinosaur {
 public:
-    Predator() : Dinosaur(), attack_(rand()%100), loudness_(rand()%100) {}
+    Predator() : Dinosaur(), attack_(rand()%100), loudness_(rand()%100) {
+        gui_ = new DinosaurGUI("dinosaur-brown.png",0.15);
+    }
     virtual ~Predator(){}
     Predator(Predator& parent1, Predator& parent2);
     virtual void accept(Visitor &v);

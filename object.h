@@ -13,7 +13,6 @@ public:
 
     virtual void accept(Visitor& v) = 0; // implementacja wzorca wizytatora
 
-protected:
     Coordinates* position_;
 
 };

@@ -20,6 +20,8 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName
         dinoSound = new Sound(PREDATOR_SOUND);
     }
     position_ = new Coordinates();
+    position_->setRandomCoordiantes();
+    setPos(x()+position_->getXcoordinate(),y()+position_->getYcoordinate());
 }
 
 void DinosaurGUI :: keyPressEvent(QKeyEvent *event){

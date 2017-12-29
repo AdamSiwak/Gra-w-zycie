@@ -22,21 +22,19 @@ Map* Map::instance_ = 0;
 Map::Map(){
     qDebug()<<"siema";
 
-    QGraphicsScene * scene = new QGraphicsScene();
+    scene_ = new QGraphicsScene();
 
     BackgroundGUI back;
-    scene->setBackgroundBrush(back);
-
-    DinosaurGUI* dino2 = new DinosaurGUI("dinosaur_green.png",0.15);
-    scene->addItem(dino2);
-
-    //Prey dinoo = new Prey();
-  //  Map::getInstance();
+    scene_->setBackgroundBrush(back);
 
     DinosaurGUI* dino = new DinosaurGUI("dinosaur-brown.png", 0.15);
-    scene->addItem(dino);
+    scene_->addItem(dino);
 
-    QGraphicsView * view = new QGraphicsView(scene);
+    createPopulation(5);
+//    Prey * pred = new Prey();
+//    add_new_dinosaur(pred);
+
+    QGraphicsView * view = new QGraphicsView(scene_);
     view->showMaximized();
     view->show();
 
@@ -50,7 +48,7 @@ void Map::add_new_object(Object* object){
 }
 
 void Map::add_new_dinosaur(Dinosaur* dinosaur) {
-   // dinosaur->position_->setRandomCoordinates();
+    scene_->addItem(dinosaur->gui_);
     dinosaurs_.push_back(dinosaur);
 }
 
