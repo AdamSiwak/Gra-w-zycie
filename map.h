@@ -7,7 +7,7 @@
 class Map { // singleton
 
 private:
-    Map() {}
+    Map();
     Map(const Map&) = delete;
     Map& operator=(const Map&) = delete;
 
@@ -16,11 +16,11 @@ private:
     std::vector<Object*> objects_;
 
 public:
-    static Map& getInstance() {
+    static Map* getInstance(){
         if(!instance_) {
-            instance_ = new Map;
+            instance_ = new Map();
         }
-        return *instance_;
+        return instance_;
     }
 
     void createPopulation(int size);
