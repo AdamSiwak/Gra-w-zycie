@@ -6,6 +6,7 @@
 #include "object.h"
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
+#include "dinosaurGUI.h"
 
 class DinosaurGUI;
 class Water;
@@ -25,6 +26,13 @@ public:
     int hunger() const { return hunger_; }
     int maxHunger() const { return maxHunger_; }
     int thirst() const { return thirst_; }
+
+    void stepRight();
+    void stepLeft();
+    void stepUp();
+    void stepDown();
+
+    void move2position(int x, int y);
 
     void move();
     void drink() {

@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
     DinosaurGUI* dino2 = new DinosaurGUI("dinosaur_green.png",0.15);
     scene->addItem(dino2);
 
-    Prey* dinoo = new Prey();
-    Map::getInstance().add_new_dinosaur(dinoo);
+//    Prey* dinoo = new Prey();
+//    Map::getInstance().add_new_dinosaur(dinoo);
 
     DinosaurGUI* dino = new DinosaurGUI("dinosaur-brown.png", 0.15);
     scene->addItem(dino);

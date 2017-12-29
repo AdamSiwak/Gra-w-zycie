@@ -1,16 +1,49 @@
 #include "dinosaur.h"
 #include <QDebug>
 
-//Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(0), thirst_(0) {
-//    // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
-//    // TODO: ograniczenia jednych parametrów względem innych
-//}
-
-
-Dinosaur::Dinosaur() {
+Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(0), thirst_(0) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
     // TODO: ograniczenia jednych parametrów względem innych
 }
+
+
+//Dinosaur::Dinosaur() {
+
+//}
+
+void Dinosaur::stepRight(){
+    gui_->stepRight();
+}
+void Dinosaur::stepLeft(){
+    gui_->stepLeft();
+}
+void Dinosaur::stepUp(){
+    gui_->stepUp();
+}
+void Dinosaur::stepDown(){
+    gui_->stepDown();
+}
+
+void Dinosaur::move2position(int x, int y)
+{
+    while ((position_->getXcoordinate() != x) && (position_->getYcoordinate() != y)){
+        if (x>position_->getXcoordinate()){
+            stepRight();
+        }
+        else if (x<position_->getXcoordinate()){
+            stepRight();
+        }
+        if(y>position_->getYcoordinate()){
+            stepDown();
+        }
+        else if(y<position_->getYcoordinate()){
+            stepUp();
+        }
+    }
+
+}
+
+
 
 void Dinosaur::move() {
     this->analyze_surroundings();
