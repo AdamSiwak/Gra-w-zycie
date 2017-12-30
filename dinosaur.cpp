@@ -1,5 +1,7 @@
 #include "dinosaur.h"
+
 #include <QDebug>
+#include <QTimer>
 
 Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(0), thirst_(0) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
@@ -26,21 +28,18 @@ void Dinosaur::stepDown(){
 
 void Dinosaur::move2position(int x, int y)
 {
-    while ((position_->getXcoordinate() != x) && (position_->getYcoordinate() != y)){
-        if (x>position_->getXcoordinate()){
-            stepRight();
-        }
-        else if (x<position_->getXcoordinate()){
-            stepRight();
-        }
-        if(y>position_->getYcoordinate()){
-            stepDown();
-        }
-        else if(y<position_->getYcoordinate()){
-            stepUp();
-        }
+    if (x<gui_->position_->getXcoordinate()){
+        stepLeft();
     }
-
+    else if (x>gui_->position_->getXcoordinate()){
+        stepRight();
+    }
+    if(y<gui_->position_->getYcoordinate()){
+        stepUp();
+    }
+    else if(y>gui_->position_->getYcoordinate()){
+        stepDown();
+    }
 }
 
 

@@ -16,6 +16,10 @@
 #include "map.h"
 #include "dinosaur.h"
 #include "prey.h"
+#include "tree.h"
+#include "cave.h"
+#include "lake.h"
+
 
 Map* Map::instance_ = 0;
 
@@ -36,10 +40,11 @@ Map::Map(){
 
     QGraphicsView * view = new QGraphicsView(scene_);
     view->showMaximized();
-    view->show();
 
     Sound* background = new Sound(BACKGROUND);
     background->play();
+
+    timer_ = new Timer();
 }
 
 void Map::add_new_object(ObjectGUI* object){
@@ -49,6 +54,7 @@ void Map::add_new_object(ObjectGUI* object){
 
 void Map::add_new_dinosaur(Dinosaur* dinosaur) {
     scene_->addItem(dinosaur->gui_);
+//    dinosaur->move2position(10,100);
     dinosaurs_.push_back(dinosaur);
 }
 
@@ -61,22 +67,27 @@ void Map::createPredatorsPopulation(int size) {
 void Map::createCaves(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_object(new ObjectGUI("cave.png",0.75));
+        add_new_object(new Cave("cave.png",0.75));
     }
 }
 
 void Map::createLakes(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_object(new ObjectGUI("lake.png",0.5));
+        add_new_object(new Lake("lake.png",0.5));
     }
 }
 
 void Map::createTrees(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_object(new ObjectGUI("tree.png",0.035));
+        add_new_object(new Tree("tree.png",0.025));
     }
+}
+
+void Map::timerCallBack()
+{
+    qDebug()<<"siema";
 }
 
 void Map::createPreysPopulation(int size) {

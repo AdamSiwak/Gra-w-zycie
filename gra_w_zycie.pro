@@ -34,7 +34,11 @@ SOURCES += \
     objectgui.cpp \
     prey.cpp \
     dinosaurGUI.cpp \
-    coordinates.cpp
+    coordinates.cpp \
+    cave.cpp \
+    lake.cpp \
+    tree.cpp \
+    timer.cpp
 
 HEADERS += \
     predator.h \
@@ -51,7 +55,11 @@ HEADERS += \
     backgroundgui.h \
     objectgui.h\
     prey.h \
-    coordinates.h
+    coordinates.h \
+    cave.h \
+    lake.h \
+    tree.h \
+    timer.h
 
 FORMS += \
         applicationwindow.ui

@@ -8,7 +8,7 @@ class Prey;
 class Predator : public Dinosaur {
 public:
     Predator() : Dinosaur(), attack_(rand()%100), loudness_(rand()%100) {
-        gui_ = new DinosaurGUI(picture,0.15);
+        gui_ = new DinosaurGUI(picture_,0.15);
     }
     virtual ~Predator(){}
     Predator(Predator& parent1, Predator& parent2);
@@ -22,7 +22,7 @@ private:
     int attack_;
     int loudness_;
 
-    const QString picture = "dinosaur-brown.png";
+    const QString picture_ = "dinosaur-brown.png";
 };
 
 #endif // PREDATOR_H

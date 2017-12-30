@@ -5,9 +5,11 @@
 
 #include "vector"
 #include "predator.h"
+#include "timer.h"
 
-class Map { // singleton
 
+class Map
+{ // singleton
 private:
     Map();
     Map(const Map&) = delete;
@@ -19,6 +21,10 @@ private:
 
     QGraphicsScene * scene_;
 
+
+    Timer* timer_;
+    const int PERIOD_ = 100;
+
 public:
     static Map* getInstance(){
         if(!instance_) {
@@ -27,7 +33,7 @@ public:
         return instance_;
     }
 
-    void add_new_object(ObjectGUI* object);
+    void add_new_object(ObjectGUI *object);
     void add_new_dinosaur(Dinosaur* dinosaur);
 
     void createPreysPopulation(int size);
@@ -35,6 +41,8 @@ public:
     void createCaves(int amount);
     void createLakes(int amount);
     void createTrees(int amount);
+
+    void timerCallBack();
 
     int get_n_dinosaurs() { return dinosaurs_.size(); }
     int get_n_objects() { return objects_.size(); }

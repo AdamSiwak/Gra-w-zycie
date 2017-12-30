@@ -36,7 +36,7 @@ void DinosaurGUI :: keyPressEvent(QKeyEvent *event){
             stepDown();
             break;
     }
-    qDebug()<<"X="<<position_->getXcoordinate()<<", Y="<<position_->getYcoordinate();
+
 }
 
 
@@ -73,6 +73,7 @@ void DinosaurGUI::stepUp()
         setPos(x(),y()-STEP_SIZE_);
         setTransform(QTransform::fromScale(1, 1));
         setRotation(90);
+        qDebug()<<"X="<<position_->getXcoordinate()<<", Y="<<position_->getYcoordinate();
     }
 }
 

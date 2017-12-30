@@ -9,7 +9,7 @@ class Tree;
 class Prey : public Dinosaur {
 public:
     Prey() : Dinosaur(), defence_(rand()%100), hearingDistance_(rand()%10), isChased_(false) {
-        gui_ = new DinosaurGUI(picture,0.15);
+        gui_ = new DinosaurGUI(picture_,0.15);
     }
     Prey(Prey& parent1, Prey& parent2);
     virtual ~Prey(){}
@@ -31,7 +31,7 @@ private:
 
     Cave* last_cave;
 
-    const QString picture = "dinosaur_green.png";
+    const QString picture_ = "dinosaur_green.png";
 };
 
 #endif // PREY_H

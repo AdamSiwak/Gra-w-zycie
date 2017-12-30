@@ -34,6 +34,7 @@ public:
 
     void move2position(int x, int y);
 
+
     void move();
     void drink() {
         thirst_ = 0;
