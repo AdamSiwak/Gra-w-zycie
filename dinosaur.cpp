@@ -6,8 +6,9 @@
 Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(0), thirst_(0) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
     // TODO: ograniczenia jednych parametrów względem innych
-//    currentDestination_->setXcoordinate(100);
-//    currentDestination_->setYcoordinate(300);
+    currentDestination_ = new Coordinates();
+    currentDestination_->setXcoordinate(rand()%currentDestination_->MAX_X_-currentDestination_->MAX_X_/2);
+    currentDestination_->setYcoordinate(rand()%currentDestination_->MAX_Y_-currentDestination_->MAX_Y_/2);
 }
 
 

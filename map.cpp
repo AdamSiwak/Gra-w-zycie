@@ -85,9 +85,9 @@ void Map::createTrees(int amount)
 }
 
 void Map::timerCallBack(){
-//dinosaurs_[0]->move2position(0,100);
+
     for (auto it = dinosaurs_.begin(); it != dinosaurs_.end(); ++it) {
-        (*it)->move2position(10,120);
+        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
  //        (*it)->move_to_destination(0,0);
     }
 }
