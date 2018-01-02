@@ -17,16 +17,24 @@ Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRang
 //}
 
 void Dinosaur::stepRight(){
-    gui_->stepRight();
+    if(!gui_->isSelected()){
+        gui_->stepRight();
+    }
 }
 void Dinosaur::stepLeft(){
-    gui_->stepLeft();
+    if(!gui_->isSelected()){
+        gui_->stepLeft();
+    }
 }
 void Dinosaur::stepUp(){
-    gui_->stepUp();
+    if(!gui_->isSelected()){
+        gui_->stepUp();
+    }
 }
 void Dinosaur::stepDown(){
-    gui_->stepDown();
+    if(!gui_->isSelected()){
+        gui_->stepDown();
+    }
 }
 
 void Dinosaur::move2position(int x, int y)
