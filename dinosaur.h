@@ -11,7 +11,7 @@
 class DinosaurGUI;
 class Water;
 
-class Dinosaur : public Object {
+class Dinosaur {
 public:
     Dinosaur();
     virtual ~Dinosaur() {}
@@ -41,11 +41,14 @@ public:
     }
 
     DinosaurGUI* gui_;
+
+    Coordinates* currentDestination_;
+
 protected:
     virtual void createGUIElement() = 0;
     void analyze_surroundings();
 
-    void move_to_destination(int x = 0, int y = 0); 
+    void move_to_destination(int x = 0, int y = 0);
 
     int maxEnergy_;
     int speed_;
@@ -64,6 +67,7 @@ protected:
 
     Water* last_water;
 
+    static const int maxMaxEnergy = 100;
     static const int maxSpeed = 5;
     static const int maxSightRange = 10;
     static const int maxSightAngle = 270;

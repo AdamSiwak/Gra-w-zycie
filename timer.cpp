@@ -5,10 +5,10 @@ Timer::Timer()
 {
     timer_ = new QTimer(this);
     connect(timer_, SIGNAL(timeout()), this, SLOT(myfunction()));
-    timer_->start(1000); //period in ms
+    timer_->start(10); //period in ms
 }
 
 void Timer::myfunction()
 {
-    qDebug()<< "time";
+    Map::getInstance()->timerCallBack();
 }

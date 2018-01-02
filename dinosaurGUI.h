@@ -27,7 +27,7 @@ public:
 
 private:
     Sound* dinoSound;
-    static const int STEP_SIZE_ = 5;
+    static const int STEP_SIZE_ = 1;
 };
 
 #endif // DINOSAURGUI_H

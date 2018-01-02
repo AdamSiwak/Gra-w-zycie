@@ -6,6 +6,8 @@
 Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(0), thirst_(0) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
     // TODO: ograniczenia jednych parametrów względem innych
+//    currentDestination_->setXcoordinate(100);
+//    currentDestination_->setYcoordinate(300);
 }
 
 
@@ -57,9 +59,9 @@ void Dinosaur::move() {
 }
 
 void Dinosaur::analyze_surroundings() {
-    for (int i = position_->x_-1; i <= position_->x_+1; ++i)
-        for (int j = position_->y_-1; j <= position_->y_+1; ++j)
-            if (i != position_->x_ || j != position_->y_) {
+    for (int i = gui_->position_->x_-1; i <= gui_->position_->x_+1; ++i)
+        for (int j = gui_->position_->y_-1; j <= gui_->position_->y_+1; ++j)
+            if (i != gui_->position_->x_ || j != gui_->position_->y_) {
                 // TODO: analiza
             }
 }
@@ -72,23 +74,23 @@ void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
         deltaX = rand()%(2*speed_)-speed_;
         deltaY = rand()%(2*speed_)-speed_;
     } else {
-        if (position_->x_ < x) { // określenie współrzędnych w osi OX
+        if (gui_->position_->x_ < x) { // określenie współrzędnych w osi OX
             deltaX = speed_;
-        } else if (position_->x_ == x) {
+        } else if (gui_->position_->x_ == x) {
             deltaX = 0;
         } else { // x_ > x
             deltaX = -speed_;
         }
 
-        if (position_->y_ < y) { // określenie współrzędnych w osi OY
+        if (gui_->position_->y_ < y) { // określenie współrzędnych w osi OY
             deltaY = speed_;
-        } else if (position_->y_ == y) {
+        } else if (gui_->position_->y_ == y) {
             deltaY = 0;
         } else { // y_ > y
             deltaY = -speed_;
         }
     }
 
-    position_->x_ += deltaX;
-    position_->y_ += deltaY;
+    gui_->position_->x_ += deltaX;
+    gui_->position_->y_ += deltaY;
 }

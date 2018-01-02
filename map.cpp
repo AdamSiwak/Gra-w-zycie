@@ -54,7 +54,6 @@ void Map::add_new_object(ObjectGUI* object){
 
 void Map::add_new_dinosaur(Dinosaur* dinosaur) {
     scene_->addItem(dinosaur->gui_);
-//    dinosaur->move2position(10,100);
     dinosaurs_.push_back(dinosaur);
 }
 
@@ -85,9 +84,12 @@ void Map::createTrees(int amount)
     }
 }
 
-void Map::timerCallBack()
-{
-    qDebug()<<"siema";
+void Map::timerCallBack(){
+//dinosaurs_[0]->move2position(0,100);
+    for (auto it = dinosaurs_.begin(); it != dinosaurs_.end(); ++it) {
+        (*it)->move2position(10,120);
+ //        (*it)->move_to_destination(0,0);
+    }
 }
 
 void Map::createPreysPopulation(int size) {
