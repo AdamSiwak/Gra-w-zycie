@@ -52,3 +52,8 @@ void Prey::go2nearestEating()
 {
 
 }
+
+void Prey::go2Partner()
+{
+
+}

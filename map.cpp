@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QDebug>
 #include <QMediaPlayer>
+#include <math.h>
 
 #include "dinosaurGUI.h"
 #include "sound.h"
@@ -101,7 +102,31 @@ void Map::createTrees(int amount)
 
 Coordinates *Map::getNearestLake(Dinosaur *dino)
 {
+    Coordinates* coords;
+    int dinoX = dino->gui_->position_->xRealCoordinate_;
+    int dinoY = dino->gui_->position_->yRealCoordinate_;
 
+    int lakeX = 0;
+    int lakeY = 0;
+
+    int distance = 0;
+    int minDistance = __INT_MAX__;
+
+
+    for (auto it = lakes_.begin(); it != lakes_.end(); ++it) {
+
+        lakeX=(*it)->position_->xRealCoordinate_;
+        lakeY=(*it)->position_->yRealCoordinate_;
+
+        distance = sqrt(pow((lakeX - dinoX),2)+pow((lakeY - dinoY),2));
+
+        if (distance<minDistance){
+            minDistance=distance;
+            coords = (*it)->position_;
+        }
+    }
+
+    return coords;
 }
 
 Coordinates *Map::getNearestTree(Dinosaur *dino)

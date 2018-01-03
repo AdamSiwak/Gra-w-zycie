@@ -14,6 +14,7 @@ public:
     virtual void accept(Visitor &v);
     virtual hungerStates eating();
     virtual void go2nearestEating();
+    virtual void go2Partner();
 
     Prey* reproduce(Prey& prey);
     void set_last_cave(Cave& cave) { last_cave = &cave; }

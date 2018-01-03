@@ -55,6 +55,7 @@ public:
     void toDie();
     void go2nearestLake();
     virtual void go2nearestEating() = 0;
+    virtual void go2Partner() = 0;
 
 protected:
     virtual void createGUIElement() = 0;
@@ -86,8 +87,10 @@ protected:
     static const int minMaxHunger = 10000;
     static const int maxMaxHunger = 30000;
     static const int maxThirst = 10000;
-    static const int criticalThirst = 0.2 * maxThirst;
-    static const int criticalHunger = 0.2 * maxMaxHunger;
+    static const int criticalThirst = 0.5 * maxThirst;
+    static const int criticalHunger = 0.5 * maxMaxHunger;
+    static const int maxAge = 100;
+    static const int reproductiveAge = 50;
 
 };
 

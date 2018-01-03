@@ -139,15 +139,22 @@ Dinosaur::thirstStates Dinosaur::drinking()
 
 void Dinosaur::behaviour()
 {
-    if(thirst() == 0){
+    if(thirst() == 0 || age()== maxAge){
         toDie();
     }
-    if(thirst()<criticalThirst){
+    else if(thirst()<criticalThirst){
         go2nearestLake();
     }
-    if(hunger()<criticalHunger){
+    else if(hunger()<criticalHunger){
         go2nearestEating();
     }
+    else if(age()>reproductiveAge){
+        go2Partner();
+    }
+    else {
+
+    }
+
 }
 
 void Dinosaur::toDie()

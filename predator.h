@@ -15,6 +15,7 @@ public:
     void attack(Prey& prey);
     virtual hungerStates eating();
     virtual void go2nearestEating();
+    virtual void go2Partner();
 
 private:
     virtual void createGUIElement();

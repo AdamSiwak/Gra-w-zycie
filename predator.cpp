@@ -1,5 +1,6 @@
 #include "predator.h"
 #include "visitor.h"
+#include "map.h"
 
 Predator::Predator() : Dinosaur(), attack_(rand()%100), loudness_(rand()%100) {
     gui_ = new DinosaurGUI(picture_,0.15);
@@ -49,9 +50,14 @@ Dinosaur::hungerStates Predator::eating()
 
 void Predator::go2nearestEating()
 {
-
+    currentDestination_ = Map::getInstance()->getNearestPrey(this);
 }
 
-void Predator::createGUIElement() {
+void Predator::go2Partner()
+{
+    currentDestination_ = Map::getInstance()->getNearestPredator(this);
+}
+
+void Predator::createGUIElement(){
 
 }
