@@ -13,6 +13,8 @@ public:
     virtual void accept(Visitor &v);
     Predator* reproduce(Predator& pred);
     void attack(Prey& prey);
+    virtual hungerStates eating();
+    virtual void go2nearestEating();
 
 private:
     virtual void createGUIElement();

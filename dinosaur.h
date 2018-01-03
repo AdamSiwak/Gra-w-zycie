@@ -12,10 +12,15 @@ class DinosaurGUI;
 class Water;
 
 class Dinosaur {
+protected:
+
 public:
     Dinosaur();
     virtual ~Dinosaur() {}
     virtual void accept(Visitor& v){}
+
+    enum hungerStates{HUNGRY, FULL, EATING};
+    enum thirstStates{THIRSTY, DRUNK, DRINKING};
     
     int age() const { return age_; }
     int maxEnergy() const { return maxEnergy_; }
@@ -43,6 +48,13 @@ public:
     DinosaurGUI* gui_;
 
     Coordinates* currentDestination_;
+    void energyBurning();
+    virtual hungerStates eating() = 0;
+    thirstStates drinking();
+    void behaviour();
+    void toDie();
+    void go2nearestLake();
+    virtual void go2nearestEating() = 0;
 
 protected:
     virtual void createGUIElement() = 0;
@@ -67,14 +79,16 @@ protected:
 
     Water* last_water;
 
-    static const int maxMaxEnergy = 100;
+    static const int maxMaxEnergy = 10000;
     static const int maxSpeed = 5;
     static const int maxSightRange = 10;
     static const int maxSightAngle = 270;
-    static const int minMaxHunger = 100;
-    static const int maxMaxHunger = 300;
-    static const int maxThirst = 100;
-    static const int criticalThirst = maxThirst - 20;
+    static const int minMaxHunger = 10000;
+    static const int maxMaxHunger = 30000;
+    static const int maxThirst = 10000;
+    static const int criticalThirst = 0.2 * maxThirst;
+    static const int criticalHunger = 0.2 * maxMaxHunger;
+
 };
 
 #endif // DINOSAUR_H

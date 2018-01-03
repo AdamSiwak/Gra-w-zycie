@@ -42,3 +42,13 @@ void Prey::createGUIElement() {
 void Prey::accept(Visitor &v) {
     v.visit(*this);
 }
+
+Dinosaur::hungerStates Prey::eating()
+{
+
+}
+
+void Prey::go2nearestEating()
+{
+
+}

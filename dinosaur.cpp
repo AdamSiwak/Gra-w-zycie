@@ -1,7 +1,9 @@
 #include "dinosaur.h"
+#include "map.h"
 
 #include <QDebug>
 #include <QTimer>
+
 
 Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRange_(rand()%maxSightRange), sightAngle_(rand()%maxSightAngle), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(0), thirst_(0) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
@@ -19,21 +21,25 @@ Dinosaur::Dinosaur() : age_(0), energy_(100), speed_(rand()%maxSpeed), sightRang
 void Dinosaur::stepRight(){
     if(!gui_->isSelected()){
         gui_->stepRight();
+        energyBurning();
     }
 }
 void Dinosaur::stepLeft(){
     if(!gui_->isSelected()){
         gui_->stepLeft();
+        energyBurning();
     }
 }
 void Dinosaur::stepUp(){
     if(!gui_->isSelected()){
         gui_->stepUp();
+        energyBurning();
     }
 }
 void Dinosaur::stepDown(){
     if(!gui_->isSelected()){
         gui_->stepDown();
+        energyBurning();
     }
 }
 
@@ -103,3 +109,54 @@ void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
     gui_->position_->x_ += deltaX;
     gui_->position_->y_ += deltaY;
 }
+
+void Dinosaur::energyBurning(){
+    hunger_--;
+    thirst_--;
+}
+
+Dinosaur::hungerStates Dinosaur::eating()
+{
+    if(hunger()<maxHunger()){
+        hunger_++;
+        return EATING;
+    }
+    else{
+        return FULL;
+    }
+}
+
+Dinosaur::thirstStates Dinosaur::drinking()
+{
+    if(thirst()<maxThirst){
+        thirst_++;
+        return DRINKING;
+    }
+    else{
+        return DRUNK;
+    }
+}
+
+void Dinosaur::behaviour()
+{
+    if(thirst() == 0){
+        toDie();
+    }
+    if(thirst()<criticalThirst){
+        go2nearestLake();
+    }
+    if(hunger()<criticalHunger){
+        go2nearestEating();
+    }
+}
+
+void Dinosaur::toDie()
+{
+   // ~Dinosaur();
+}
+
+void Dinosaur::go2nearestLake()
+{
+    currentDestination_ = Map::getInstance()->getNearestLake(this);
+}
+

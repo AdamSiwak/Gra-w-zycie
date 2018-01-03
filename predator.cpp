@@ -42,6 +42,16 @@ Predator* Predator::reproduce(Predator &pred) {
     return child;
 }
 
+Dinosaur::hungerStates Predator::eating()
+{
+
+}
+
+void Predator::go2nearestEating()
+{
+
+}
+
 void Predator::createGUIElement() {
 
 }

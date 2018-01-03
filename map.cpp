@@ -47,46 +47,86 @@ Map::Map(){
     timer_ = new Timer();
 }
 
-void Map::add_new_object(ObjectGUI* object){
+void Map::add_new_lake(ObjectGUI* object){
     scene_->addItem(object);
-    objects_.push_back(object);
+    lakes_.push_back(object);
 }
 
-void Map::add_new_dinosaur(Dinosaur* dinosaur) {
+void Map::add_new_tree(ObjectGUI* object){
+    scene_->addItem(object);
+    trees_.push_back(object);
+}
+
+void Map::add_new_cave(ObjectGUI* object){
+    scene_->addItem(object);
+    caves_.push_back(object);
+}
+
+void Map::add_new_predator(Predator* dinosaur) {
     scene_->addItem(dinosaur->gui_);
-    dinosaurs_.push_back(dinosaur);
+    predators_.push_back(dinosaur);
+}
+
+void Map::add_new_prey(Prey* dinosaur) {
+    scene_->addItem(dinosaur->gui_);
+    preys_.push_back(dinosaur);
 }
 
 void Map::createPredatorsPopulation(int size) {
     for (int i = 0; i < size; ++i) {
-        add_new_dinosaur(new Predator);
+        add_new_predator(new Predator);
     }
 }
 
 void Map::createCaves(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_object(new Cave("cave.png",0.75));
+        add_new_cave(new Cave("cave.png",0.75));
     }
 }
 
 void Map::createLakes(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_object(new Lake("lake.png",0.5));
+        add_new_lake(new Lake("lake.png",0.5));
     }
 }
 
 void Map::createTrees(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_object(new Tree("tree.png",0.025));
+        add_new_tree(new Tree("tree.png",0.025));
     }
+}
+
+Coordinates *Map::getNearestLake(Dinosaur *dino)
+{
+
+}
+
+Coordinates *Map::getNearestTree(Dinosaur *dino)
+{
+
+}
+
+Coordinates *Map::getNearestCave(Dinosaur *dino)
+{
+
+}
+
+Coordinates *Map::getNearestPredator(Dinosaur *dino)
+{
+
+}
+
+Coordinates *Map::getNearestPrey(Dinosaur *dino)
+{
+
 }
 
 void Map::timerCallBack(){
 
-    for (auto it = dinosaurs_.begin(); it != dinosaurs_.end(); ++it) {
+    for (auto it = preys_.begin(); it != preys_.end(); ++it) {
         (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
  //        (*it)->move_to_destination(0,0);
     }
@@ -94,7 +134,7 @@ void Map::timerCallBack(){
 
 void Map::createPreysPopulation(int size) {
     for (int i = 0; i < size; ++i) {
-        add_new_dinosaur(new Prey);
+        add_new_prey(new Prey);
     }
 }
 

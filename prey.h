@@ -12,9 +12,10 @@ public:
     Prey(Prey& parent1, Prey& parent2);
     virtual ~Prey(){}
     virtual void accept(Visitor &v);
+    virtual hungerStates eating();
+    virtual void go2nearestEating();
 
     Prey* reproduce(Prey& prey);
-    void eat();
     void set_last_cave(Cave& cave) { last_cave = &cave; }
     bool is_being_chased() { return isChased_; }
     void hide(Cave& cave);
