@@ -68,6 +68,10 @@ public:
     Coordinates *getNearestPrey(Dinosaur * dino);
 
     std::vector<ObjectGUI*> getLakes(){return lakes_;};
+    std::vector<ObjectGUI*> getTrees(){return trees_;};
+    std::vector<ObjectGUI*> getCaves(){return caves_;};
+    std::vector<Dinosaur*> getPredators(){return predators_;};
+    std::vector<Dinosaur*> getPreys(){return preys_;};
 
 };
 
