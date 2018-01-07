@@ -21,11 +21,40 @@ public:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-//    void move2position_should_move_only_one_step_in_destination_direction();
-    void test_reproduce();
-    void getNearestLake_should_return_coordinates_of_nearest_lake();
+
+    /////// MAP TESTS //////
+    void map_getInstance_should_create_new_instance();
+    void map_getInstance_shouldnt_create_new_instance_if_already_created();
+    void map_addNewLake_should_add_lake_with_random_coordinates_to_collection();
+    void map_addNewTree_should_add_tree_with_random_coordinates_to_collection();
+    void map_addNewCave_should_add_cave_with_random_coordinates_to_collection();
+    void map_addNewPredator_should_add_predator_with_random_coordinates_and_attributes_to_collection();
+    void map_addNewPrey_should_add_prey_with_random_coordinates_and_attributes_to_collection();
+    void map_createPreysPopulation_should_add_n_preys_with_random_coordinates_and_attributes_to_collection();
+    void map_createPredatorsPopulation_should_add_n_predators_with_random_coordinates_and_attributes_to_collection();
+    void map_createCaves_should_add_n_caves_with_random_coordinates_to_collection();
+    void map_createLakes_should_add_n_lakes_with_random_coordinates_to_collection();
+    void map_createTrees_should_add_n_trees_with_random_coordinates_to_collection();
+    void map_getNearestLake_should_return_pointer_to_nearest_lake();
+    void map_getNearestTree_should_return_pointer_to_nearest_tree();
+    void map_getNearestCave_should_return_pointer_to_nearest_cave();
+    void map_getNearestPredator_should_return_pointer_to_nearest_predator();
+    void map_getNearestPrey_should_return_pointer_to_nearest_prey();
+    void map_timerCallBack_should_update_position_of_dinosaurs();
+    void map_timerCallBack_should_kill_too_old_dinosaurs();
+    void map_timerCallBack_should_update_statistics_of_population(); // ewentualnie dodac kolejne testy przy zmianie funkcjonalnosci timerCallBack
+    ////////////////////////
+
+    //// DINOSAUR TESTS ////
+//    void dinosaur_move2position_should_move_only_one_step_in_destination_direction();
+    void dinosaur_test_reproduce();
+    ////////////////////////
+
+    //// COORDINATES TEST ////
     void call_isEqual_oprator_for_Coorginates_should_return_true_if_both_coordinates_are_same_and_false_otherwise();
+    //////////////////////////
 };
+
 
 Gra_w_zycie_test::Gra_w_zycie_test()
 {
@@ -47,37 +76,80 @@ void Gra_w_zycie_test::cleanupTestCase()
 
 }
 
-//void Gra_w_zycie_test::move2position_should_move_only_one_step_in_destination_direction()
-//{
-//    // Arrange
-//    Predator p;
-//    p.gui_->position_->setXcoordinate(100);
-//    p.gui_->position_->setYcoordinate(100);
-//    int x = 50;
-//    int y = 50;
-//    // Act
-//    p.move2position(x, y);
-//    // Assert
-//    QCOMPARE(p.gui_->position_->getXcoordinate(), 99);
-//    QCOMPARE(p.gui_->position_->getYcoordinate(), 99);
-//}
 
-void Gra_w_zycie_test::test_reproduce()
+//////////////////// MAP TESTS ////////////////////
+
+void Gra_w_zycie_test::map_getInstance_should_create_new_instance()
 {
-    Predator parent1, parent2;
-    Predator* child = parent1.reproduce(parent2);
+    Map* map = nullptr;
 
-    QTRY_VERIFY(child != nullptr);
-    QCOMPARE(child->age(),0);
-    QTRY_VERIFY(child->speed() !=parent1.speed());
-    QCOMPARE(child->hunger(),0);
-    QTRY_VERIFY(child->maxHunger() != parent1.maxHunger());
-    QCOMPARE(child->thirst(),0);
+    map = Map::getInstance();
 
-    delete child;
+    QVERIFY(map != nullptr);
 }
 
-void Gra_w_zycie_test::getNearestLake_should_return_coordinates_of_nearest_lake()
+void Gra_w_zycie_test::map_getInstance_shouldnt_create_new_instance_if_already_created()
+{
+    Map* map = Map::getInstance();
+
+    QCOMPARE(Map::getInstance(),map);
+}
+
+void Gra_w_zycie_test::map_addNewLake_should_add_lake_with_random_coordinates_to_collection()
+{
+    Map* map = Map::getInstance();
+
+    Lake lake("lake.png",0.5);
+    map->addNewLake(&lake);
+}
+
+void Gra_w_zycie_test::map_addNewTree_should_add_tree_with_random_coordinates_to_collection()
+{
+
+}
+
+void Gra_w_zycie_test::map_addNewCave_should_add_cave_with_random_coordinates_to_collection()
+{
+
+}
+
+void Gra_w_zycie_test::map_addNewPredator_should_add_predator_with_random_coordinates_and_attributes_to_collection()
+{
+
+}
+
+void Gra_w_zycie_test::map_addNewPrey_should_add_prey_with_random_coordinates_and_attributes_to_collection()
+{
+
+}
+
+void Gra_w_zycie_test::map_createPreysPopulation_should_add_n_preys_with_random_coordinates_and_attributes_to_collection()
+{
+
+}
+
+void Gra_w_zycie_test::map_createPredatorsPopulation_should_add_n_predators_with_random_coordinates_and_attributes_to_collection()
+{
+
+}
+
+void Gra_w_zycie_test::map_createCaves_should_add_n_caves_with_random_coordinates_to_collection()
+{
+
+}
+
+void Gra_w_zycie_test::map_createLakes_should_add_n_lakes_with_random_coordinates_to_collection()
+{
+
+}
+
+void Gra_w_zycie_test::map_createTrees_should_add_n_trees_with_random_coordinates_to_collection()
+{
+
+}
+
+
+void Gra_w_zycie_test::map_getNearestLake_should_return_pointer_to_nearest_lake()
 {
     //Arrange
     Lake* lake;
@@ -96,6 +168,81 @@ void Gra_w_zycie_test::getNearestLake_should_return_coordinates_of_nearest_lake(
     QCOMPARE(lake->position_->getYcoordinate(),15);
 }
 
+void Gra_w_zycie_test::map_getNearestTree_should_return_pointer_to_nearest_tree()
+{
+
+}
+
+void Gra_w_zycie_test::map_getNearestCave_should_return_pointer_to_nearest_cave()
+{
+
+}
+
+void Gra_w_zycie_test::map_getNearestPredator_should_return_pointer_to_nearest_predator()
+{
+
+}
+
+void Gra_w_zycie_test::map_getNearestPrey_should_return_pointer_to_nearest_prey()
+{
+
+}
+
+void Gra_w_zycie_test::map_timerCallBack_should_update_position_of_dinosaurs()
+{
+
+}
+
+void Gra_w_zycie_test::map_timerCallBack_should_kill_too_old_dinosaurs()
+{
+
+}
+
+void Gra_w_zycie_test::map_timerCallBack_should_update_statistics_of_population()
+{
+
+}
+
+///////////////////////////////////////////////////
+
+
+////////////////// DINOSAUR TESTS /////////////////
+
+//void Gra_w_zycie_test::dinosaur_move2position_should_move_only_one_step_in_destination_direction()
+//{
+//    // Arrange
+//    Predator p;
+//    p.gui_->position_->setXcoordinate(100);
+//    p.gui_->position_->setYcoordinate(100);
+//    int x = 50;
+//    int y = 50;
+//    // Act
+//    p.move2position(x, y);
+//    // Assert
+//    QCOMPARE(p.gui_->position_->getXcoordinate(), 99);
+//    QCOMPARE(p.gui_->position_->getYcoordinate(), 99);
+//}
+
+void Gra_w_zycie_test::dinosaur_test_reproduce()
+{
+    Predator parent1, parent2;
+    Predator* child = parent1.reproduce(parent2);
+
+    QVERIFY(child != nullptr);
+    QCOMPARE(child->age(),0);
+    QVERIFY(child->speed() !=parent1.speed());
+    QCOMPARE(child->hunger(),0);
+    QVERIFY(child->maxHunger() != parent1.maxHunger());
+    QCOMPARE(child->thirst(),0);
+
+    delete child;
+}
+
+///////////////////////////////////////////////////
+
+
+//////////////// COORDINATES TESTS ////////////////
+
 void Gra_w_zycie_test::call_isEqual_oprator_for_Coorginates_should_return_true_if_both_coordinates_are_same_and_false_otherwise()
 {
     //Arrange
@@ -106,10 +253,15 @@ void Gra_w_zycie_test::call_isEqual_oprator_for_Coorginates_should_return_true_i
     coords1.setYcoordinate(10);
     coords2.setXcoordinate(10);
     coords2.setYcoordinate(10);
+    coords3.setXcoordinate(20);
+    coords3.setYcoordinate(20);
 
     QVERIFY(coords1 == coords2);
 
+    QVERIFY(coords1 != coords3);
 }
+
+///////////////////////////////////////////////////
 
 QTEST_MAIN(Gra_w_zycie_test)
 

@@ -28,7 +28,9 @@ Map::Map(){
 
     BackgroundGUI back;
     scene_->setBackgroundBrush(back);
+}
 
+void Map::startAnimation(){
     createCaves(2);
     createLakes(2);
     createTrees(2);
@@ -36,13 +38,19 @@ Map::Map(){
     createPredatorsPopulation(3);
     createPreysPopulation(5);
 
-    QGraphicsView * view = new QGraphicsView(scene_);
-    view->showMaximized();
+    view_ = new QGraphicsView(scene_);
+    view_->showMaximized();
 
-    Sound* background = new Sound(BACKGROUND);
-    background->play();
+    backgroundSound_ = new Sound(BACKGROUND);
+    backgroundSound_->play();
 
     timer_ = new Timer();
+}
+
+void Map::stopAnimation(){
+    delete view_;
+    delete backgroundSound_;
+    delete timer_;
 }
 
 void Map::addNewLake(ObjectGUI* object){

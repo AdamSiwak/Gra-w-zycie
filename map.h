@@ -34,6 +34,8 @@ private:
     std::vector<ObjectGUI*> trees_;
 
     QGraphicsScene* scene_;
+    QGraphicsView* view_;
+    Sound* backgroundSound_;
 
     Timer* timer_;
 
@@ -47,6 +49,9 @@ public:
         }
         return instance_;
     }
+
+    void startAnimation();
+    void stopAnimation();
 
     void addNewLake(ObjectGUI* object);
     void addNewTree(ObjectGUI* object);
