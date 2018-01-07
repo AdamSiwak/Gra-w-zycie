@@ -183,10 +183,12 @@ Dinosaur *Map::getNearestObject(Dinosaur *dino, std::vector<Dinosaur *> dinosurs
 void Map::timerCallBack(){
 
     for (auto it = preys_.begin(); it != preys_.end(); ++it) {
-        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+//        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+        (*it)->behaviour();
     }
     for (auto it = predators_.begin(); it != predators_.end(); ++it) {
-        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+//        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+        (*it)->behaviour();
     }
 }
 

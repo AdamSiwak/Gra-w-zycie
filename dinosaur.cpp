@@ -110,6 +110,11 @@ void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
     gui_->position_->setYcoordinate(gui_->position_->getYcoordinate() + deltaY);
 }
 
+void Dinosaur::drawLotsPosition()
+{
+    currentDestination_->setRandomCoordiantes();
+}
+
 void Dinosaur::energyBurning(){
     hunger_--;
     thirst_--;
@@ -139,11 +144,12 @@ Dinosaur::thirstStates Dinosaur::drinking()
 
 void Dinosaur::behaviour()
 {
-    if(thirst() == 0 || hunger() == 0|| age()== maxAge){
+/*    if(thirst() == 0 || hunger() == 0|| age()== maxAge){
         toDie();
     }
-    else if(thirst()<criticalThirst){
+    else*/ if(thirst()<criticalThirst){
         go2nearestLake();
+      //  if(target_->position_->getRealYcoordinate() ==)
     }
     else if(hunger()<criticalHunger){
         go2nearestEating();
@@ -152,7 +158,12 @@ void Dinosaur::behaviour()
         go2Partner();
     }
     else {
-
+        if(gui_->position_->getRealXcoordinate()==currentDestination_->getXcoordinate() && gui_->position_->getRealYcoordinate()==currentDestination_->getYcoordinate()){
+            drawLotsPosition();
+        }
+        else{
+            move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
+        }
     }
 
 }
@@ -165,5 +176,6 @@ void Dinosaur::toDie()
 void Dinosaur::go2nearestLake()
 {
     target_ = Map::getInstance()->getNearestLake(this);
+    move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
 }
 

@@ -37,6 +37,8 @@ private:
 
     Timer* timer_;
 
+    ObjectGUI *getNearestObject(Dinosaur *dino, std::vector<ObjectGUI *> object);
+    Dinosaur *getNearestObject(Dinosaur *dino, std::vector<Dinosaur*> dinosurs);
 
 public:
     static Map* getInstance(){
@@ -69,8 +71,6 @@ public:
     Cave *getNearestCave(Dinosaur * dino);
     Predator *getNearestPredator(Dinosaur * dino);
     Prey *getNearestPrey(Dinosaur * dino);
-    ObjectGUI *getNearestObject(Dinosaur *dino, std::vector<ObjectGUI *> object);
-    Dinosaur *getNearestObject(Dinosaur *dino, std::vector<Dinosaur*> dinosurs);
 
     std::vector<ObjectGUI*> getLakes(){return lakes_;}
     std::vector<ObjectGUI*> getTrees(){return trees_;}

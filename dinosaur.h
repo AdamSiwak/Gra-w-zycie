@@ -33,27 +33,31 @@ public:
     void stepUp();
     void stepDown();
 
-    void move2position(int x, int y);
-
-    void move();
-
     DinosaurGUI* gui_;
 
-    Coordinates* currentDestination_;
-    void energyBurning();
-    virtual hungerStates eating() = 0;
-    thirstStates drinking();
     void behaviour();
-    void toDie();
-    void go2nearestLake();
-    virtual void go2nearestEating() = 0;
-    virtual void go2Partner() = 0;
+
 
 protected:
     virtual void createGUIElement() = 0;
     void analyze_surroundings();
 
     void move_to_destination(int x = 0, int y = 0);
+    void drawLotsPosition();
+    void toDie();
+    void go2nearestLake();
+    virtual void go2nearestEating() = 0;
+    virtual void go2Partner() = 0;
+
+    Coordinates* currentDestination_;
+    void energyBurning();
+    virtual hungerStates eating() = 0;
+    thirstStates drinking();
+
+    void move2position(int x, int y);
+    void move();
+
+
 
     int speed_;
     int maxHunger_;

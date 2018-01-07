@@ -19,6 +19,10 @@ public:
 
     void setRandomCoordiantes();
 
+    bool operator==(const Coordinates& right){
+        if( x_ == right.x_ && y_ == right.y_) return true;
+        else return false;}
+
     static const int MAX_X_=1000;
     static const int MAX_Y_=1000;
 
