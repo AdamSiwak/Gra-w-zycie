@@ -6,7 +6,6 @@
 #include "../../predator.h"
 #include "../../map.h"
 #include "../../coordinates.h"
-#include "../../map.h"
 
 // add necessary includes here
 
@@ -30,6 +29,7 @@ private slots:
     void map_addNewCave_should_add_cave_with_random_coordinates_to_collection();
     void map_addNewPredator_should_add_predator_with_random_coordinates_and_attributes_to_collection();
     void map_addNewPrey_should_add_prey_with_random_coordinates_and_attributes_to_collection();
+    void map_deleteAllObjects_should_delete_all_objects();
     void map_createPreysPopulation_should_add_n_preys_with_random_coordinates_and_attributes_to_collection();
     void map_createPredatorsPopulation_should_add_n_predators_with_random_coordinates_and_attributes_to_collection();
     void map_createCaves_should_add_n_caves_with_random_coordinates_to_collection();
@@ -97,55 +97,134 @@ void Gra_w_zycie_test::map_getInstance_shouldnt_create_new_instance_if_already_c
 
 void Gra_w_zycie_test::map_addNewLake_should_add_lake_with_random_coordinates_to_collection()
 {
-    Map* map = Map::getInstance();
+    int size = Map::getInstance()->get_n_lakes();
+    QCOMPARE(size,0);
 
-    Lake lake("lake.png",0.5);
-    map->addNewLake(&lake);
+    Lake* lake = new Lake("lake.png",0.5);
+    Map::getInstance()->addNewLake(lake);
+
+    QCOMPARE(size+1,Map::getInstance()->get_n_lakes());
+
+    //Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_addNewTree_should_add_tree_with_random_coordinates_to_collection()
 {
+    int size = Map::getInstance()->get_n_trees();
 
+    Tree* tree = new Tree("tree.png",0.5);
+    Map::getInstance()->addNewTree(tree);
+
+    QCOMPARE(size+1,Map::getInstance()->get_n_trees());
+
+    //Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_addNewCave_should_add_cave_with_random_coordinates_to_collection()
 {
+    int size = Map::getInstance()->get_n_caves();
 
+    Cave* cave = new Cave("cave.png",0.5);
+    Map::getInstance()->addNewCave(cave);
+
+    QCOMPARE(size+1,Map::getInstance()->get_n_caves());
+
+    //Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_addNewPredator_should_add_predator_with_random_coordinates_and_attributes_to_collection()
 {
+    int size = Map::getInstance()->get_n_predators();
 
+    Predator* predator = new Predator();
+    Map::getInstance()->addNewPredator(predator);
+
+    QCOMPARE(size+1,Map::getInstance()->get_n_predators());
+
+    //Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_addNewPrey_should_add_prey_with_random_coordinates_and_attributes_to_collection()
 {
+    int size = Map::getInstance()->get_n_preys();
 
+    Prey* prey = new Prey();
+    Map::getInstance()->addNewPrey(prey);
+
+    QCOMPARE(size+1,Map::getInstance()->get_n_preys());
+
+    //Map::getInstance()->deleteAllObjects();
+}
+
+void Gra_w_zycie_test::map_deleteAllObjects_should_delete_all_objects()
+{
+    Lake* lake = new Lake("lake.png",0.5);
+    Map::getInstance()->addNewLake(lake);
+
+    Tree* tree = new Tree("tree.png",0.5);
+    Map::getInstance()->addNewTree(tree);
+
+    Cave* cave = new Cave("cave.png",0.5);
+    Map::getInstance()->addNewCave(cave);
+
+    Predator* predator = new Predator();
+    Map::getInstance()->addNewPredator(predator);
+
+    Prey* prey = new Prey();
+    Map::getInstance()->addNewPrey(prey);
+
+    //Map::getInstance()->deleteAllObjects();
+
+//    QCOMPARE(Map::getInstance()->get_n_lakes(),0);
+//    QCOMPARE(Map::getInstance()->get_n_trees(),0);
+//    QCOMPARE(Map::getInstance()->get_n_caves(),0);
+//    QCOMPARE(Map::getInstance()->get_n_predators(),0);
+//    QCOMPARE(Map::getInstance()->get_n_preys(),0);
 }
 
 void Gra_w_zycie_test::map_createPreysPopulation_should_add_n_preys_with_random_coordinates_and_attributes_to_collection()
 {
+//    Map::getInstance()->createPreysPopulation(20);
 
+//    QCOMPARE(Map::getInstance()->get_n_preys(),20);
+
+//    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_createPredatorsPopulation_should_add_n_predators_with_random_coordinates_and_attributes_to_collection()
 {
+//    Map::getInstance()->createPredatorsPopulation(30);
 
+//    QCOMPARE(Map::getInstance()->get_n_predators(),30);
+
+//    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_createCaves_should_add_n_caves_with_random_coordinates_to_collection()
 {
+//    Map::getInstance()->createCaves(10);
 
+//    QCOMPARE(Map::getInstance()->get_n_caves(),10);
+
+//    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_createLakes_should_add_n_lakes_with_random_coordinates_to_collection()
 {
+//    Map::getInstance()->createLakes(50);
 
+//    QCOMPARE(Map::getInstance()->get_n_lakes(),50);
+
+//    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_createTrees_should_add_n_trees_with_random_coordinates_to_collection()
 {
+//    Map::getInstance()->createTrees(10);
 
+//    QCOMPARE(Map::getInstance()->get_n_trees(),10);
+
+//    Map::getInstance()->deleteAllObjects();
 }
 
 
@@ -153,19 +232,21 @@ void Gra_w_zycie_test::map_getNearestLake_should_return_pointer_to_nearest_lake(
 {
     //Arrange
     Lake* lake;
-    Predator* dino = new Predator();
-    dino->gui_->position_->setXcoordinate(0);
-    dino->gui_->position_->setYcoordinate(0);
+    Predator dino;
+    dino.gui_->position_->setXcoordinate(0);
+    dino.gui_->position_->setYcoordinate(0);
     Map::getInstance()->createLakes(2);
     Map::getInstance()->getLakes()[0]->position_->setXcoordinate(15);
     Map::getInstance()->getLakes()[0]->position_->setYcoordinate(15);
     Map::getInstance()->getLakes()[1]->position_->setXcoordinate(150);
     Map::getInstance()->getLakes()[1]->position_->setYcoordinate(150);
     //Act
-    lake = Map::getInstance()->getNearestLake(dino);
+    lake = Map::getInstance()->getNearestLake(&dino);
     //Assert
     QCOMPARE(lake->position_->getXcoordinate(),15);
     QCOMPARE(lake->position_->getYcoordinate(),15);
+
+//    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_getNearestTree_should_return_pointer_to_nearest_tree()

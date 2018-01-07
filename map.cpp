@@ -105,6 +105,39 @@ void Map::createTrees(int amount)
     }
 }
 
+void Map::deleteAllObjects()
+{
+    while (!preys_.empty()) {
+        Prey* p = dynamic_cast<Prey*>(*(preys_.end()--));
+        delete p;
+        preys_.pop_back();
+    }
+
+    while (!predators_.empty()) {
+        Predator* p =  dynamic_cast<Predator*>(*(predators_.end()--));
+        delete p;
+        predators_.pop_back();
+    }
+
+    while (!caves_.empty()) {
+        Cave* p =  dynamic_cast<Cave*>(*(caves_.end()--));
+        delete p;
+        caves_.pop_back();
+    }
+
+    while (!lakes_.empty()) {
+        Lake* p =  dynamic_cast<Lake*>(*(lakes_.end()--));
+        delete p;
+        lakes_.pop_back();
+    }
+
+    while (!trees_.empty()) {
+        Tree* p =  dynamic_cast<Tree*>(*(trees_.end()--));
+        delete p;
+        trees_.pop_back();
+    }
+}
+
 Lake *Map::getNearestLake(Dinosaur *dino)
 {
     return dynamic_cast<Lake*>(getNearestObject(dino,getLakes()));

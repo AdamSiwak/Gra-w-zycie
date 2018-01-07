@@ -14,12 +14,8 @@
 #include "lake.h"
 
 
-class Map : QObject
+class Map
 { // singleton
-    Q_OBJECT
-public slots:
-    void timerCallBack();
-
 private:
     Map();
     Map(const Map&) = delete;
@@ -65,11 +61,13 @@ public:
     void createLakes(int amount);
     void createTrees(int amount);
 
+    void deleteAllObjects();
+
     int get_n_preys() { return preys_.size(); }
     int get_n_predators() { return predators_.size(); }
     int get_n_lakes() { return lakes_.size(); }
-    int get_n_caves() { return lakes_.size(); }
-    int get_n_trees() { return lakes_.size(); }
+    int get_n_caves() { return caves_.size(); }
+    int get_n_trees() { return trees_.size(); }
 
     Lake *getNearestLake(Dinosaur * dino);
     Tree *getNearestTree(Dinosaur * dino);
@@ -82,6 +80,8 @@ public:
     std::vector<ObjectGUI*> getCaves(){return caves_;}
     std::vector<Dinosaur*> getPredators(){return predators_;}
     std::vector<Dinosaur*> getPreys(){return preys_;}
+
+    void timerCallBack();
 
 };
 
