@@ -2,6 +2,8 @@
 #define OBJECT_H
 
 #include "coordinates.h"
+#include <boost/weak_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 class Visitor;
 
@@ -16,5 +18,8 @@ public:
     Coordinates* position_;
 
 };
+
+typedef boost::shared_ptr<Object> Object_sharedPtr;
+typedef boost::weak_ptr<Object> Object_weakPtr;
 
 #endif // OBJECT_H

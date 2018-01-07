@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
+#include <boost/weak_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "object.h"
 
@@ -18,5 +20,8 @@ public:
 private:
     qreal scale_;
 };
+
+typedef boost::shared_ptr<ObjectGUI> ObjectGUI_sharedPtr;
+typedef boost::weak_ptr<ObjectGUI> ObjectGUI_weakPtr;
 
 #endif // OBJECTGUI_H

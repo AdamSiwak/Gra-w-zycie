@@ -100,36 +100,36 @@ void Gra_w_zycie_test::map_addNewLake_should_add_lake_with_random_coordinates_to
     int size = Map::getInstance()->get_n_lakes();
     QCOMPARE(size,0);
 
-    Lake* lake = new Lake("lake.png",0.5);
+    ObjectGUI_sharedPtr lake(new Lake("lake.png",0.5));
     Map::getInstance()->addNewLake(lake);
 
     QCOMPARE(size+1,Map::getInstance()->get_n_lakes());
 
-    //Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_addNewTree_should_add_tree_with_random_coordinates_to_collection()
 {
     int size = Map::getInstance()->get_n_trees();
 
-    Tree* tree = new Tree("tree.png",0.5);
+    ObjectGUI_sharedPtr tree(new Tree("tree.png",0.5));
     Map::getInstance()->addNewTree(tree);
 
     QCOMPARE(size+1,Map::getInstance()->get_n_trees());
 
-    //Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_addNewCave_should_add_cave_with_random_coordinates_to_collection()
 {
     int size = Map::getInstance()->get_n_caves();
 
-    Cave* cave = new Cave("cave.png",0.5);
+    ObjectGUI_sharedPtr cave(new Cave("cave.png",0.5));
     Map::getInstance()->addNewCave(cave);
 
     QCOMPARE(size+1,Map::getInstance()->get_n_caves());
 
-    //Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_addNewPredator_should_add_predator_with_random_coordinates_and_attributes_to_collection()
@@ -141,7 +141,9 @@ void Gra_w_zycie_test::map_addNewPredator_should_add_predator_with_random_coordi
 
     QCOMPARE(size+1,Map::getInstance()->get_n_predators());
 
-    //Map::getInstance()->deleteAllObjects();
+    QCOMPARE(0,Map::getInstance()->get_n_caves()); // TODO: wywalic
+
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_addNewPrey_should_add_prey_with_random_coordinates_and_attributes_to_collection()
@@ -153,18 +155,18 @@ void Gra_w_zycie_test::map_addNewPrey_should_add_prey_with_random_coordinates_an
 
     QCOMPARE(size+1,Map::getInstance()->get_n_preys());
 
-    //Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_deleteAllObjects_should_delete_all_objects()
 {
-    Lake* lake = new Lake("lake.png",0.5);
+    ObjectGUI_sharedPtr lake(new Lake("lake.png",0.5));
     Map::getInstance()->addNewLake(lake);
 
-    Tree* tree = new Tree("tree.png",0.5);
+    ObjectGUI_sharedPtr tree(new Tree("tree.png",0.5));
     Map::getInstance()->addNewTree(tree);
 
-    Cave* cave = new Cave("cave.png",0.5);
+    ObjectGUI_sharedPtr cave(new Cave("cave.png",0.5));
     Map::getInstance()->addNewCave(cave);
 
     Predator* predator = new Predator();
@@ -173,11 +175,11 @@ void Gra_w_zycie_test::map_deleteAllObjects_should_delete_all_objects()
     Prey* prey = new Prey();
     Map::getInstance()->addNewPrey(prey);
 
-    //Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->deleteAllObjects();
 
-//    QCOMPARE(Map::getInstance()->get_n_lakes(),0);
-//    QCOMPARE(Map::getInstance()->get_n_trees(),0);
-//    QCOMPARE(Map::getInstance()->get_n_caves(),0);
+    QCOMPARE(Map::getInstance()->get_n_lakes(),0);
+    QCOMPARE(Map::getInstance()->get_n_trees(),0);
+    QCOMPARE(Map::getInstance()->get_n_caves(),0);
 //    QCOMPARE(Map::getInstance()->get_n_predators(),0);
 //    QCOMPARE(Map::getInstance()->get_n_preys(),0);
 }
@@ -202,36 +204,40 @@ void Gra_w_zycie_test::map_createPredatorsPopulation_should_add_n_predators_with
 
 void Gra_w_zycie_test::map_createCaves_should_add_n_caves_with_random_coordinates_to_collection()
 {
-//    Map::getInstance()->createCaves(10);
+    Map::getInstance()->createCaves(10);
 
-//    QCOMPARE(Map::getInstance()->get_n_caves(),10);
+    QCOMPARE(Map::getInstance()->get_n_caves(),10);
 
-//    Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->getCaves()[0]->position_->setXcoordinate(15);
+
+    QCOMPARE( Map::getInstance()->getCaves()[0]->position_->getXcoordinate(),15);
+
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_createLakes_should_add_n_lakes_with_random_coordinates_to_collection()
 {
-//    Map::getInstance()->createLakes(50);
+    Map::getInstance()->createLakes(50);
 
-//    QCOMPARE(Map::getInstance()->get_n_lakes(),50);
+    QCOMPARE(Map::getInstance()->get_n_lakes(),50);
 
-//    Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_createTrees_should_add_n_trees_with_random_coordinates_to_collection()
 {
-//    Map::getInstance()->createTrees(10);
+    Map::getInstance()->createTrees(10);
 
-//    QCOMPARE(Map::getInstance()->get_n_trees(),10);
+    QCOMPARE(Map::getInstance()->get_n_trees(),10);
 
-//    Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->deleteAllObjects();
 }
 
 
 void Gra_w_zycie_test::map_getNearestLake_should_return_pointer_to_nearest_lake()
 {
     //Arrange
-    Lake* lake;
+
     Predator dino;
     dino.gui_->position_->setXcoordinate(0);
     dino.gui_->position_->setYcoordinate(0);
@@ -241,10 +247,10 @@ void Gra_w_zycie_test::map_getNearestLake_should_return_pointer_to_nearest_lake(
     Map::getInstance()->getLakes()[1]->position_->setXcoordinate(150);
     Map::getInstance()->getLakes()[1]->position_->setYcoordinate(150);
     //Act
-    lake = Map::getInstance()->getNearestLake(&dino);
+    Lake_weakPtr lake = Map::getInstance()->getNearestLake(&dino);
     //Assert
-    QCOMPARE(lake->position_->getXcoordinate(),15);
-    QCOMPARE(lake->position_->getYcoordinate(),15);
+    QCOMPARE(lake.lock()->position_->getXcoordinate(),15);
+    QCOMPARE(lake.lock()->position_->getYcoordinate(),15);
 
 //    Map::getInstance()->deleteAllObjects();
 }
@@ -311,7 +317,7 @@ void Gra_w_zycie_test::dinosaur_test_reproduce()
 
     QVERIFY(child != nullptr);
     QCOMPARE(child->age(),0);
-    QVERIFY(child->speed() !=parent1.speed());
+    QVERIFY(child->speed() != parent1.speed());
     QCOMPARE(child->hunger(),0);
     QVERIFY(child->maxHunger() != parent1.maxHunger());
     QCOMPARE(child->thirst(),0);

@@ -67,7 +67,7 @@ protected:
 
     int rotation;
 
-    Object* target_;
+    Object_weakPtr target_;
 
     Water* last_water;
 
