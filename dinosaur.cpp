@@ -74,9 +74,9 @@ void Dinosaur::move() {
 }
 
 void Dinosaur::analyze_surroundings() {
-    for (int i = gui_->position_->x_-1; i <= gui_->position_->x_+1; ++i)
-        for (int j = gui_->position_->y_-1; j <= gui_->position_->y_+1; ++j)
-            if (i != gui_->position_->x_ || j != gui_->position_->y_) {
+    for (int i = gui_->position_->getXcoordinate()-1; i <= gui_->position_->getXcoordinate()+1; ++i)
+        for (int j = gui_->position_->getYcoordinate()-1; j <= gui_->position_->getYcoordinate()+1; ++j)
+            if (i != gui_->position_->getXcoordinate() || j != gui_->position_->getYcoordinate()) {
                 // TODO: analiza
             }
 }
@@ -89,25 +89,25 @@ void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
         deltaX = rand()%(2*speed_)-speed_;
         deltaY = rand()%(2*speed_)-speed_;
     } else {
-        if (gui_->position_->x_ < x) { // określenie współrzędnych w osi OX
+        if (gui_->position_->getXcoordinate() < x) { // określenie współrzędnych w osi OX
             deltaX = speed_;
-        } else if (gui_->position_->x_ == x) {
+        } else if (gui_->position_->getXcoordinate() == x) {
             deltaX = 0;
         } else { // x_ > x
             deltaX = -speed_;
         }
 
-        if (gui_->position_->y_ < y) { // określenie współrzędnych w osi OY
+        if (gui_->position_->getYcoordinate() < y) { // określenie współrzędnych w osi OY
             deltaY = speed_;
-        } else if (gui_->position_->y_ == y) {
+        } else if (gui_->position_->getYcoordinate() == y) {
             deltaY = 0;
         } else { // y_ > y
             deltaY = -speed_;
         }
     }
 
-    gui_->position_->x_ += deltaX;
-    gui_->position_->y_ += deltaY;
+    gui_->position_->setXcoordinate(gui_->position_->getXcoordinate() + deltaX);
+    gui_->position_->setYcoordinate(gui_->position_->getYcoordinate() + deltaY);
 }
 
 void Dinosaur::energyBurning(){

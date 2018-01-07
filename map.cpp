@@ -103,8 +103,8 @@ void Map::createTrees(int amount)
 Coordinates *Map::getNearestLake(Dinosaur *dino)
 {
     Coordinates* coords;
-    int dinoX = dino->gui_->position_->xRealCoordinate_;
-    int dinoY = dino->gui_->position_->yRealCoordinate_;
+    int dinoX = dino->gui_->position_->getRealXcoordinate();
+    int dinoY = dino->gui_->position_->getRealYcoordinate();
 
     int lakeX = 0;
     int lakeY = 0;
@@ -115,8 +115,8 @@ Coordinates *Map::getNearestLake(Dinosaur *dino)
 
     for (auto it = lakes_.begin(); it != lakes_.end(); ++it) {
 
-        lakeX=(*it)->position_->xRealCoordinate_;
-        lakeY=(*it)->position_->yRealCoordinate_;
+        lakeX=(*it)->position_->getRealXcoordinate();
+        lakeY=(*it)->position_->getRealYcoordinate();
 
         distance = sqrt(pow((lakeX - dinoX),2)+pow((lakeY - dinoY),2));
 
