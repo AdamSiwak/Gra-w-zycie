@@ -36,7 +36,7 @@ Map::Map(){
     createLakes(2);
     createTrees(2);
 
-    createPredatorsPopulation(5);
+    createPredatorsPopulation(3);
     createPreysPopulation(5);
 
     QGraphicsView * view = new QGraphicsView(scene_);
@@ -152,6 +152,10 @@ Coordinates *Map::getNearestPrey(Dinosaur *dino)
 void Map::timerCallBack(){
 
     for (auto it = preys_.begin(); it != preys_.end(); ++it) {
+        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+ //        (*it)->move_to_destination(0,0);
+    }
+    for (auto it = predators_.begin(); it != predators_.end(); ++it) {
         (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
  //        (*it)->move_to_destination(0,0);
     }

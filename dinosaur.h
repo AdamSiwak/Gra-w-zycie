@@ -23,11 +23,7 @@ public:
     enum thirstStates{THIRSTY, DRUNK, DRINKING};
     
     int age() const { return age_; }
-    int maxEnergy() const { return maxEnergy_; }
-    int energy() const { return energy_; }
     int speed() const { return speed_; }
-    int sightRange() const { return sightRange_; }
-    int sightAngle() const { return sightAngle_; }
     int hunger() const { return hunger_; }
     int maxHunger() const { return maxHunger_; }
     int thirst() const { return thirst_; }
@@ -39,11 +35,7 @@ public:
 
     void move2position(int x, int y);
 
-
     void move();
-    void drink() {
-        thirst_ = 0;
-    }
 
     DinosaurGUI* gui_;
 
@@ -63,13 +55,8 @@ protected:
 
     void move_to_destination(int x = 0, int y = 0);
 
-    int maxEnergy_;
     int speed_;
-    int sightRange_;
-    int sightAngle_;
     int maxHunger_;
-
-    int energy_;
     int age_;
     int hunger_;
     int thirst_;
@@ -80,17 +67,16 @@ protected:
 
     Water* last_water;
 
-    static const int maxMaxEnergy = 10000;
+    static const int multiplier = 10000;
+    static const int maxMaxEnergy = 1 * multiplier;
     static const int maxSpeed = 5;
-    static const int maxSightRange = 10;
-    static const int maxSightAngle = 270;
-    static const int minMaxHunger = 10000;
-    static const int maxMaxHunger = 30000;
-    static const int maxThirst = 10000;
+    static const int minMaxHunger = 1 * multiplier;
+    static const int maxMaxHunger = 3 * multiplier;
+    static const int maxThirst = 1 * multiplier;
     static const int criticalThirst = 0.5 * maxThirst;
     static const int criticalHunger = 0.5 * maxMaxHunger;
-    static const int maxAge = 100;
-    static const int reproductiveAge = 50;
+    static const int maxAge = 100 *multiplier;
+    static const int reproductiveAge = 0.5 *maxAge;
 
 };
 
