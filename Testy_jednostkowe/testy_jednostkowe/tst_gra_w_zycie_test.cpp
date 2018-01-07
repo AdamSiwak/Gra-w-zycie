@@ -80,7 +80,7 @@ void Gra_w_zycie_test::test_reproduce()
 void Gra_w_zycie_test::getNearestLake_should_return_coordinates_of_nearest_lake()
 {
     //Arrange
-    Coordinates* coordinates;
+    Lake* lake;
     Predator* dino = new Predator();
     dino->gui_->position_->setXcoordinate(0);
     dino->gui_->position_->setYcoordinate(0);
@@ -90,12 +90,10 @@ void Gra_w_zycie_test::getNearestLake_should_return_coordinates_of_nearest_lake(
     Map::getInstance()->getLakes()[1]->position_->setXcoordinate(150);
     Map::getInstance()->getLakes()[1]->position_->setYcoordinate(150);
     //Act
-    coordinates = Map::getInstance()->getNearestLake(dino);
+    lake = Map::getInstance()->getNearestLake(dino);
     //Assert
-    QCOMPARE(coordinates->getXcoordinate(),15);
-    QCOMPARE(coordinates->getXcoordinate(),15);
-    QTRY_VERIFY( coordinates->getXcoordinate() !=0);
-    QTRY_VERIFY( coordinates->getYcoordinate() !=0);
+    QCOMPARE(lake->position_->getXcoordinate(),15);
+    QCOMPARE(lake->position_->getYcoordinate(),15);
 }
 
 QTEST_MAIN(Gra_w_zycie_test)

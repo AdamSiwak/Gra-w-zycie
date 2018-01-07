@@ -66,7 +66,7 @@ void Dinosaur::move() {
 
     if (this->thirst_ > Dinosaur::criticalThirst) { // ruch w kierunku źródła
 
-    } else if (this->target.expired() != false) { // ruch w kierunku celu
+   // } else if (this->target_.expired() != false) { // ruch w kierunku celu
 
     } else { // ruch w losowym kierunku
         move_to_destination(0,0);
@@ -139,7 +139,7 @@ Dinosaur::thirstStates Dinosaur::drinking()
 
 void Dinosaur::behaviour()
 {
-    if(thirst() == 0 || age()== maxAge){
+    if(thirst() == 0 || hunger() == 0|| age()== maxAge){
         toDie();
     }
     else if(thirst()<criticalThirst){
@@ -164,6 +164,6 @@ void Dinosaur::toDie()
 
 void Dinosaur::go2nearestLake()
 {
-    currentDestination_ = Map::getInstance()->getNearestLake(this);
+    target_ = Map::getInstance()->getNearestLake(this);
 }
 

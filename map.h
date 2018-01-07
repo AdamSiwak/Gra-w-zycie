@@ -8,12 +8,15 @@
 #include "vector"
 #include "predator.h"
 #include "timer.h"
+#include "prey.h"
+#include "tree.h"
+#include "cave.h"
+#include "lake.h"
 
 
-class Map : QMainWindow
+class Map : QObject
 { // singleton
     Q_OBJECT
-
 public slots:
     void timerCallBack();
 
@@ -43,11 +46,11 @@ public:
         return instance_;
     }
 
-    void add_new_lake(ObjectGUI* object);
-    void add_new_tree(ObjectGUI* object);
-    void add_new_cave(ObjectGUI* object);
-    void add_new_predator(Predator* dinosaur);
-    void add_new_prey(Prey* dinosaur);
+    void addNewLake(ObjectGUI* object);
+    void addNewTree(ObjectGUI* object);
+    void addNewCave(ObjectGUI* object);
+    void addNewPredator(Predator* dinosaur);
+    void addNewPrey(Prey* dinosaur);
 
     void createPreysPopulation(int size);
     void createPredatorsPopulation(int size);
@@ -61,11 +64,13 @@ public:
     int get_n_caves() { return lakes_.size(); }
     int get_n_trees() { return lakes_.size(); }
 
-    Coordinates *getNearestLake(Dinosaur * dino);
-    Coordinates *getNearestTree(Dinosaur * dino);
-    Coordinates *getNearestCave(Dinosaur * dino);
-    Coordinates *getNearestPredator(Dinosaur * dino);
-    Coordinates *getNearestPrey(Dinosaur * dino);
+    Lake *getNearestLake(Dinosaur * dino);
+    Tree *getNearestTree(Dinosaur * dino);
+    Cave *getNearestCave(Dinosaur * dino);
+    Predator *getNearestPredator(Dinosaur * dino);
+    Prey *getNearestPrey(Dinosaur * dino);
+    ObjectGUI *getNearestObject(Dinosaur *dino, std::vector<ObjectGUI *> object);
+    Dinosaur *getNearestObject(Dinosaur *dino, std::vector<Dinosaur*> dinosurs);
 
     std::vector<ObjectGUI*> getLakes(){return lakes_;}
     std::vector<ObjectGUI*> getTrees(){return trees_;}

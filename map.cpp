@@ -16,10 +16,7 @@
 #include "backgroundgui.h"
 #include "map.h"
 #include "dinosaur.h"
-#include "prey.h"
-#include "tree.h"
-#include "cave.h"
-#include "lake.h"
+
 
 
 Map* Map::instance_ = 0;
@@ -48,122 +45,154 @@ Map::Map(){
     timer_ = new Timer();
 }
 
-void Map::add_new_lake(ObjectGUI* object){
+void Map::addNewLake(ObjectGUI* object){
     scene_->addItem(object);
     lakes_.push_back(object);
 }
 
-void Map::add_new_tree(ObjectGUI* object){
+void Map::addNewTree(ObjectGUI* object){
     scene_->addItem(object);
     trees_.push_back(object);
 }
 
-void Map::add_new_cave(ObjectGUI* object){
+void Map::addNewCave(ObjectGUI* object){
     scene_->addItem(object);
     caves_.push_back(object);
 }
 
-void Map::add_new_predator(Predator* dinosaur) {
+void Map::addNewPredator(Predator* dinosaur) {
     scene_->addItem(dinosaur->gui_);
     predators_.push_back(dinosaur);
 }
 
-void Map::add_new_prey(Prey* dinosaur) {
+void Map::addNewPrey(Prey* dinosaur) {
     scene_->addItem(dinosaur->gui_);
     preys_.push_back(dinosaur);
 }
 
 void Map::createPredatorsPopulation(int size) {
     for (int i = 0; i < size; ++i) {
-        add_new_predator(new Predator);
+        addNewPredator(new Predator);
     }
 }
 
 void Map::createCaves(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_cave(new Cave("cave.png",0.75));
+        addNewCave(new Cave("cave.png",0.75));
     }
 }
 
 void Map::createLakes(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_lake(new Lake("lake.png",0.5));
+        addNewLake(new Lake("lake.png",0.5));
     }
 }
 
 void Map::createTrees(int amount)
 {
     for (int i = 0; i < amount; ++i) {
-        add_new_tree(new Tree("tree.png",0.025));
+        addNewTree(new Tree("tree.png",0.025));
     }
 }
 
-Coordinates *Map::getNearestLake(Dinosaur *dino)
+Lake *Map::getNearestLake(Dinosaur *dino)
 {
-    Coordinates* coords;
+    return dynamic_cast<Lake*>(getNearestObject(dino,getLakes()));
+}
+
+Tree *Map::getNearestTree(Dinosaur *dino)
+{
+    return dynamic_cast<Tree*>(getNearestObject(dino,getTrees()));
+}
+
+Cave *Map::getNearestCave(Dinosaur *dino)
+{
+    return dynamic_cast<Cave*>(getNearestObject(dino,getCaves()));
+}
+
+Predator *Map::getNearestPredator(Dinosaur *dino)
+{
+    return dynamic_cast<Predator*>(getNearestObject(dino,getPredators()));
+}
+
+Prey *Map::getNearestPrey(Dinosaur *dino)
+{
+    return dynamic_cast<Prey*>(getNearestObject(dino,getPreys()));
+}
+
+ObjectGUI *Map::getNearestObject(Dinosaur *dino, std::vector<ObjectGUI*> objects)
+{
+    ObjectGUI* object;
     int dinoX = dino->gui_->position_->getRealXcoordinate();
     int dinoY = dino->gui_->position_->getRealYcoordinate();
 
-    int lakeX = 0;
-    int lakeY = 0;
+    int objectX = 0;
+    int objectY = 0;
 
     int distance = 0;
     int minDistance = __INT_MAX__;
 
 
-    for (auto it = lakes_.begin(); it != lakes_.end(); ++it) {
+    for (auto it = objects.begin(); it != objects.end(); ++it) {
 
-        lakeX=(*it)->position_->getRealXcoordinate();
-        lakeY=(*it)->position_->getRealYcoordinate();
+        objectX=(*it)->position_->getRealXcoordinate();
+        objectY=(*it)->position_->getRealYcoordinate();
 
-        distance = sqrt(pow((lakeX - dinoX),2)+pow((lakeY - dinoY),2));
+        distance = sqrt(pow((objectX - dinoX),2)+pow((objectY - dinoY),2));
 
         if (distance<minDistance){
             minDistance=distance;
-            coords = (*it)->position_;
+            object = (*it);
         }
     }
 
-    return coords;
+    return object;
 }
 
-Coordinates *Map::getNearestTree(Dinosaur *dino)
+Dinosaur *Map::getNearestObject(Dinosaur *dino, std::vector<Dinosaur *> dinosurs)
 {
+    Dinosaur* dinosur;
+    int dinoX = dino->gui_->position_->getRealXcoordinate();
+    int dinoY = dino->gui_->position_->getRealYcoordinate();
 
-}
+    int dinosurX = 0;
+    int dinosurY = 0;
 
-Coordinates *Map::getNearestCave(Dinosaur *dino)
-{
+    int distance = 0;
+    int minDistance = __INT_MAX__;
 
-}
 
-Coordinates *Map::getNearestPredator(Dinosaur *dino)
-{
+    for (auto it = dinosurs.begin(); it != dinosurs.end(); ++it) {
 
-}
+        dinosurX=(*it)->gui_->position_->getRealXcoordinate();
+        dinosurY=(*it)->gui_->position_->getRealYcoordinate();
 
-Coordinates *Map::getNearestPrey(Dinosaur *dino)
-{
+        distance = sqrt(pow((dinosurX - dinoX),2)+pow((dinosurY - dinoY),2));
 
+        if (distance<minDistance){
+            minDistance=distance;
+            dinosur = (*it);
+        }
+    }
+
+    return dinosur;
 }
 
 void Map::timerCallBack(){
 
     for (auto it = preys_.begin(); it != preys_.end(); ++it) {
         (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
- //        (*it)->move_to_destination(0,0);
     }
     for (auto it = predators_.begin(); it != predators_.end(); ++it) {
         (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
- //        (*it)->move_to_destination(0,0);
     }
 }
 
 void Map::createPreysPopulation(int size) {
     for (int i = 0; i < size; ++i) {
-        add_new_prey(new Prey);
+        addNewPrey(new Prey);
     }
 }
 

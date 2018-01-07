@@ -36,12 +36,12 @@ Dinosaur::hungerStates Predator::eating()
 
 void Predator::go2nearestEating()
 {
-    currentDestination_ = Map::getInstance()->getNearestPrey(this);
+    target_ = Map::getInstance()->getNearestPrey(this);
 }
 
 void Predator::go2Partner()
 {
-    currentDestination_ = Map::getInstance()->getNearestPredator(this);
+    target_ = Map::getInstance()->getNearestPredator(this);
 }
 
 void Predator::createGUIElement(){

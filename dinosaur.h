@@ -11,7 +11,7 @@
 class DinosaurGUI;
 class Water;
 
-class Dinosaur {
+class Dinosaur : public Object {
 protected:
 
 public:
@@ -63,7 +63,7 @@ protected:
 
     int rotation;
 
-    boost::weak_ptr<Dinosaur> target;
+    Object* target_;
 
     Water* last_water;
 
@@ -75,8 +75,8 @@ protected:
     static const int maxThirst = 1 * multiplier;
     static const int criticalThirst = 0.5 * maxThirst;
     static const int criticalHunger = 0.5 * maxMaxHunger;
-    static const int maxAge = 100 *multiplier;
-    static const int reproductiveAge = 0.5 *maxAge;
+    static const int maxAge = 100 * multiplier;
+    static const int reproductiveAge = 0.5 * maxAge;
 
 };
 
