@@ -67,6 +67,8 @@ public:
     Coordinates *getNearestPredator(Dinosaur * dino);
     Coordinates *getNearestPrey(Dinosaur * dino);
 
+    std::vector<ObjectGUI*> getLakes(){return lakes_;};
+
 };
 
 #endif // MAP_H
