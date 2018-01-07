@@ -5,6 +5,8 @@
 
 #include "../../predator.h"
 #include "../../map.h"
+#include "../../coordinates.h"
+#include "../../map.h"
 
 // add necessary includes here
 
@@ -19,8 +21,9 @@ public:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    void test_move();
+    void move2position_should_move_only_one_step_in_destination_direction();
     void test_reproduce();
+    void getNearestLake_should_return_coordinates_of_nearest_lake();
 
 };
 
@@ -44,16 +47,19 @@ void Gra_w_zycie_test::cleanupTestCase()
 
 }
 
-void Gra_w_zycie_test::test_move()
+void Gra_w_zycie_test::move2position_should_move_only_one_step_in_destination_direction()
 {
+    // Arrange
     Predator p;
-    int x = p.x();
-    int y = p.y();
-
-    p.move();
-
-    QTRY_VERIFY(x != p.x());
-    QTRY_VERIFY(y != p.y());
+    p.gui_->position_->setXcoordinate(100);
+    p.gui_->position_->setYcoordinate(100);
+    int x = 50;
+    int y = 50;
+    // Act
+    p.move2position(x, y);
+    // Assert
+    QCOMPARE(p.gui_->position_->getXcoordinate(), 99);
+    QCOMPARE(p.gui_->position_->getYcoordinate(), 99);
 }
 
 void Gra_w_zycie_test::test_reproduce()
@@ -62,17 +68,26 @@ void Gra_w_zycie_test::test_reproduce()
     Predator* child = parent1.reproduce(parent2);
 
     QTRY_VERIFY(child != nullptr);
-    QTRY_VERIFY(child->age() == 0);
-    QTRY_VERIFY(child->maxEnergy() != parent1.maxEnergy());
-    QTRY_VERIFY(child->energy() == 100);
-    QTRY_VERIFY(child->speed() != parent1.speed());
-    QTRY_VERIFY(child->sightRange() != parent1.sightRange());
-    QTRY_VERIFY(child->sightAngle() != parent1.sightAngle());
-    QTRY_VERIFY(child->hunger() == 0);
+    QCOMPARE(child->age(),0);
+    QTRY_VERIFY(child->speed() !=parent1.speed());
+    QCOMPARE(child->hunger(),0);
     QTRY_VERIFY(child->maxHunger() != parent1.maxHunger());
-    QTRY_VERIFY(child->thirst() == 0);
+    QCOMPARE(child->thirst(),0);
 
     delete child;
+}
+
+void Gra_w_zycie_test::getNearestLake_should_return_coordinates_of_nearest_lake()
+{
+    //Arrange
+    Coordinates* coordinates;
+    Predator* dino = new Predator();
+    Map::getInstance()->createLakes(2);
+    //Act
+    coordinates = Map::getInstance()->getNearestLake(dino);
+    //Assert
+    QTRY_VERIFY( coordinates->getXcoordinate() !=0);
+    QTRY_VERIFY( coordinates->getYcoordinate() !=0);
 }
 
 QTEST_MAIN(Gra_w_zycie_test)
