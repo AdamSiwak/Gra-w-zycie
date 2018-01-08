@@ -195,7 +195,7 @@ void Dinosaur::toDie()
 
 void Dinosaur::go2nearestLake()
 {
-    target_ = Map::getInstance()->getNearestLake(this);
+    target_ = Map::getInstance()->getNearestLake(*this);
     move2position(target_.lock()->position_->getXcoordinate(),target_.lock()->position_->getYcoordinate());
 
 }

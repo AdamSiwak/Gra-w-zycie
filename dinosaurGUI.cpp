@@ -14,10 +14,10 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName
     setTransformOriginPoint(-50,-50);
 
     if(dinoName == "dinosaur-brown.png"){
-        dinoSound = new Sound(PRAY_SOUND);
+        dinoSound = Sound_sharedPtr(new Sound(PRAY_SOUND));
     }
     else if(dinoName == "dinosaur_green.png"){
-        dinoSound = new Sound(PREDATOR_SOUND);
+        dinoSound = Sound_sharedPtr(new Sound(PREDATOR_SOUND));
     }
 }
 

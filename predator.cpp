@@ -3,7 +3,7 @@
 #include "map.h"
 
 Predator::Predator() : Dinosaur(), attack_(rand()%100), loudness_(rand()%100) {
-    gui_ = new DinosaurGUI(picture_,0.15);
+    gui_ = DinosaurGUI_sharedPtr(new DinosaurGUI(picture_,0.15));
 }
 
 Predator::Predator(Predator& parent1, Predator& parent2) {
@@ -24,8 +24,8 @@ void Predator::accept(Visitor &v) {
     v.visit(*this);
 }
 
-Predator* Predator::reproduce(Predator &pred) {
-    Predator* child = new Predator(*this, pred);
+Predator_sharedPtr Predator::reproduce(Predator &pred) {
+    Predator_sharedPtr child = Predator_sharedPtr(new Predator(*this, pred));
     return child;
 }
 

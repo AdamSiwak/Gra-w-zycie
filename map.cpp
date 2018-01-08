@@ -24,7 +24,7 @@ Map* Map::instance_ = 0;
 Map::Map(){
     qDebug()<<"Hello Debug";
 
-    scene_ = new QGraphicsScene();
+    scene_ = QGraphicsScene_sharedPtr(new QGraphicsScene());
 
     BackgroundGUI back;
     scene_->setBackgroundBrush(back);
@@ -38,19 +38,19 @@ void Map::startAnimation(){
     createPredatorsPopulation(5);
     createPreysPopulation(5);
 
-    view_ = new QGraphicsView(scene_);
+    view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
 
-    backgroundSound_ = new Sound(BACKGROUND);
+    backgroundSound_ = Sound_sharedPtr(new Sound(BACKGROUND));
    // backgroundSound_->play(); //TODO: uncomment
 
-    timer_ = new Timer();
+    timer_ = Timer_sharedPtr(new Timer());
 }
 
 void Map::stopAnimation(){
-    delete view_;
-    delete backgroundSound_;
-    delete timer_;
+    view_.reset();
+    backgroundSound_.reset();
+    timer_.reset();
 }
 
 void Map::addNewLake(ObjectGUI_sharedPtr object){
@@ -69,12 +69,12 @@ void Map::addNewCave(ObjectGUI_sharedPtr object){
 }
 
 void Map::addNewPredator(Dinosaur_sharedPtr dinosaur) {
-    scene_->addItem(dinosaur->gui_);
+    scene_->addItem(&(*dinosaur->gui_));
     predators_.push_back(dinosaur);
 }
 
 void Map::addNewPrey(Dinosaur_sharedPtr dinosaur) {
-    scene_->addItem(dinosaur->gui_);
+    scene_->addItem(&(*dinosaur->gui_));
     preys_.push_back(dinosaur);
 }
 
