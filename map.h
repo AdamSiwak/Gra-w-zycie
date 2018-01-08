@@ -77,11 +77,11 @@ public:
     Predator_weakPtr getNearestPredator(Dinosaur& dino);
     Prey_weakPtr getNearestPrey(Dinosaur& dino);
 
-    std::vector<ObjectGUI_sharedPtr> getLakes(){return lakes_;}
-    std::vector<ObjectGUI_sharedPtr> getTrees(){return trees_;}
-    std::vector<ObjectGUI_sharedPtr> getCaves(){return caves_;}
-    std::vector<Dinosaur_sharedPtr> getPredators(){return predators_;}
-    std::vector<Dinosaur_sharedPtr> getPreys(){return preys_;}
+    std::vector<ObjectGUI_sharedPtr>& getLakes(){return lakes_;}
+    std::vector<ObjectGUI_sharedPtr>& getTrees(){return trees_;}
+    std::vector<ObjectGUI_sharedPtr>& getCaves(){return caves_;}
+    std::vector<Dinosaur_sharedPtr>& getPredators(){return predators_;}
+    std::vector<Dinosaur_sharedPtr>& getPreys(){return preys_;}
 
     void timerCallBack();
 

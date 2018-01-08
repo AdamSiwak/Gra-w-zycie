@@ -235,15 +235,15 @@ void Gra_w_zycie_test::map_createTrees_should_add_n_trees_with_random_coordinate
 void Gra_w_zycie_test::map_getNearestLake_should_return_pointer_to_nearest_lake()
 {
     //Arrange
-
     Predator dino;
     dino.gui_->position_->setXcoordinate(0);
     dino.gui_->position_->setYcoordinate(0);
     Map::getInstance()->createLakes(2);
-    Map::getInstance()->getLakes()[0]->position_->setXcoordinate(15);
-    Map::getInstance()->getLakes()[0]->position_->setYcoordinate(15);
-    Map::getInstance()->getLakes()[1]->position_->setXcoordinate(150);
-    Map::getInstance()->getLakes()[1]->position_->setYcoordinate(150);
+    std::vector<ObjectGUI_sharedPtr>& lakes = Map::getInstance()->getLakes();
+    lakes[0]->position_->setXcoordinate(15);
+    lakes[0]->position_->setYcoordinate(15);
+    lakes[1]->position_->setXcoordinate(150);
+    lakes[1]->position_->setYcoordinate(150);
     //Act
     Lake_weakPtr lake = Map::getInstance()->getNearestLake(dino);
     //Assert
@@ -255,22 +255,86 @@ void Gra_w_zycie_test::map_getNearestLake_should_return_pointer_to_nearest_lake(
 
 void Gra_w_zycie_test::map_getNearestTree_should_return_pointer_to_nearest_tree()
 {
+    //Arrange
+    Predator dino;
+    dino.gui_->position_->setXcoordinate(0);
+    dino.gui_->position_->setYcoordinate(0);
+    Map::getInstance()->createTrees(2);
+    std::vector<ObjectGUI_sharedPtr>& trees = Map::getInstance()->getTrees();
+    trees[0]->position_->setXcoordinate(15);
+    trees[0]->position_->setYcoordinate(15);
+    trees[1]->position_->setXcoordinate(150);
+    trees[1]->position_->setYcoordinate(150);
+    //Act
+    Tree_weakPtr tree = Map::getInstance()->getNearestTree(dino);
+    //Assert
+    QCOMPARE(tree.lock()->position_->getXcoordinate(),15);
+    QCOMPARE(tree.lock()->position_->getYcoordinate(),15);
 
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_getNearestCave_should_return_pointer_to_nearest_cave()
 {
+    //Arrange
+    Predator dino;
+    dino.gui_->position_->setXcoordinate(0);
+    dino.gui_->position_->setYcoordinate(0);
+    Map::getInstance()->createCaves(2);
+    std::vector<ObjectGUI_sharedPtr>& caves = Map::getInstance()->getCaves();
+    caves[0]->position_->setXcoordinate(15);
+    caves[0]->position_->setYcoordinate(15);
+    caves[1]->position_->setXcoordinate(150);
+    caves[1]->position_->setYcoordinate(150);
+    //Act
+    Cave_weakPtr cave = Map::getInstance()->getNearestCave(dino);
+    //Assert
+    QCOMPARE(cave.lock()->position_->getXcoordinate(),15);
+    QCOMPARE(cave.lock()->position_->getYcoordinate(),15);
 
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_getNearestPredator_should_return_pointer_to_nearest_predator()
 {
+    //Arrange
+    Predator dino;
+    dino.gui_->position_->setXcoordinate(0);
+    dino.gui_->position_->setYcoordinate(0);
+    Map::getInstance()->createPredatorsPopulation(2);
+    std::vector<Dinosaur_sharedPtr>& predators = Map::getInstance()->getPredators();
+    (&(*predators[0]))->position_->setXcoordinate(15);
+    (&(*predators[0]))->position_->setYcoordinate(15);
+    (&(*predators[1]))->position_->setXcoordinate(150);
+    (&(*predators[1]))->position_->setYcoordinate(150);
+    //Act
+//    Predator_weakPtr predator = Map::getInstance()->getNearestPredator(dino);
+//    //Assert
+//    QCOMPARE(predator.lock()->position_->getXcoordinate(),15);
+//    QCOMPARE(predator.lock()->position_->getYcoordinate(),15);
 
+//    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_getNearestPrey_should_return_pointer_to_nearest_prey()
 {
+    //Arrange
+//    Predator dino;
+//    dino.gui_->position_->setXcoordinate(0);
+//    dino.gui_->position_->setYcoordinate(0);
+//    Map::getInstance()->createPreysPopulation(2);
+//    std::vector<Dinosaur_sharedPtr>& preys = Map::getInstance()->getPreys();
+//    preys[0]->position_->setXcoordinate(15);
+//    preys[0]->position_->setYcoordinate(15);
+//    preys[1]->position_->setXcoordinate(150);
+//    preys[1]->position_->setYcoordinate(150);
+//    //Act
+//    Prey_weakPtr prey = Map::getInstance()->getNearestPrey(dino);
+//    //Assert
+//    QCOMPARE(prey.lock()->position_->getXcoordinate(),15);
+//    QCOMPARE(prey.lock()->position_->getYcoordinate(),15);
 
+//    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_timerCallBack_should_update_position_of_dinosaurs()
