@@ -35,14 +35,14 @@ void Map::startAnimation(){
     createLakes(2);
     createTrees(2);
 
-    createPredatorsPopulation(3);
+    createPredatorsPopulation(5);
     createPreysPopulation(5);
 
     view_ = new QGraphicsView(scene_);
     view_->showMaximized();
 
     backgroundSound_ = new Sound(BACKGROUND);
-    backgroundSound_->play();
+   // backgroundSound_->play(); //TODO: uncomment
 
     timer_ = new Timer();
 }

@@ -5,12 +5,12 @@
 #include <QTimer>
 
 
-Dinosaur::Dinosaur() : age_(0), speed_(rand()%maxSpeed), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(0), thirst_(0) {
+Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
     // TODO: ograniczenia jednych parametrów względem innych
+    speed_=rand() % (maxSpeed - minSpeed) + minSpeed;
     currentDestination_ = new Coordinates();
-    currentDestination_->setXcoordinate(rand()%currentDestination_->MAX_X_-currentDestination_->MAX_X_/2);
-    currentDestination_->setYcoordinate(rand()%currentDestination_->MAX_Y_-currentDestination_->MAX_Y_/2);
+    currentDestination_->setRandomCoordiantes();
 }
 
 
@@ -45,17 +45,19 @@ void Dinosaur::stepDown(){
 
 void Dinosaur::move2position(int x, int y)
 {
-    if (x<gui_->position_->getXcoordinate()){
-        stepLeft();
-    }
-    else if (x>gui_->position_->getXcoordinate()){
-        stepRight();
-    }
-    if(y<gui_->position_->getYcoordinate()){
-        stepUp();
-    }
-    else if(y>gui_->position_->getYcoordinate()){
-        stepDown();
+    for(int i=0; i<speed(); ++i){
+        if (x<gui_->position_->getXcoordinate()){
+            stepLeft();
+        }
+        else if (x>gui_->position_->getXcoordinate()){
+            stepRight();
+        }
+        if(y<gui_->position_->getYcoordinate()){
+            stepUp();
+        }
+        else if(y>gui_->position_->getYcoordinate()){
+            stepDown();
+        }
     }
 }
 
@@ -133,8 +135,10 @@ Dinosaur::hungerStates Dinosaur::eating()
 
 Dinosaur::thirstStates Dinosaur::drinking()
 {
-    if(thirst()<maxThirst){
-        thirst_++;
+    gui_->beginDrinking();
+    if(thirst()<0.8*maxThirst){
+        thirst_+=10;
+
         return DRINKING;
     }
     else{
@@ -144,28 +148,44 @@ Dinosaur::thirstStates Dinosaur::drinking()
 
 void Dinosaur::behaviour()
 {
+
 /*    if(thirst() == 0 || hunger() == 0|| age()== maxAge){
         toDie();
     }
-    else*/ if(thirst()<criticalThirst){
+    else*/
+    if(thirst()<criticalThirst || thirstState_ == DRINKING){
         go2nearestLake();
-      //  if(target_->position_->getRealYcoordinate() ==)
+        if(*target_.lock()->position_ == *gui_->position_ ){
+            thirstState_=drinking();
+        }
     }
-    else if(hunger()<criticalHunger){
-        go2nearestEating();
-    }
-    else if(age()>reproductiveAge){
-        go2Partner();
-    }
+//    else if(hunger()<criticalHunger){
+//        go2nearestEating();
+//    }
+//    else if(age()>reproductiveAge){
+//        go2Partner();
+//    }
     else {
-        if(gui_->position_->getRealXcoordinate()==currentDestination_->getXcoordinate() && gui_->position_->getRealYcoordinate()==currentDestination_->getYcoordinate()){
+        if(*currentDestination_== *gui_->position_){
             drawLotsPosition();
+
         }
         else{
             move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
+
         }
     }
 
+}
+
+QString Dinosaur::toString()
+{
+    QString str;
+
+    str = "X = "+ QString::number(gui_->position_->getXcoordinate()) + "Y = "+ QString::number(gui_->position_->getYcoordinate())+
+            " Age = "+ QString::number(age()) + " Thirst = " + QString::number(thirst());
+
+    return str;
 }
 
 void Dinosaur::toDie()
@@ -177,5 +197,6 @@ void Dinosaur::go2nearestLake()
 {
     target_ = Map::getInstance()->getNearestLake(this);
     move2position(target_.lock()->position_->getXcoordinate(),target_.lock()->position_->getYcoordinate());
+
 }
 

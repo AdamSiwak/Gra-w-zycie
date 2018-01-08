@@ -25,6 +25,9 @@ public:
     void stepUp();
     void stepDown();
 
+    void beginDrinking();
+    void endDrinking();
+
 private:
     Sound* dinoSound;
     static const int STEP_SIZE_ = 1;

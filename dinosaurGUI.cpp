@@ -71,9 +71,6 @@ void DinosaurGUI::stepUp()
     if(position_->getYcoordinate()>-(position_->MAX_Y_/2)){
         position_->setYcoordinate(position_->getYcoordinate()-1);
         setPos(x(),y()-STEP_SIZE_);
-        //setTransform(QTransform::fromScale(1, 1));
-        //setRotation(90);
-        qDebug()<<"X="<<position_->getXcoordinate()<<", Y="<<position_->getYcoordinate();
     }
 }
 
@@ -85,4 +82,15 @@ void DinosaurGUI::stepDown()
         //setTransform(QTransform::fromScale(1, -1));
         //setRotation(90);
     }
+}
+
+void DinosaurGUI::beginDrinking()
+{
+    setTransform(QTransform::fromScale(-1, 1));
+    setRotation(-45);
+}
+
+void DinosaurGUI::endDrinking()
+{
+    setRotation(0);
 }

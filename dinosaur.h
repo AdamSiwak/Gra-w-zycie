@@ -7,6 +7,7 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dinosaurGUI.h"
+#include <iostream>
 
 class DinosaurGUI;
 class Water;
@@ -26,7 +27,7 @@ public:
     int speed() const { return speed_; }
     int hunger() const { return hunger_; }
     int maxHunger() const { return maxHunger_; }
-    int thirst() const { return thirst_; }
+    int thirst() { return thirst_; }
 
     void stepRight();
     void stepLeft();
@@ -37,6 +38,7 @@ public:
 
     void behaviour();
 
+    QString toString();
 
 protected:
     virtual void createGUIElement() = 0;
@@ -56,7 +58,7 @@ protected:
 
     void move2position(int x, int y);
     void move();
-
+    thirstStates thirstState_;
 
 
     int speed_;
@@ -73,7 +75,8 @@ protected:
 
     static const int multiplier = 10000;
     static const int maxMaxEnergy = 1 * multiplier;
-    static const int maxSpeed = 5;
+    static const int maxSpeed = 8;
+    static const int minSpeed = 3;
     static const int minMaxHunger = 1 * multiplier;
     static const int maxMaxHunger = 3 * multiplier;
     static const int maxThirst = 1 * multiplier;
