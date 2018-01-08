@@ -2,6 +2,8 @@
 #define PREY_H
 
 #include "dinosaur.h"
+#include <boost/weak_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 class Cave;
 class Tree;
@@ -16,7 +18,7 @@ public:
     virtual void go2nearestEating();
     virtual void go2Partner();
 
-    Prey* reproduce(Prey& prey);
+    Prey* reproduce(Prey& prey); // TODO: zmienic na sprytne
     void set_last_cave(Cave& cave) { last_cave = &cave; }
     bool is_being_chased() { return isChased_; }
     void hide(Cave& cave);
@@ -29,9 +31,12 @@ private:
 
     bool isChased_;
 
-    Cave* last_cave;
+    Cave* last_cave; // TODO: usunac
 
     const QString picture_ = "dinosaur_green.png";
 };
+
+typedef boost::shared_ptr<Prey> Prey_sharedPtr;
+typedef boost::weak_ptr<Prey> Prey_weakPtr;
 
 #endif // PREY_H

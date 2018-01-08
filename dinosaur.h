@@ -84,4 +84,7 @@ protected:
 
 };
 
+typedef boost::shared_ptr<Dinosaur> Dinosaur_sharedPtr;
+typedef boost::weak_ptr<Dinosaur> Dinosaur_weakPtr;
+
 #endif // DINOSAUR_H

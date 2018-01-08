@@ -24,8 +24,8 @@ private:
     ~Map(){}
 
     static Map* instance_;
-    std::vector<Dinosaur*> predators_;
-    std::vector<Dinosaur*> preys_;
+    std::vector<Dinosaur_sharedPtr> predators_;
+    std::vector<Dinosaur_sharedPtr> preys_;
     std::vector<ObjectGUI_sharedPtr> caves_;
     std::vector<ObjectGUI_sharedPtr> lakes_;
     std::vector<ObjectGUI_sharedPtr> trees_;
@@ -36,8 +36,8 @@ private:
 
     Timer* timer_;
 
-    ObjectGUI_sharedPtr getNearestObject(Dinosaur *dino, std::vector<ObjectGUI_sharedPtr> object);
-    Dinosaur *getNearestObject(Dinosaur *dino, std::vector<Dinosaur*> dinosurs);
+    ObjectGUI_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
+    Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs);
 
 public:
     static Map* getInstance(){
@@ -53,8 +53,8 @@ public:
     void addNewLake(ObjectGUI_sharedPtr object);
     void addNewTree(ObjectGUI_sharedPtr object);
     void addNewCave(ObjectGUI_sharedPtr object);
-    void addNewPredator(Predator* dinosaur);
-    void addNewPrey(Prey* dinosaur);
+    void addNewPredator(Dinosaur_sharedPtr dinosaur);
+    void addNewPrey(Dinosaur_sharedPtr dinosaur);
 
     void createPreysPopulation(int size);
     void createPredatorsPopulation(int size);
@@ -70,17 +70,17 @@ public:
     int get_n_caves() { return caves_.size(); }
     int get_n_trees() { return trees_.size(); }
 
-    Lake_weakPtr getNearestLake(Dinosaur * dino);
-    Tree_weakPtr getNearestTree(Dinosaur * dino);
-    Cave_weakPtr getNearestCave(Dinosaur * dino);
-    Predator *getNearestPredator(Dinosaur * dino);
-    Prey *getNearestPrey(Dinosaur * dino);
+    Lake_weakPtr getNearestLake(Dinosaur& dino);
+    Tree_weakPtr getNearestTree(Dinosaur& dino);
+    Cave_weakPtr getNearestCave(Dinosaur& dino);
+    Predator_weakPtr getNearestPredator(Dinosaur& dino);
+    Prey_weakPtr getNearestPrey(Dinosaur& dino);
 
     std::vector<ObjectGUI_sharedPtr> getLakes(){return lakes_;}
     std::vector<ObjectGUI_sharedPtr> getTrees(){return trees_;}
     std::vector<ObjectGUI_sharedPtr> getCaves(){return caves_;}
-    std::vector<Dinosaur*> getPredators(){return predators_;}
-    std::vector<Dinosaur*> getPreys(){return preys_;}
+    std::vector<Dinosaur_sharedPtr> getPredators(){return predators_;}
+    std::vector<Dinosaur_sharedPtr> getPreys(){return preys_;}
 
     void timerCallBack();
 
