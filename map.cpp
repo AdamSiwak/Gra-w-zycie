@@ -68,71 +68,63 @@ void Map::addNewCave(ObjectGUI_sharedPtr object){
     caves_.push_back(object);
 }
 
-void Map::addNewPredator(Predator* dinosaur) {
+void Map::addNewPredator(Dinosaur_sharedPtr dinosaur) {
     scene_->addItem(dinosaur->gui_);
     predators_.push_back(dinosaur);
 }
 
-void Map::addNewPrey(Prey* dinosaur) {
+void Map::addNewPrey(Dinosaur_sharedPtr dinosaur) {
     scene_->addItem(dinosaur->gui_);
     preys_.push_back(dinosaur);
 }
 
 void Map::createPredatorsPopulation(int size) {
     for (int i = 0; i < size; ++i) {
-        addNewPredator(new Predator);
+        Dinosaur_sharedPtr p(new Predator() );
+        addNewPredator(p);
+    }
+}
+
+void Map::createPreysPopulation(int size) {
+    for (int i = 0; i < size; ++i) {
+        Dinosaur_sharedPtr p(new Prey() );
+        addNewPrey(p);
     }
 }
 
 void Map::createCaves(int amount)
 {
-    try {
-        for (int i = 0; i < amount; ++i) {
-            ObjectGUI_sharedPtr p(new Cave("cave.png",0.75) );
-            addNewCave(p);
-        }
-    } catch (const std::bad_alloc& e) {
-        qDebug() << "Allocation failed: " << e.what() << '\n';
+    for (int i = 0; i < amount; ++i) {
+        ObjectGUI_sharedPtr p(new Cave("cave.png",0.75) );
+        addNewCave(p);
     }
 }
 
 void Map::createLakes(int amount)
 {
-    try {
-        for (int i = 0; i < amount; ++i) {
-            ObjectGUI_sharedPtr p(new Lake("lake.png",0.5) );
-            addNewLake(p);
-        }
-    } catch (const std::bad_alloc& e) {
-        qDebug() << "Allocation failed: " << e.what() << '\n';
+    for (int i = 0; i < amount; ++i) {
+        ObjectGUI_sharedPtr p(new Lake("lake.png",0.5) );
+        addNewLake(p);
     }
 }
 
 void Map::createTrees(int amount)
 {
-    try {
-        for (int i = 0; i < amount; ++i) {
-            ObjectGUI_sharedPtr p(new Tree("tree.png",0.025) );
-            addNewTree(p);
-        }
-    } catch (const std::bad_alloc& e) {
-        qDebug() << "Allocation failed: " << e.what() << '\n';
+    for (int i = 0; i < amount; ++i) {
+        ObjectGUI_sharedPtr p(new Tree("tree.png",0.025) );
+        addNewTree(p);
     }
 }
 
 void Map::deleteAllObjects()
 {
-//    while (!preys_.empty()) {
-//        Prey* p = dynamic_cast<Prey*>(*(preys_.end()--));
-//        delete p;
-//        preys_.pop_back();
-//    }
+    while (!preys_.empty()) {
+        preys_.pop_back();
+    }
 
-//    while (!predators_.empty()) {
-//        Predator* p =  dynamic_cast<Predator*>(*(predators_.end()--));
-//        delete p;
-//        predators_.pop_back();
-//    }
+    while (!predators_.empty()) {
+        predators_.pop_back();
+    }
 
     while (!caves_.empty()) {
         caves_.pop_back();
@@ -147,39 +139,41 @@ void Map::deleteAllObjects()
     }
 }
 
-Lake_weakPtr Map::getNearestLake(Dinosaur *dino)
+Lake_weakPtr Map::getNearestLake(Dinosaur& dino)
 {
     ObjectGUI_sharedPtr object = getNearestObject(dino,getLakes());
     return boost::dynamic_pointer_cast<Lake>(object);
 }
 
-Tree_weakPtr Map::getNearestTree(Dinosaur *dino)
+Tree_weakPtr Map::getNearestTree(Dinosaur& dino)
 {
     ObjectGUI_sharedPtr object = getNearestObject(dino,getTrees());
     return boost::dynamic_pointer_cast<Tree>(object);
 }
 
-Cave_weakPtr Map::getNearestCave(Dinosaur *dino)
+Cave_weakPtr Map::getNearestCave(Dinosaur& dino)
 {
     ObjectGUI_sharedPtr object = getNearestObject(dino,getCaves());
     return boost::dynamic_pointer_cast<Cave>(object);
 }
 
-Predator *Map::getNearestPredator(Dinosaur *dino)
+Predator_weakPtr Map::getNearestPredator(Dinosaur& dino)
 {
-    return dynamic_cast<Predator*>(getNearestObject(dino,getPredators()));
+    Dinosaur_sharedPtr object = getNearestObject(dino,getPredators());
+    return boost::dynamic_pointer_cast<Predator>(object);
 }
 
-Prey *Map::getNearestPrey(Dinosaur *dino)
+Prey_weakPtr Map::getNearestPrey(Dinosaur& dino)
 {
-    return dynamic_cast<Prey*>(getNearestObject(dino,getPreys()));
+    Dinosaur_sharedPtr object = getNearestObject(dino,getPreys());
+    return boost::dynamic_pointer_cast<Prey>(object);
 }
 
-ObjectGUI_sharedPtr Map::getNearestObject(Dinosaur *dino, std::vector<ObjectGUI_sharedPtr> objects)
+ObjectGUI_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> objects)
 {
     ObjectGUI_sharedPtr object;
-    int dinoX = dino->gui_->position_->getRealXcoordinate();
-    int dinoY = dino->gui_->position_->getRealYcoordinate();
+    int dinoX = dino.gui_->position_->getRealXcoordinate();
+    int dinoY = dino.gui_->position_->getRealYcoordinate();
 
     int objectX = 0;
     int objectY = 0;
@@ -204,11 +198,11 @@ ObjectGUI_sharedPtr Map::getNearestObject(Dinosaur *dino, std::vector<ObjectGUI_
     return object;
 }
 
-Dinosaur *Map::getNearestObject(Dinosaur *dino, std::vector<Dinosaur *> dinosurs)
+Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs)
 {
-    Dinosaur* dinosur;
-    int dinoX = dino->gui_->position_->getRealXcoordinate();
-    int dinoY = dino->gui_->position_->getRealYcoordinate();
+    Dinosaur_sharedPtr dinosur;
+    int dinoX = dino.gui_->position_->getRealXcoordinate();
+    int dinoY = dino.gui_->position_->getRealYcoordinate();
 
     int dinosurX = 0;
     int dinosurY = 0;
@@ -244,10 +238,3 @@ void Map::timerCallBack(){
         (*it)->behaviour();
     }
 }
-
-void Map::createPreysPopulation(int size) {
-    for (int i = 0; i < size; ++i) {
-        addNewPrey(new Prey);
-    }
-}
-

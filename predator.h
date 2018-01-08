@@ -2,6 +2,8 @@
 #define PREDATOR_H
 
 #include "dinosaur.h"
+#include <boost/weak_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 class Prey;
 
@@ -11,7 +13,7 @@ public:
     virtual ~Predator(){}
     Predator(Predator& parent1, Predator& parent2);
     virtual void accept(Visitor &v);
-    Predator* reproduce(Predator& pred);
+    Predator* reproduce(Predator& pred);//TODO: zmienic na sprytny wskaznik
     void attack(Prey& prey);
     virtual hungerStates eating();
     virtual void go2nearestEating();
@@ -25,5 +27,8 @@ private:
 
     const QString picture_ = "dinosaur-brown.png";
 };
+
+typedef boost::shared_ptr<Predator> Predator_sharedPtr;
+typedef boost::weak_ptr<Predator> Predator_weakPtr;
 
 #endif // PREDATOR_H
