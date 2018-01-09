@@ -26,7 +26,7 @@ public:
     int speed() const { return speed_; }
     int hunger() const { return hunger_; }
     int maxHunger() const { return maxHunger_; }
-    int thirst() { return thirst_; }
+    int thirst() const { return thirst_; }
 
     void stepRight();
     void stepLeft();

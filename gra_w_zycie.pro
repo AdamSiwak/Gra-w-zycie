@@ -47,7 +47,6 @@ HEADERS += \
     dinosaur.h \
     visitor.h \
     statictics_visitor.h \
-    statistics.h \
     map.h \
     map_block.h \
     object.h \
