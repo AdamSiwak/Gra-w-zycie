@@ -16,6 +16,7 @@
 #include "backgroundgui.h"
 #include "map.h"
 #include "dinosaur.h"
+#include "cloud.h"
 
 
 
@@ -31,18 +32,21 @@ Map::Map(){
 }
 
 void Map::startAnimation(){
-    createCaves(2);
     createLakes(2);
     createTrees(2);
-
+    createCaves(2);
     createPredatorsPopulation(5);
     createPreysPopulation(5);
+
+
+    ObjectGUI_sharedPtr p(new Cloud("cloud.png",0.3));
+    addNewCave(p);
 
     view_ = new QGraphicsView(scene_);
     view_->showMaximized();
 
     backgroundSound_ = new Sound(BACKGROUND);
-   // backgroundSound_->play(); //TODO: uncomment
+    //backgroundSound_->play(); //TODO: uncomment
 
     timer_ = new Timer();
 }

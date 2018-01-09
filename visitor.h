@@ -5,7 +5,7 @@ class Object;
 class Dinosaur;
 class Predator;
 class Prey;
-class Water;
+class Lake;
 class Tree;
 class Cave;
 
@@ -13,7 +13,7 @@ class Visitor { //wizytator bazowy
 public:
     virtual void visit(Predator&) = 0;
     virtual void visit(Prey&) = 0;
-    virtual void visit(const Water& water) = 0;
+    virtual void visit(const Lake& lake) = 0;
     virtual void visit(Tree& tree) = 0;
     virtual void visit(const Cave& cave) = 0;
 };

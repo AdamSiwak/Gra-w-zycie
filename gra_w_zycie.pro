@@ -38,7 +38,8 @@ SOURCES += \
     cave.cpp \
     lake.cpp \
     tree.cpp \
-    timer.cpp
+    timer.cpp \
+    cloud.cpp
 
 HEADERS += \
     predator.h \
@@ -59,7 +60,8 @@ HEADERS += \
     cave.h \
     lake.h \
     tree.h \
-    timer.h
+    timer.h \
+    cloud.h
 
 FORMS += \
         applicationwindow.ui

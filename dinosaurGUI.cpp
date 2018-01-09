@@ -2,7 +2,9 @@
 #include <QDebug>
 #include <QDir>
 #include <QKeyEvent>
+#include "cloud.h"
 #include "sound.h"
+#include <QMessageBox>
 
 DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName, scale){
 
@@ -22,20 +24,21 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName
 }
 
 void DinosaurGUI :: keyPressEvent(QKeyEvent *event){
-
-    switch(event -> key()){
-        case Qt::Key_Left:
-            stepLeft();
-            break;
-        case Qt::Key_Right:
-            stepRight();
-            break;
-        case Qt::Key_Up:
-            stepUp();
-            break;
-        case Qt::Key_Down:
-            stepDown();
-            break;
+    for(int i=0; i<10; ++i){
+        switch(event -> key()){
+            case Qt::Key_Left:
+                stepLeft();
+                break;
+            case Qt::Key_Right:
+                stepRight();
+                break;
+            case Qt::Key_Up:
+                stepUp();
+                break;
+            case Qt::Key_Down:
+                stepDown();
+                break;
+        }
     }
 }
 
@@ -44,6 +47,15 @@ void DinosaurGUI::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     dinoSound->play();
     dinoSound->setVolume(30);
+
+
+//    QMessageBox msgBox;
+////    msgBox.setText("Name");
+//    msgBox.setInformativeText("This is Dinosaur");
+//    msgBox.setStandardButtons(QMessageBox::Ok);
+//    msgBox.setDefaultButton(QMessageBox::Ok);
+//    int ret = msgBox.exec();
+
 }
 
 void DinosaurGUI::stepRight()
