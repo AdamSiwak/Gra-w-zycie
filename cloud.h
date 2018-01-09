@@ -7,6 +7,9 @@ class Cloud : public ObjectGUI
 {
 public:
     Cloud(QString picture, const qreal scale);
+    void writeText(QString s);
+private:
+    QPixmap *pixmap_;
 };
 
 typedef boost::shared_ptr<Cloud> Cloud_sharedPtr;

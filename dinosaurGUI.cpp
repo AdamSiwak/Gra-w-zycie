@@ -8,7 +8,6 @@
 
 DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName, scale){
 
-
     setFlag(QGraphicsItem::ItemIsSelectable);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
@@ -21,6 +20,8 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName
     else if(dinoName == "dinosaur_green.png"){
         dinoSound = Sound_sharedPtr(new Sound(PREDATOR_SOUND));
     }
+
+    cloud_ = new Cloud("cloud.png",0.3);
 }
 
 void DinosaurGUI :: keyPressEvent(QKeyEvent *event){
@@ -47,15 +48,6 @@ void DinosaurGUI::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     dinoSound->play();
     dinoSound->setVolume(30);
-
-
-//    QMessageBox msgBox;
-////    msgBox.setText("Name");
-//    msgBox.setInformativeText("This is Dinosaur");
-//    msgBox.setStandardButtons(QMessageBox::Ok);
-//    msgBox.setDefaultButton(QMessageBox::Ok);
-//    int ret = msgBox.exec();
-
 }
 
 void DinosaurGUI::stepRight()
@@ -83,6 +75,7 @@ void DinosaurGUI::stepUp()
     if(position_->getYcoordinate()>-(position_->MAX_Y_/2)){
         position_->setYcoordinate(position_->getYcoordinate()-1);
         setPos(x(),y()-STEP_SIZE_);
+        setRotation(0);
     }
 }
 
@@ -91,8 +84,7 @@ void DinosaurGUI::stepDown()
     if(position_->getYcoordinate()<position_->MAX_Y_/2){
         position_->setYcoordinate(position_->getYcoordinate()+1);
         setPos(x(),y()+STEP_SIZE_);
-        //setTransform(QTransform::fromScale(1, -1));
-        //setRotation(90);
+        setRotation(0);
     }
 }
 

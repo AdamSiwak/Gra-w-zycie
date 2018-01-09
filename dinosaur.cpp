@@ -8,6 +8,7 @@
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
     // TODO: ograniczenia jednych parametrów względem innych
+
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed;
     currentDestination_ = new Coordinates();
     currentDestination_->setRandomCoordiantes();
@@ -61,8 +62,6 @@ void Dinosaur::move2position(int x, int y)
     }
 }
 
-
-
 void Dinosaur::move() {
     this->analyze_surroundings();
 
@@ -72,6 +71,20 @@ void Dinosaur::move() {
 
     } else { // ruch w losowym kierunku
         move_to_destination(0,0);
+    }
+}
+
+void Dinosaur::showMyStatistics()
+{
+    if (gui_->isSelected()){
+        //qDebug()<<toString();
+//        gui_->cloud_->writeText(toString());
+        gui_->cloud_->position_->setXcoordinate(gui_->position_->getXcoordinate());
+        gui_->cloud_->position_->setYcoordinate(gui_->position_->getYcoordinate());
+        gui_->cloud_->setVisible(true);
+    }
+    else{
+        gui_->cloud_->setVisible(false);
     }
 }
 
@@ -153,6 +166,8 @@ void Dinosaur::behaviour()
         toDie();
     }
     else*/
+    showMyStatistics();
+
     if(thirst()<criticalThirst || thirstState_ == DRINKING){
         go2nearestLake();
         if(*target_.lock()->position_ == *gui_->position_ ){

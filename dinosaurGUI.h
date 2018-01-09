@@ -11,6 +11,7 @@
 #include <QGraphicsItem>
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
+#include "cloud.h"
 
 class DinosaurGUI : public ObjectGUI
 {
@@ -30,6 +31,7 @@ public:
     void beginDrinking();
     void endDrinking();
 
+    Cloud* cloud_;
 private:
     Sound_sharedPtr dinoSound;
     static const int STEP_SIZE_ = 1;
