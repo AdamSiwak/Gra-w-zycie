@@ -228,13 +228,20 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 }
 
 void Map::timerCallBack(){
+    preysStatistics_.nextTimeMoment();
+    predatorsStatistics_.nextTimeMoment();
 
     for (auto it = preys_.begin(); it != preys_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
         (*it)->behaviour();
+        (*it)->accept(preysStatistics_);
     }
     for (auto it = predators_.begin(); it != predators_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
         (*it)->behaviour();
+        (*it)->accept(predatorsStatistics_);
     }
+
+    qDebug() << "preys: \n" << preysStatistics_.toString();
+    qDebug() << "predators: \n" << predatorsStatistics_.toString();
 }

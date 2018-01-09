@@ -12,6 +12,7 @@
 #include "tree.h"
 #include "cave.h"
 #include "lake.h"
+#include "statictics_visitor.h"
 
 typedef boost::shared_ptr<QGraphicsScene> QGraphicsScene_sharedPtr;
 typedef boost::shared_ptr<QGraphicsView> QGraphicsView_sharedPtr;
@@ -36,6 +37,9 @@ private:
     Sound_sharedPtr backgroundSound_;
 
     Timer_sharedPtr timer_;
+
+    StatisticsVisitor predatorsStatistics_;
+    StatisticsVisitor preysStatistics_;
 
     ObjectGUI_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
     Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs);

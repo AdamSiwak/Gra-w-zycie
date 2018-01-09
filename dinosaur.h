@@ -41,7 +41,6 @@ public:
 
 protected:
     virtual void createGUIElement() = 0;
-    void analyze_surroundings();
 
     void move_to_destination(int x = 0, int y = 0);
     void drawLotsPosition();
@@ -56,7 +55,6 @@ protected:
     thirstStates drinking();
 
     void move2position(int x, int y);
-    void move();
     thirstStates thirstState_;
 
 
@@ -65,8 +63,6 @@ protected:
     int age_;
     int hunger_;
     int thirst_;
-
-    int rotation;
 
     Object_weakPtr target_;
 
