@@ -8,8 +8,8 @@ class StatisticsVisitor : public Visitor {
 public:
     QString& toString();
     void nextTimeMoment();
-    virtual void visit(Predator&);
-    virtual void visit(Prey&);
+    virtual void visit(Predator& predator);
+    virtual void visit(Prey& prey);
     virtual void visit(const Lake&) {}
     virtual void visit(const Tree&) {}
     virtual void visit(const Cave&) {}
