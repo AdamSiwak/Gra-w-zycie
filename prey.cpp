@@ -2,7 +2,7 @@
 #include "visitor.h"
 
 Prey::Prey(): Dinosaur(), defence_(rand()%100), hearingDistance_(rand()%10), isChased_(false) {
-    gui_ = new DinosaurGUI(picture_,0.15);
+    gui_ = DinosaurGUI_sharedPtr(new DinosaurGUI(picture_,0.15));
 
 }
 

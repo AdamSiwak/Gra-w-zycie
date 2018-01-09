@@ -9,6 +9,8 @@
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
+#include <boost/weak_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 class DinosaurGUI : public ObjectGUI
 {
@@ -29,8 +31,11 @@ public:
     void endDrinking();
 
 private:
-    Sound* dinoSound;
+    Sound_sharedPtr dinoSound;
     static const int STEP_SIZE_ = 1;
 };
+
+typedef boost::shared_ptr<DinosaurGUI> DinosaurGUI_sharedPtr;
+typedef boost::weak_ptr<DinosaurGUI> DinosaurGUI_weakPtr;
 
 #endif // DINOSAURGUI_H

@@ -10,7 +10,6 @@
 #include <iostream>
 
 class DinosaurGUI;
-class Water;
 
 class Dinosaur : public Object {
 protected:
@@ -34,7 +33,7 @@ public:
     void stepUp();
     void stepDown();
 
-    DinosaurGUI* gui_;
+    DinosaurGUI_sharedPtr gui_;
 
     void behaviour();
 
@@ -70,8 +69,6 @@ protected:
     int rotation;
 
     Object_weakPtr target_;
-
-    Water* last_water;
 
     static const int multiplier = 10000;
     static const int maxMaxEnergy = 1 * multiplier;

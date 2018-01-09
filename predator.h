@@ -13,7 +13,7 @@ public:
     virtual ~Predator(){}
     Predator(Predator& parent1, Predator& parent2);
     virtual void accept(Visitor &v);
-    Predator* reproduce(Predator& pred);//TODO: zmienic na sprytny wskaznik
+    boost::shared_ptr<Predator> reproduce(Predator& pred);
     void attack(Prey& prey);
     virtual hungerStates eating();
     virtual void go2nearestEating();

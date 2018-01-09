@@ -18,8 +18,7 @@ public:
     virtual void go2nearestEating();
     virtual void go2Partner();
 
-    Prey* reproduce(Prey& prey); // TODO: zmienic na sprytne
-    void set_last_cave(Cave& cave) { last_cave = &cave; }
+    boost::shared_ptr<Prey> reproduce(Prey& prey);
     bool is_being_chased() { return isChased_; }
     void hide(Cave& cave);
 
@@ -30,8 +29,6 @@ private:
     int hearingDistance_;
 
     bool isChased_;
-
-    Cave* last_cave; // TODO: usunac
 
     const QString picture_ = "dinosaur_green.png";
 };

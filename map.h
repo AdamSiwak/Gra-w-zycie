@@ -13,7 +13,8 @@
 #include "cave.h"
 #include "lake.h"
 
-
+typedef boost::shared_ptr<QGraphicsScene> QGraphicsScene_sharedPtr;
+typedef boost::shared_ptr<QGraphicsView> QGraphicsView_sharedPtr;
 
 class Map
 { // singleton
@@ -30,11 +31,11 @@ private:
     std::vector<ObjectGUI_sharedPtr> lakes_;
     std::vector<ObjectGUI_sharedPtr> trees_;
 
-    QGraphicsScene* scene_;
-    QGraphicsView* view_;
-    Sound* backgroundSound_;
+    QGraphicsScene_sharedPtr scene_;
+    QGraphicsView_sharedPtr view_;
+    Sound_sharedPtr backgroundSound_;
 
-    Timer* timer_;
+    Timer_sharedPtr timer_;
 
     ObjectGUI_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
     Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs);
@@ -76,11 +77,11 @@ public:
     Predator_weakPtr getNearestPredator(Dinosaur& dino);
     Prey_weakPtr getNearestPrey(Dinosaur& dino);
 
-    std::vector<ObjectGUI_sharedPtr> getLakes(){return lakes_;}
-    std::vector<ObjectGUI_sharedPtr> getTrees(){return trees_;}
-    std::vector<ObjectGUI_sharedPtr> getCaves(){return caves_;}
-    std::vector<Dinosaur_sharedPtr> getPredators(){return predators_;}
-    std::vector<Dinosaur_sharedPtr> getPreys(){return preys_;}
+    std::vector<ObjectGUI_sharedPtr>& getLakes(){return lakes_;}
+    std::vector<ObjectGUI_sharedPtr>& getTrees(){return trees_;}
+    std::vector<ObjectGUI_sharedPtr>& getCaves(){return caves_;}
+    std::vector<Dinosaur_sharedPtr>& getPredators(){return predators_;}
+    std::vector<Dinosaur_sharedPtr>& getPreys(){return preys_;}
 
     void timerCallBack();
 
