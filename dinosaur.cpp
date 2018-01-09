@@ -62,18 +62,6 @@ void Dinosaur::move2position(int x, int y)
     }
 }
 
-void Dinosaur::move() {
-    this->analyze_surroundings();
-
-    if (this->thirst_ > Dinosaur::criticalThirst) { // ruch w kierunku źródła
-
-   // } else if (this->target_.expired() != false) { // ruch w kierunku celu
-
-    } else { // ruch w losowym kierunku
-        move_to_destination(0,0);
-    }
-}
-
 void Dinosaur::showMyStatistics()
 {
     if (gui_->isSelected()){
@@ -86,14 +74,6 @@ void Dinosaur::showMyStatistics()
     else{
         gui_->cloud_->setVisible(false);
     }
-}
-
-void Dinosaur::analyze_surroundings() {
-    for (int i = gui_->position_->getXcoordinate()-1; i <= gui_->position_->getXcoordinate()+1; ++i)
-        for (int j = gui_->position_->getYcoordinate()-1; j <= gui_->position_->getYcoordinate()+1; ++j)
-            if (i != gui_->position_->getXcoordinate() || j != gui_->position_->getYcoordinate()) {
-                // TODO: analiza
-            }
 }
 
 void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {

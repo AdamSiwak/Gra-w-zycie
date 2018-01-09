@@ -19,6 +19,8 @@ public:
     virtual void go2nearestEating();
     virtual void go2Partner();
 
+    int attack() { return attack_; }
+
 private:
     virtual void createGUIElement();
 

@@ -39,7 +39,8 @@ SOURCES += \
     lake.cpp \
     tree.cpp \
     timer.cpp \
-    cloud.cpp
+    cloud.cpp \
+    statistics_visitor.cpp
 
 HEADERS += \
     predator.h \
@@ -47,7 +48,6 @@ HEADERS += \
     dinosaur.h \
     visitor.h \
     statictics_visitor.h \
-    statistics.h \
     map.h \
     map_block.h \
     object.h \

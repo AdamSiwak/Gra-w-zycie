@@ -22,6 +22,8 @@ public:
     bool is_being_chased() { return isChased_; }
     void hide(Cave& cave);
 
+    int defence() { return defence_; }
+
 private:
     virtual void createGUIElement();
 

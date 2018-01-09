@@ -303,17 +303,17 @@ void Gra_w_zycie_test::map_getNearestPredator_should_return_pointer_to_nearest_p
     dino.gui_->position_->setYcoordinate(0);
     Map::getInstance()->createPredatorsPopulation(2);
     std::vector<Dinosaur_sharedPtr>& predators = Map::getInstance()->getPredators();
-    (&(*predators[0]))->position_->setXcoordinate(15);
-    (&(*predators[0]))->position_->setYcoordinate(15);
-    (&(*predators[1]))->position_->setXcoordinate(150);
-    (&(*predators[1]))->position_->setYcoordinate(150);
+    predators[0]->position_->setXcoordinate(15);
+    predators[0]->position_->setYcoordinate(15);
+    predators[1]->position_->setXcoordinate(150);
+    predators[1]->position_->setYcoordinate(150);
     //Act
-//    Predator_weakPtr predator = Map::getInstance()->getNearestPredator(dino);
-//    //Assert
-//    QCOMPARE(predator.lock()->position_->getXcoordinate(),15);
-//    QCOMPARE(predator.lock()->position_->getYcoordinate(),15);
+    Predator_weakPtr predator = Map::getInstance()->getNearestPredator(dino);
+    //Assert
+    QCOMPARE(predator.lock()->position_->getXcoordinate(),15);
+    QCOMPARE(predator.lock()->position_->getYcoordinate(),15);
 
-//    Map::getInstance()->deleteAllObjects();
+    Map::getInstance()->deleteAllObjects();
 }
 
 void Gra_w_zycie_test::map_getNearestPrey_should_return_pointer_to_nearest_prey()

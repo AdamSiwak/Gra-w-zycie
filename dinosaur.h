@@ -45,7 +45,6 @@ protected:
     thirstStates thirstState_;
 
     virtual void createGUIElement() = 0;
-    void analyze_surroundings();
 
     void move_to_destination(int x = 0, int y = 0);
     void drawLotsPosition();
@@ -64,14 +63,11 @@ protected:
 
     void showMyStatistics();
 
-
     int speed_;
     int maxHunger_;
     int age_;
     int hunger_;
     int thirst_;
-
-    int rotation;
 
     Object_weakPtr target_;
 
