@@ -245,6 +245,6 @@ void Map::timerCallBack(){
         (*it)->accept(predatorsStatistics_);
     }
 
-//    qDebug() << "preys: \n" << preysStatistics_.toString();
-//    qDebug() << "predators: \n" << predatorsStatistics_.toString();
+    qDebug() << "preys: \n" << preysStatistics_.toString();
+    qDebug() << "predators: \n" << predatorsStatistics_.toString();
 }

@@ -10,13 +10,15 @@ QString& StatisticsVisitor::toString() {
     *(--averageThirst_.end()) /= *(--alive_.end());
     *(--averageAttack_.end()) /= *(--alive_.end());
 
-    parameters_ = "alive: " + QString::number(*(--alive_.end())) + '\n';
-    parameters_ += "average speed: " + QString::number(*(--averageSpeed_.end())) + '\n';
-    parameters_ += "average age: " + QString::number(*(--averageAge_.end())) + '\n';
-    parameters_ += "average max hunger: " + QString::number(*(--averageMaxHunger_.end())) + '\n';
-    parameters_ += "average hunger: " + QString::number(*(--averageHunger_.end())) + '\n';
-    parameters_ += "average thirst: " + QString::number(*(--averageThirst_.end())) + '\n';
-    parameters_ += "average attack: " + QString::number(*(--averageAttack_.end())) + '\n';
+    parameters_ = "alive: " + QString::number(*(--alive_.end())) + "\n";
+    parameters_ += "average speed: " + QString::number(*(--averageSpeed_.end())) + "\n";
+    parameters_ += "average age: " + QString::number(*(--averageAge_.end())) + "\n";
+    parameters_ += "average max hunger: " + QString::number(*(--averageMaxHunger_.end())) + "\n";
+    parameters_ += "average hunger: " + QString::number(*(--averageHunger_.end())) + "\n";
+    parameters_ += "average thirst: " + QString::number(*(--averageThirst_.end())) + "\n";
+    parameters_ += "average attack: " + QString::number(*(--averageAttack_.end())) + "\n";
+
+    return parameters_;
 }
 
 void StatisticsVisitor::nextTimeMoment() {
