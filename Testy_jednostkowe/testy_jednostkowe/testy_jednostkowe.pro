@@ -20,7 +20,9 @@ SOURCES +=  tst_gra_w_zycie_test.cpp \
     ../../prey.cpp \
     ../../sound.cpp \
     ../../timer.cpp \
-    ../../tree.cpp
+    ../../tree.cpp \
+    ../../cloud.cpp \
+    ../../statistics_visitor.cpp
 
 SUBDIRS += \
     ../../gra_w_zycie.pro
@@ -59,7 +61,6 @@ HEADERS += \
     ../../prey.h \
     ../../sound.h \
     ../../statictics_visitor.h \
-    ../../statistics.h \
     ../../timer.cpp.autosave \
     ../../timer.h \
     ../../tree.h \
