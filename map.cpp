@@ -38,9 +38,6 @@ void Map::startAnimation(){
     createPredatorsPopulation(5);
     createPreysPopulation(5);
 
-    ObjectGUI_sharedPtr p(new Cloud("cloud.png",0.3));
-    addNewCave(p);
-
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
 
@@ -73,11 +70,13 @@ void Map::addNewCave(ObjectGUI_sharedPtr object){
 
 void Map::addNewPredator(Dinosaur_sharedPtr dinosaur) {
     scene_->addItem(&(*dinosaur->gui_));
+    scene_->addItem(&(*dinosaur->gui_->cloud_));
     predators_.push_back(dinosaur);
 }
 
 void Map::addNewPrey(Dinosaur_sharedPtr dinosaur) {
     scene_->addItem(&(*dinosaur->gui_));
+    scene_->addItem(&(*dinosaur->gui_->cloud_));
     preys_.push_back(dinosaur);
 }
 

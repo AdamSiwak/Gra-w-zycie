@@ -8,6 +8,7 @@
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
     // TODO: ograniczenia jednych parametrów względem innych
+
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed;
     currentDestination_ = new Coordinates();
     currentDestination_->setRandomCoordiantes();
@@ -58,6 +59,21 @@ void Dinosaur::move2position(int x, int y)
         else if(y>gui_->position_->getYcoordinate()){
             stepDown();
         }
+    }
+}
+
+void Dinosaur::showMyStatistics()
+{
+
+    if (gui_->isSelected()){
+        //qDebug()<<toString();
+        gui_->cloud_->writeText(toString());
+        gui_->cloud_->setX(gui_->x());
+        gui_->cloud_->setY(gui_->y());
+        gui_->cloud_->setVisible(true);
+    }
+    else{
+        gui_->cloud_->setVisible(false);
     }
 }
 
@@ -131,6 +147,9 @@ void Dinosaur::behaviour()
         toDie();
     }
     else*/
+    age_++;
+    showMyStatistics();
+
     if(thirst()<criticalThirst || thirstState_ == DRINKING){
         go2nearestLake();
         if(*target_.lock()->position_ == *gui_->position_ ){
@@ -160,8 +179,10 @@ QString Dinosaur::toString()
 {
     QString str;
 
-    str = "X = "+ QString::number(gui_->position_->getXcoordinate()) + "Y = "+ QString::number(gui_->position_->getYcoordinate())+
-            " Age = "+ QString::number(age()) + " Thirst = " + QString::number(thirst());
+    str = " Age = " + QString::number(age()) +
+          " Thirst = " + QString::number(thirst()) + "," +
+          " Hunger = " + QString::number(hunger()) + "," +
+          " Speed = " + QString::number(speed()) + ",";
 
     return str;
 }

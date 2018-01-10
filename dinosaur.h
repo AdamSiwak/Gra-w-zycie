@@ -8,6 +8,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dinosaurGUI.h"
 #include <iostream>
+#include "cloud.h"
 
 class DinosaurGUI;
 
@@ -40,6 +41,9 @@ public:
     QString toString();
 
 protected:
+    Coordinates* currentDestination_;
+    thirstStates thirstState_;
+
     virtual void createGUIElement() = 0;
 
     void move_to_destination(int x = 0, int y = 0);
@@ -49,14 +53,15 @@ protected:
     virtual void go2nearestEating() = 0;
     virtual void go2Partner() = 0;
 
-    Coordinates* currentDestination_;
+
     void energyBurning();
     virtual hungerStates eating() = 0;
     thirstStates drinking();
 
     void move2position(int x, int y);
-    thirstStates thirstState_;
+    void move();
 
+    void showMyStatistics();
 
     int speed_;
     int maxHunger_;
