@@ -38,9 +38,6 @@ void Map::startAnimation(){
     createPredatorsPopulation(5);
     createPreysPopulation(5);
 
-//    ObjectGUI_sharedPtr p(new Cloud("cloud.png",0.3));
-//    addNewCave(p);
-
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
 

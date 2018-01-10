@@ -64,11 +64,12 @@ void Dinosaur::move2position(int x, int y)
 
 void Dinosaur::showMyStatistics()
 {
+
     if (gui_->isSelected()){
         //qDebug()<<toString();
-//        gui_->cloud_->writeText(toString());
-        gui_->cloud_->position_->setXcoordinate(gui_->position_->getXcoordinate());
-        gui_->cloud_->position_->setYcoordinate(gui_->position_->getYcoordinate());
+        gui_->cloud_->writeText(toString());
+        gui_->cloud_->setX(gui_->x());
+        gui_->cloud_->setY(gui_->y());
         gui_->cloud_->setVisible(true);
     }
     else{
@@ -146,6 +147,7 @@ void Dinosaur::behaviour()
         toDie();
     }
     else*/
+    age_++;
     showMyStatistics();
 
     if(thirst()<criticalThirst || thirstState_ == DRINKING){
@@ -177,8 +179,10 @@ QString Dinosaur::toString()
 {
     QString str;
 
-    str = "X = "+ QString::number(gui_->position_->getXcoordinate()) + "Y = "+ QString::number(gui_->position_->getYcoordinate())+
-            " Age = "+ QString::number(age()) + " Thirst = " + QString::number(thirst());
+    str = " Age = " + QString::number(age()) +
+          " Thirst = " + QString::number(thirst()) + "," +
+          " Hunger = " + QString::number(hunger()) + "," +
+          " Speed = " + QString::number(speed()) + ",";
 
     return str;
 }
