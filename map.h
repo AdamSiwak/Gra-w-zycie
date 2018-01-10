@@ -4,6 +4,8 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QKeyEvent>
 
 #include "vector"
 #include "predator.h"
@@ -17,13 +19,31 @@
 typedef boost::shared_ptr<QGraphicsScene> QGraphicsScene_sharedPtr;
 typedef boost::shared_ptr<QGraphicsView> QGraphicsView_sharedPtr;
 
-class Map
+class Map : public QObject
 { // singleton
+    //Q_OBJECT
 private:
     Map();
     Map(const Map&) = delete;
     Map& operator=(const Map&) = delete;
     ~Map(){}
+
+    void showStatistics() {
+        QMessageBox msgBox;
+        msgBox.setText("Statistics");
+        QString text = predatorsStatistics_.toString();
+        text.append(preysStatistics_.toString());
+        msgBox.setInformativeText(text);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        int ret = msgBox.exec();
+    }
+
+    void keyPressEvent(QKeyEvent *event){
+        if (event->key() == Qt::Key_Tab){
+                showStatistics();
+        }
+    }
 
     static Map* instance_;
     std::vector<Dinosaur_sharedPtr> predators_;

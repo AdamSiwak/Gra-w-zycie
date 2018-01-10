@@ -19,7 +19,6 @@
 #include "cloud.h"
 
 
-
 Map* Map::instance_ = 0;
 
 Map::Map(){
@@ -230,8 +229,8 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 }
 
 void Map::timerCallBack(){
-    preysStatistics_.nextTimeMoment();
-    predatorsStatistics_.nextTimeMoment();
+    preysStatistics_.TimeMomentBegin();
+    predatorsStatistics_.TimeMomentBegin();
 
     for (auto it = preys_.begin(); it != preys_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
@@ -243,6 +242,9 @@ void Map::timerCallBack(){
         (*it)->behaviour();
         (*it)->accept(predatorsStatistics_);
     }
+
+    preysStatistics_.TimeMomentEnd();
+    predatorsStatistics_.TimeMomentEnd();
 
     qDebug() << "preys: \n" << preysStatistics_.toString();
     qDebug() << "predators: \n" << predatorsStatistics_.toString();
