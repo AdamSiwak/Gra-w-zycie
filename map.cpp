@@ -198,6 +198,16 @@ Prey_sharedPtr Map::getNearestPrey(Dinosaur& dino)
     return boost::dynamic_pointer_cast<Prey>(object);
 }
 
+Predator_sharedPtr Map::getNearestReproductivePredator(Dinosaur &dino)
+{
+    return boost::dynamic_pointer_cast<Predator>(getNearestObject(dino, getPredators(), true));
+}
+
+Prey_sharedPtr Map::getNearestReproductivePrey(Dinosaur &dino)
+{
+    return boost::dynamic_pointer_cast<Prey>(getNearestObject(dino, getPreys(), true));
+}
+
 Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> objects)
 {
     ObjectGUI_sharedPtr object;
@@ -227,9 +237,9 @@ Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sha
     return object;
 }
 
-Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs)
+Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge)
 {
-    Dinosaur_sharedPtr dinosur;
+    Dinosaur_sharedPtr dinosur = nullptr;
     int dinoX = dino.gui_->position_->getRealXcoordinate();
     int dinoY = dino.gui_->position_->getRealYcoordinate();
 
@@ -239,20 +249,24 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
     int distance = 0;
     int minDistance = __INT_MAX__;
 
-
     for (auto it = dinosurs.begin(); it != dinosurs.end(); ++it) {
 
         dinosurX=(*it)->gui_->position_->getRealXcoordinate();
         dinosurY=(*it)->gui_->position_->getRealYcoordinate();
 
         distance = sqrt(pow((dinosurX - dinoX),2)+pow((dinosurY - dinoY),2));
-
         if (distance<minDistance){
             minDistance=distance;
-            dinosur = (*it);
+            if (inReproductiveAge == true){
+                if((*it)->age()>Dinosaur::getReproductiveAge()){
+                    dinosur = (*it);
+                }
+            }
+            else{
+                dinosur = (*it);
+            }
         }
     }
-
     return dinosur;
 }
 
@@ -262,11 +276,13 @@ void Map::timerCallBack(){
 
     for (auto it = preys_.begin(); it != preys_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+        (*it)->makeADecision();
         (*it)->behaviour();
         (*it)->accept(*preysStatistics_);
     }
     for (auto it = predators_.begin(); it != predators_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+        (*it)->makeADecision();
         (*it)->behaviour();
         (*it)->accept(*predatorsStatistics_);
     }

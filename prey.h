@@ -14,12 +14,13 @@ public:
     Prey(Prey& parent1, Prey& parent2);
     virtual ~Prey(){}
     virtual void accept(Visitor &v);
-    virtual behaviourStates eating();
+    virtual Dinosaur::behaviourStates eating();
     virtual void findTheNearestEating();
-    virtual behaviourStates go2eating();
-    virtual void go2Partner();
+    virtual Dinosaur::behaviourStates go2eating();
+    virtual Dinosaur::behaviourStates findPartner();
+    virtual void reproducing();
 
-    boost::shared_ptr<Prey> reproduce(Prey& prey);
+    boost::shared_ptr<Prey> reproduce(Prey &prey);
     bool is_being_chased() { return isChased_; }
     void hide(Cave& cave);
 

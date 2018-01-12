@@ -77,6 +77,11 @@ void Dinosaur::showMyStatistics()
     }
 }
 
+int Dinosaur::getReproductiveAge()
+{
+    return reproductiveAge;
+}
+
 bool Dinosaur::cased() const
 {
     return cased_;
@@ -85,6 +90,16 @@ bool Dinosaur::cased() const
 void Dinosaur::setCased(bool cased)
 {
     cased_ = cased;
+}
+
+Dinosaur::behaviourStates Dinosaur::behaviourState() const
+{
+    return behaviourState_;
+}
+
+void Dinosaur::setBehaviourState(const behaviourStates &behaviourState)
+{
+    behaviourState_ = behaviourState;
 }
 
 void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
@@ -153,10 +168,9 @@ Dinosaur::behaviourStates Dinosaur::drinking()
 void Dinosaur::behaviour()
 {
 
-/*    if(thirst() == 0 || hunger() == 0|| age()== maxAge){
-        toDie();
-    }
-    else*/
+    age_++;
+    showMyStatistics();
+
     switch (needs_) {
     case WANT2DRINK:
         switch (behaviourState_) {
@@ -174,7 +188,7 @@ void Dinosaur::behaviour()
             behaviourState_ = drinking();
             break;
         case DRUNK:
-            //TODO :: implementation
+            //do nothing
             break;
         default:
             behaviourState_ = SERCH4LAKE;
@@ -191,12 +205,41 @@ void Dinosaur::behaviour()
                 behaviourState_ = go2eating();
                 break;
             case EATING:
-                eating();
+                behaviourState_ = eating();
                 break;
-
+            case FULL:
+                //do nothing
+                break;
             default:
                 behaviourState_ = SERCH4EATING;
                 break;
+        }
+        break;
+    case WANT2REPRODUCE:
+        switch (behaviourState_) {
+            case SERCH4PARTNER:
+                behaviourState_ = findPartner();
+                break;
+            case GO2PARTNER:
+                move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
+                if(*target_dino_->position_ == *position_){
+                    behaviourState_ = REPRODUCING;
+                }
+                break;
+            case REPRODUCING:
+                reproducing();
+                break;
+            default:
+                behaviourState_ = SERCH4PARTNER;
+                break;
+        }
+
+    case DONT_HAVE_ANY_NEEDS:
+        if(*currentDestination_== *gui_->position_){
+            drawLotsPosition();
+        }
+        else{
+            move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
         }
         break;
     default:

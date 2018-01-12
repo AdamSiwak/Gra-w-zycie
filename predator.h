@@ -13,12 +13,13 @@ public:
     virtual ~Predator(){}
     Predator(Predator& parent1, Predator& parent2);
     virtual void accept(Visitor &v);
-    boost::shared_ptr<Predator> reproduce(Predator& pred);
+    boost::shared_ptr<Predator> reproduce(Predator &pred);
     void attack(Prey& prey);
-    virtual behaviourStates eating();
+    virtual Dinosaur::behaviourStates eating();
     virtual void findTheNearestEating();
-    virtual behaviourStates go2eating();
-    virtual void go2Partner();
+    virtual Dinosaur::behaviourStates go2eating();
+    virtual Dinosaur::behaviourStates findPartner();
+    virtual void reproducing();
 
     int attack() { return attack_; }
 

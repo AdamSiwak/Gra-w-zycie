@@ -74,7 +74,7 @@ private:
     QChartView* preysChartView;
 
     Object_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
-    Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs);
+    Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge = false);
 
 public:
     static Map* getInstance(){
@@ -112,6 +112,9 @@ public:
     Cave_sharedPtr getNearestCave(Dinosaur& dino);
     Predator_sharedPtr getNearestPredator(Dinosaur& dino);
     Prey_sharedPtr getNearestPrey(Dinosaur& dino);
+
+    Predator_sharedPtr getNearestReproductivePredator(Dinosaur& dino);
+    Prey_sharedPtr getNearestReproductivePrey(Dinosaur& dino);
 
     std::vector<ObjectGUI_sharedPtr>& getLakes(){return lakes_;}
     std::vector<ObjectGUI_sharedPtr>& getTrees(){return trees_;}

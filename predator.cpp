@@ -23,20 +23,29 @@ void Predator::accept(Visitor &v) {
     v.visit(*this);
 }
 
-Predator_sharedPtr Predator::reproduce(Predator &pred) {
-    Predator_sharedPtr child = Predator_sharedPtr(new Predator(*this, pred));
+boost::shared_ptr<Predator> Predator::reproduce(Predator &pred)
+{
+    Predator_sharedPtr child = static_cast<Predator_sharedPtr>(new Predator(*this, pred));
     return child;
 }
 
 Dinosaur::behaviourStates Predator::eating()
 {
-    hunger_+=10;
-
+    if(hunger()<maxHunger()){
+        hunger_+=10;
+        target_dino_->setBehaviourState(IS_DEVOURED);
+        return EATING;
+    }
+    else{
+        target_dino_->setBehaviourState(TO_DIE);
+        return FULL;
+    }
 }
 
 void Predator::findTheNearestEating()
 {
     target_dino_ = Map::getInstance()->getNearestPrey(*this); 
+    target_dino_->setCased(true);
 }
 
 Dinosaur::behaviourStates Predator::go2eating()
@@ -50,11 +59,25 @@ Dinosaur::behaviourStates Predator::go2eating()
     }
 }
 
-void Predator::go2Partner()
+void Predator::reproducing()
 {
-    target_ = Map::getInstance()->getNearestPredator(*this);
-    move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
+    hunger_ -= 0.3*maxHunger();
+    thirst_ -= 0.3*maxThirst;
+    Predator_sharedPtr newDino = reproduce(dynamic_cast<Predator&>(*target_dino_));
+    Map::getInstance()->addNewPredator(newDino);
 }
+
+Dinosaur::behaviourStates Predator::findPartner()
+{
+    if(Map::getInstance()->getNearestReproductivePredator(*this)!=nullptr){
+        target_dino_ = Map::getInstance()->getNearestPredator(*this);
+        return GO2PARTNER;
+    }
+    else{
+        return SERCH4PARTNER;
+    }
+}
+
 
 void Predator::createGUIElement(){
 

@@ -63,6 +63,11 @@ public:
     bool cased() const;
     void setCased(bool cased);
 
+    behaviourStates behaviourState() const;
+    void setBehaviourState(const behaviourStates &behaviourState);
+
+    static int getReproductiveAge();
+
 protected:
     Coordinates* currentDestination_;
     behaviourStates behaviourState_;
@@ -75,7 +80,8 @@ protected:
     void go2nearestLake();
     virtual void findTheNearestEating() = 0;
     virtual behaviourStates go2eating() = 0;
-    virtual void go2Partner() = 0;
+    virtual behaviourStates findPartner() = 0;
+    virtual void reproducing() = 0;
 
     void makeAdecision();
     void energyBurning();
