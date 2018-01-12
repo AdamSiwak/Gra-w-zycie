@@ -51,11 +51,11 @@ void Predator::findTheNearestEating()
 Dinosaur::behaviourStates Predator::go2eating()
 {
     move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
-    if(*target_dino_->position_==*position_){
-        return GO2EATING;
+    if(*target_dino_->gui_->position_==*position_){
+        return EATING;
     }
     else{
-        return EATING;
+        return GO2EATING;
     }
 }
 

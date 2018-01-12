@@ -53,10 +53,10 @@ Dinosaur::behaviourStates Prey::go2eating()
 {
     move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
     if(*target_->position_==*position_){
-        return GO2EATING;
+        return EATING;
     }
     else{
-        return EATING;
+        return GO2EATING;
     }
 }
 

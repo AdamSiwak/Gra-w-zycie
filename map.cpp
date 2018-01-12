@@ -60,8 +60,8 @@ void Map::startAnimation(){
     createLakes(2);
     createTrees(2);
     createCaves(2);
-    createPredatorsPopulation(5);
-    createPreysPopulation(5);
+    createPredatorsPopulation(1);
+    createPreysPopulation(1);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
@@ -288,6 +288,6 @@ void Map::timerCallBack(){
     preysStatistics_->TimeMomentEnd();
     predatorsStatistics_->TimeMomentEnd();
 
-    qDebug() << "preys: \n" << preysStatistics_->toString();
-    qDebug() << "predators: \n" << predatorsStatistics_->toString();
+//    qDebug() << "preys: \n" << preysStatistics_->toString();
+//    qDebug() << "predators: \n" << predatorsStatistics_->toString();
 }

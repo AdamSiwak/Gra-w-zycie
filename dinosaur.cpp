@@ -102,35 +102,6 @@ void Dinosaur::setBehaviourState(const behaviourStates &behaviourState)
     behaviourState_ = behaviourState;
 }
 
-void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
-    int deltaX;
-    int deltaY;
-
-    if (x == 0 && y == 0) { // kierunek losowy
-        deltaX = rand()%(2*speed_)-speed_;
-        deltaY = rand()%(2*speed_)-speed_;
-    } else {
-        if (gui_->position_->getXcoordinate() < x) { // określenie współrzędnych w osi OX
-            deltaX = speed_;
-        } else if (gui_->position_->getXcoordinate() == x) {
-            deltaX = 0;
-        } else { // x_ > x
-            deltaX = -speed_;
-        }
-
-        if (gui_->position_->getYcoordinate() < y) { // określenie współrzędnych w osi OY
-            deltaY = speed_;
-        } else if (gui_->position_->getYcoordinate() == y) {
-            deltaY = 0;
-        } else { // y_ > y
-            deltaY = -speed_;
-        }
-    }
-
-    gui_->position_->setXcoordinate(gui_->position_->getXcoordinate() + deltaX);
-    gui_->position_->setYcoordinate(gui_->position_->getYcoordinate() + deltaY);
-}
-
 void Dinosaur::drawLotsPosition()
 {
     currentDestination_->setRandomCoordiantes();
