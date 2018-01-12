@@ -8,7 +8,7 @@
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
     // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
     // TODO: ograniczenia jednych parametrów względem innych
-
+    behaviourState_ = OTHER;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed;
     currentDestination_ = new Coordinates();
     currentDestination_->setRandomCoordiantes();
@@ -75,6 +75,26 @@ void Dinosaur::showMyStatistics()
     else{
         gui_->cloud_->setVisible(false);
     }
+}
+
+bool Dinosaur::getIsDevoured() const
+{
+    return isDevoured_;
+}
+
+void Dinosaur::setIsDevoured(bool value)
+{
+    isDevoured_ = value;
+}
+
+void Dinosaur::findCave()
+{
+    target_ = Map::getInstance()->getNearestCave(*this);
+}
+
+void Dinosaur::isDevoured()
+{
+    gui_->setRotation(180);
 }
 
 int Dinosaur::getReproductiveAge()
@@ -178,7 +198,10 @@ void Dinosaur::behaviour()
                 behaviourState_ = eating();
                 break;
             case FULL:
-                //do nothing
+                if(target_dino_!=nullptr){
+                    target_dino_->setCased(false);
+                    target_dino_->setIsDevoured(false);
+                }
                 break;
             default:
                 behaviourState_ = SERCH4EATING;
@@ -203,7 +226,24 @@ void Dinosaur::behaviour()
                 behaviourState_ = SERCH4PARTNER;
                 break;
         }
+    case IS_DANGERED:
+        switch (behaviourState_) {
+            case SERCH4CAVE:
+                findCave();
+                break;
+            case GO2CAVE:
+                move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
+                if(*target_->position_ == *position_){
+                    behaviourState_ = HIDING;
+                }
+                break;
+            case IS_DEVOURED:
 
+                break;
+            default:
+                break;
+            }
+            break;
     case DONT_HAVE_ANY_NEEDS:
         if(*currentDestination_== *gui_->position_){
             drawLotsPosition();
@@ -266,9 +306,9 @@ void Dinosaur::makeADecision()
     if(age()>maxAge){
         needs_ = IS2OLD;
     }
-//    else if(cased()){ // TODO: impementacja w predator eating
-//        needs_ = IS_DANGERED;
-//    }
+    else if(cased() || getIsDevoured()){ // TODO: impementacja w predator eating
+        needs_ = IS_DANGERED;
+    }
     else if(thirst()<criticalThirst || behaviourState_ == DRINKING){
         needs_ = WANT2DRINK;
     }

@@ -27,8 +27,9 @@ public:
     enum behaviourStates{SERCH4LAKE, GO2LAKE, DRUNK, DRINKING,
                          SERCH4EATING, GO2EATING, FULL, EATING,
                          SERCH4PARTNER, GO2PARTNER, REPRODUCING,
-                         ESCAPING, HIDING, IS_DEVOURED,
-                         TO_DIE
+                         SERCH4CAVE, GO2CAVE, HIDING, IS_DEVOURED,
+                         TO_DIE,
+                         OTHER
                          };
 
     enum dinosaurNeeds{
@@ -68,6 +69,12 @@ public:
 
     static int getReproductiveAge();
 
+    bool getIsDevoured() const;
+    void setIsDevoured(bool value);
+
+    void findCave();
+    void isDevoured();
+
 protected:
     Coordinates* currentDestination_;
     behaviourStates behaviourState_;
@@ -99,6 +106,7 @@ protected:
     int thirst_;
 
     bool cased_;
+    bool isDevoured_;
 
     Object_sharedPtr target_;
     Dinosaur_sharedPtr target_dino_;

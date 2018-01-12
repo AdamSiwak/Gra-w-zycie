@@ -60,8 +60,8 @@ void Map::startAnimation(){
     createLakes(2);
     createTrees(2);
     createCaves(2);
-    createPredatorsPopulation(1);
-    createPreysPopulation(0);
+    createPredatorsPopulation(3);
+    createPreysPopulation(3);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
