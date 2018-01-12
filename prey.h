@@ -14,8 +14,9 @@ public:
     Prey(Prey& parent1, Prey& parent2);
     virtual ~Prey(){}
     virtual void accept(Visitor &v);
-    virtual hungerStates eating();
-    virtual void go2nearestEating();
+    virtual behaviourStates eating();
+    virtual void findTheNearestEating();
+    virtual behaviourStates go2eating();
     virtual void go2Partner();
 
     boost::shared_ptr<Prey> reproduce(Prey& prey);

@@ -24,8 +24,23 @@ public:
     virtual ~Dinosaur() {}
     virtual void accept(Visitor& v){}
 
-    enum hungerStates{HUNGRY, FULL, EATING};
-    enum thirstStates{THIRSTY, DRUNK, DRINKING};
+    enum behaviourStates{SERCH4LAKE, GO2LAKE, DRUNK, DRINKING,
+                         SERCH4EATING, GO2EATING, FULL, EATING,
+                         SERCH4PARTNER, GO2PARTNER, REPRODUCING,
+                         ESCAPING, HIDING, IS_DEVOURED,
+                         TO_DIE
+                         };
+
+    enum dinosaurNeeds{
+                        WANT2DRINK,
+                        WANT2EAT,
+                        WANT2REPRODUCE,
+                        IS_DANGERED,
+                        IS2OLD,
+                        DONT_HAVE_ANY_NEEDS
+                        };
+
+
     
     int age() const { return age_; }
     int speed() const { return speed_; }
@@ -40,27 +55,32 @@ public:
 
     DinosaurGUI_sharedPtr gui_;
 
+    void makeADecision();
     void behaviour();
 
     QString toString();
 
+    bool cased() const;
+    void setCased(bool cased);
+
 protected:
     Coordinates* currentDestination_;
-    thirstStates thirstState_;
-
+    behaviourStates behaviourState_;
+    dinosaurNeeds needs_;
     virtual void createGUIElement() = 0;
 
     void move_to_destination(int x = 0, int y = 0);
     void drawLotsPosition();
     void toDie();
     void go2nearestLake();
-    virtual void go2nearestEating() = 0;
+    virtual void findTheNearestEating() = 0;
+    virtual behaviourStates go2eating() = 0;
     virtual void go2Partner() = 0;
 
-
+    void makeAdecision();
     void energyBurning();
-    virtual hungerStates eating() = 0;
-    thirstStates drinking();
+    virtual behaviourStates eating() = 0;
+    behaviourStates drinking();
 
     void move2position(int x, int y);
     void move();
@@ -72,6 +92,8 @@ protected:
     int age_;
     int hunger_;
     int thirst_;
+
+    bool cased_;
 
     Object_sharedPtr target_;
     Dinosaur_sharedPtr target_dino_;

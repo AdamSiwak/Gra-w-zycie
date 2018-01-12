@@ -15,8 +15,9 @@ public:
     virtual void accept(Visitor &v);
     boost::shared_ptr<Predator> reproduce(Predator& pred);
     void attack(Prey& prey);
-    virtual hungerStates eating();
-    virtual void go2nearestEating();
+    virtual behaviourStates eating();
+    virtual void findTheNearestEating();
+    virtual behaviourStates go2eating();
     virtual void go2Partner();
 
     int attack() { return attack_; }

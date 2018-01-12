@@ -28,15 +28,26 @@ Predator_sharedPtr Predator::reproduce(Predator &pred) {
     return child;
 }
 
-Dinosaur::hungerStates Predator::eating()
+Dinosaur::behaviourStates Predator::eating()
 {
+    hunger_+=10;
 
 }
 
-void Predator::go2nearestEating()
+void Predator::findTheNearestEating()
 {
-    target_dino_ = Map::getInstance()->getNearestPrey(*this);
+    target_dino_ = Map::getInstance()->getNearestPrey(*this); 
+}
+
+Dinosaur::behaviourStates Predator::go2eating()
+{
     move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
+    if(*target_dino_->position_==*position_){
+        return GO2EATING;
+    }
+    else{
+        return EATING;
+    }
 }
 
 void Predator::go2Partner()

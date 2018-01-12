@@ -32,19 +32,29 @@ void Prey::accept(Visitor &v) {
     v.visit(*this);
 }
 
-Dinosaur::hungerStates Prey::eating()
+Dinosaur::behaviourStates Prey::eating()
 {
 
 }
 
-void Prey::go2nearestEating()
+void Prey::findTheNearestEating()
 {
     target_ = Map::getInstance()->getNearestTree(*this);
+}
+
+Dinosaur::behaviourStates Prey::go2eating()
+{
     move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
+    if(*target_->position_==*position_){
+        return GO2EATING;
+    }
+    else{
+        return EATING;
+    }
 }
 
 void Prey::go2Partner()
 {
     target_dino_ = Map::getInstance()->getNearestPrey(*this);
-    move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
+
 }

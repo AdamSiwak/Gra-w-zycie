@@ -77,6 +77,16 @@ void Dinosaur::showMyStatistics()
     }
 }
 
+bool Dinosaur::cased() const
+{
+    return cased_;
+}
+
+void Dinosaur::setCased(bool cased)
+{
+    cased_ = cased;
+}
+
 void Dinosaur::move_to_destination(int x, int y) {//int x = 0, int y = 0) {
     int deltaX;
     int deltaY;
@@ -116,7 +126,7 @@ void Dinosaur::energyBurning(){
     thirst_--;
 }
 
-Dinosaur::hungerStates Dinosaur::eating()
+Dinosaur::behaviourStates Dinosaur::eating()
 {
     if(hunger()<maxHunger()){
         hunger_++;
@@ -127,7 +137,7 @@ Dinosaur::hungerStates Dinosaur::eating()
     }
 }
 
-Dinosaur::thirstStates Dinosaur::drinking()
+Dinosaur::behaviourStates Dinosaur::drinking()
 {
     gui_->beginDrinking();
     if(thirst()<0.8*maxThirst){
@@ -147,31 +157,77 @@ void Dinosaur::behaviour()
         toDie();
     }
     else*/
-    age_++;
-    showMyStatistics();
-
-    if(thirst()<criticalThirst || thirstState_ == DRINKING){
-        go2nearestLake();
-        if(*target_->position_ == *gui_->position_ ){
-            thirstState_=drinking();
+    switch (needs_) {
+    case WANT2DRINK:
+        switch (behaviourState_) {
+        case SERCH4LAKE:
+            target_ = Map::getInstance()->getNearestLake(*this);
+            behaviourState_ = GO2LAKE;
+            break;
+        case GO2LAKE:
+            move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
+            if(*target_->position_==*position_){
+                behaviourState_ = DRINKING;
+            }
+            break;
+        case DRINKING:
+            behaviourState_ = drinking();
+            break;
+        case DRUNK:
+            //TODO :: implementation
+            break;
+        default:
+            behaviourState_ = SERCH4LAKE;
+            break;
         }
-    }
-    else if(hunger()<criticalHunger){
-        go2nearestEating();
-    }
-    else if(age()>reproductiveAge){
-        go2Partner();
-    }
-    else {
-        if(*currentDestination_== *gui_->position_){
-            drawLotsPosition();
+        break;
+    case WANT2EAT:
+        switch (behaviourState_){
+            case SERCH4EATING:
+                findTheNearestEating();
+                behaviourState_ = GO2EATING;
+                break;
+            case GO2EATING:
+                behaviourState_ = go2eating();
+                break;
+            case EATING:
+                eating();
+                break;
 
+            default:
+                behaviourState_ = SERCH4EATING;
+                break;
         }
-        else{
-            move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
-
-        }
+        break;
+    default:
+        break;
     }
+
+//    age_++;
+//    showMyStatistics();
+
+//    if(thirst()<criticalThirst || behaviourState_ == DRINKING){
+//        go2nearestLake();
+//        if(*target_->position_ == *gui_->position_ ){
+//            behaviourState_=drinking();
+//        }
+//    }
+//    else if(hunger()<criticalHunger){
+//        go2nearestEating();
+//    }
+//    else if(age()>reproductiveAge){
+//        go2Partner();
+//    }
+//    else {
+//        if(*currentDestination_== *gui_->position_){
+//            drawLotsPosition();
+
+//        }
+//        else{
+//            move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
+
+//        }
+//    }
 
 }
 
@@ -192,11 +248,24 @@ void Dinosaur::toDie()
    // ~Dinosaur();
 }
 
-void Dinosaur::go2nearestLake()
+void Dinosaur::makeADecision()
 {
-    target_ = Map::getInstance()->getNearestLake(*this);
-
-    move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
-
+    if(age()>maxAge){
+        needs_ = IS2OLD;
+    }
+    else if(cased()){ // TODO: impementacja w predator eating
+        needs_ = IS_DANGERED;
+    }
+    else if(thirst()<criticalThirst || behaviourState_ == DRINKING){
+        needs_ = WANT2DRINK;
+    }
+    else if(hunger()<criticalHunger || behaviourState_ == EATING){
+        needs_ = WANT2EAT;
+    }
+    else if(age()>reproductiveAge || behaviourState_ == REPRODUCING){
+        needs_ = WANT2REPRODUCE;
+    }
+    else {
+        needs_ = DONT_HAVE_ANY_NEEDS;
+    }
 }
-
