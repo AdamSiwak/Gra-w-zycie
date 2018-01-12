@@ -296,9 +296,9 @@ void Dinosaur::makeADecision()
     if(age()>maxAge){
         needs_ = IS2OLD;
     }
-    else if(cased()){ // TODO: impementacja w predator eating
-        needs_ = IS_DANGERED;
-    }
+//    else if(cased()){ // TODO: impementacja w predator eating
+//        needs_ = IS_DANGERED;
+//    }
     else if(thirst()<criticalThirst || behaviourState_ == DRINKING){
         needs_ = WANT2DRINK;
     }
