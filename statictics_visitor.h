@@ -3,9 +3,11 @@
 
 #include "visitor.h"
 #include <QString>
+#include "chart.h"
 
 class StatisticsVisitor : public Visitor {
 public:
+    StatisticsVisitor(Chart*);
     QString& toString();
     void TimeMomentBegin();
     void TimeMomentEnd();
@@ -16,17 +18,20 @@ public:
     virtual void visit(const Cave&) {}
 
 private:
-    std::vector<float> averageSpeed_;
-    std::vector<float> averageAge_;
-    std::vector<float> averageMaxHunger_;
-    std::vector<float> averageHunger_;
-    std::vector<float> averageThirst_;
-    std::vector<float> alive_;
+    float averageSpeed_;
+    float averageAge_;
+    float averageMaxHunger_;
+    float averageHunger_;
+    float averageThirst_;
+    float alive_;
 
-    std::vector<float> averageAttack_; // predators only
-    std::vector<float> averageDefence_; // preys only
+    float averageAttack_; // predators only
+    float averageDefence_; // preys only
 
     QString parameters_;
+
+    Chart* chart_;
+    int chartCounter;
 };
 
 #endif // STATICTICS_VISITOR_H

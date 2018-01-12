@@ -15,6 +15,10 @@
 #include "cave.h"
 #include "lake.h"
 #include "statictics_visitor.h"
+#include "chart.h"
+#include <QtCharts/QChartView>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QMainWindow>
 
 typedef boost::shared_ptr<QGraphicsScene> QGraphicsScene_sharedPtr;
 typedef boost::shared_ptr<QGraphicsView> QGraphicsView_sharedPtr;
@@ -31,8 +35,8 @@ private:
     void showStatistics() {
         QMessageBox msgBox;
         msgBox.setText("Statistics");
-        QString text = predatorsStatistics_.toString();
-        text.append(preysStatistics_.toString());
+        QString text = predatorsStatistics_->toString();
+        text.append(preysStatistics_->toString());
         msgBox.setInformativeText(text);
         msgBox.setStandardButtons(QMessageBox::Ok);
         msgBox.setDefaultButton(QMessageBox::Ok);
@@ -58,8 +62,16 @@ private:
 
     Timer_sharedPtr timer_;
 
-    StatisticsVisitor predatorsStatistics_;
-    StatisticsVisitor preysStatistics_;
+    StatisticsVisitor* predatorsStatistics_;
+    StatisticsVisitor* preysStatistics_;
+
+    QMainWindow predatorsWindow;
+    Chart* predatorsChart;
+    QChartView* predatorsChartView;
+
+    QMainWindow preysWindow;
+    Chart* preysChart;
+    QChartView* preysChartView;
 
     Object_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
     Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs);

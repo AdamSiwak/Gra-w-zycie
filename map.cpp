@@ -18,6 +18,10 @@
 #include "dinosaur.h"
 #include "cloud.h"
 
+#include "chart.h"
+#include <QtCharts/QChartView>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QMainWindow>
 
 Map* Map::instance_ = 0;
 
@@ -31,6 +35,30 @@ Map::Map(){
 }
 
 void Map::startAnimation(){
+
+    predatorsChart = new Chart;
+    predatorsChart->setTitle("Dynamic spline chart");
+    predatorsChart->legend()->hide();
+    predatorsChart->setAnimationOptions(QChart::AllAnimations);
+    predatorsChartView = new QChartView(predatorsChart);
+    predatorsChartView->setRenderHint(QPainter::Antialiasing);
+    predatorsWindow.setCentralWidget(predatorsChartView);
+    predatorsWindow.resize(400, 300);
+    predatorsWindow.show();
+
+    preysChart = new Chart;
+    preysChart->setTitle("Dynamic spline chart");
+    preysChart->legend()->hide();
+    preysChart->setAnimationOptions(QChart::AllAnimations);
+    preysChartView = new QChartView(predatorsChart);
+    preysChartView->setRenderHint(QPainter::Antialiasing);
+    preysWindow.setCentralWidget(preysChartView);
+    preysWindow.resize(400, 300);
+    preysWindow.show();
+
+    predatorsStatistics_ = new StatisticsVisitor(predatorsChart);
+    preysStatistics_ = new StatisticsVisitor(preysChart);
+
     createLakes(2);
     createTrees(2);
     createCaves(2);
@@ -229,23 +257,23 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 }
 
 void Map::timerCallBack(){
-    preysStatistics_.TimeMomentBegin();
-    predatorsStatistics_.TimeMomentBegin();
+    preysStatistics_->TimeMomentBegin();
+    predatorsStatistics_->TimeMomentBegin();
 
     for (auto it = preys_.begin(); it != preys_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
         (*it)->behaviour();
-        (*it)->accept(preysStatistics_);
+        (*it)->accept(*preysStatistics_);
     }
     for (auto it = predators_.begin(); it != predators_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
         (*it)->behaviour();
-        (*it)->accept(predatorsStatistics_);
+        (*it)->accept(*predatorsStatistics_);
     }
 
-    preysStatistics_.TimeMomentEnd();
-    predatorsStatistics_.TimeMomentEnd();
+    preysStatistics_->TimeMomentEnd();
+    predatorsStatistics_->TimeMomentEnd();
 
-    qDebug() << "preys: \n" << preysStatistics_.toString();
-    qDebug() << "predators: \n" << predatorsStatistics_.toString();
+    qDebug() << "preys: \n" << preysStatistics_->toString();
+    qDebug() << "predators: \n" << predatorsStatistics_->toString();
 }

@@ -13,10 +13,15 @@
 #include <boost/shared_ptr.hpp>
 #include "cloud.h"
 
+class Dinosaur;
+
+typedef boost::shared_ptr<Dinosaur> Dinosaur_sharedPtr;
+typedef boost::weak_ptr<Dinosaur> Dinosaur_weakPtr;
+
 class DinosaurGUI : public ObjectGUI
 {
 public:
-    DinosaurGUI(QString pictureName, const qreal skale);
+    DinosaurGUI(QString pictureName, const qreal skale, Dinosaur* parent);
     virtual ~DinosaurGUI() {}
     virtual void accept(Visitor& v){}
 
@@ -34,6 +39,9 @@ public:
     Cloud* cloud_;
 private:
     Sound_sharedPtr dinoSound;
+
+    Dinosaur* parent_;
+
     static const int STEP_SIZE_ = 1;
 };
 

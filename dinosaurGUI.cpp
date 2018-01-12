@@ -5,12 +5,15 @@
 #include "cloud.h"
 #include "sound.h"
 #include <QMessageBox>
+#include "dinosaur.h"
 
-DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale):ObjectGUI(dinoName, scale){
+DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale, Dinosaur* parent):ObjectGUI(dinoName, scale), parent_(parent){
 
     setFlag(QGraphicsItem::ItemIsSelectable);
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
+
+    parent_->position_ = position_;
 
     setTransformOriginPoint(-50,-50);
 

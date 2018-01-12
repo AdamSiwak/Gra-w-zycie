@@ -2,54 +2,62 @@
 #include "predator.h"
 #include "prey.h"
 
+StatisticsVisitor::StatisticsVisitor(Chart* chart) : chart_(chart), chartCounter(0) {}
+
 QString& StatisticsVisitor::toString() {
     return parameters_;
 }
 
 void StatisticsVisitor::TimeMomentBegin() {
-    averageSpeed_.push_back(0);
-    averageAge_.push_back(0);
-    averageMaxHunger_.push_back(0);
-    averageHunger_.push_back(0);
-    averageThirst_.push_back(0);
-    alive_.push_back(0);
-    averageAttack_.push_back(0);
-    averageDefence_.push_back(0);
+    averageSpeed_ = 0;
+    averageAge_ = 0;
+    averageMaxHunger_ = 0;
+    averageHunger_ = 0;
+    averageThirst_ = 0;
+    alive_ = 0;
+    averageAttack_ = 0;
+    averageDefence_ = 0;
 }
 
 void StatisticsVisitor::TimeMomentEnd() {
-    *(--averageSpeed_.end()) /= *(--alive_.end());
-    *(--averageAge_.end()) /= *(--alive_.end());
-    *(--averageMaxHunger_.end()) /= *(--alive_.end());
-    *(--averageHunger_.end()) /= *(--alive_.end());
-    *(--averageThirst_.end()) /= *(--alive_.end());
-    *(--averageAttack_.end()) /= *(--alive_.end());
+    averageSpeed_ /= alive_;
+    averageAge_ /= alive_;
+    averageMaxHunger_ /= alive_;
+    averageHunger_ /= alive_;
+    averageThirst_ /= alive_;
+    averageAttack_ /= alive_;
 
-    parameters_ = "alive: " + QString::number(*(--alive_.end())) + "\n";
-    parameters_ += "average speed: " + QString::number(*(--averageSpeed_.end())) + "\n";
-    parameters_ += "average age: " + QString::number(*(--averageAge_.end())) + "\n";
-    parameters_ += "average max hunger: " + QString::number(*(--averageMaxHunger_.end())) + "\n";
-    parameters_ += "average hunger: " + QString::number(*(--averageHunger_.end())) + "\n";
-    parameters_ += "average thirst: " + QString::number(*(--averageThirst_.end())) + "\n";
-    parameters_ += "average attack: " + QString::number(*(--averageAttack_.end())) + "\n";
+    ++chartCounter;
+    if (chartCounter >= 100) {
+        chart_->addData(averageAge_);
+        chartCounter = 0;
+    }
+
+    parameters_ = "alive: " + QString::number(alive_) + "\n";
+    parameters_ += "average speed: " + QString::number(averageSpeed_) + "\n";
+    parameters_ += "average age: " + QString::number(averageAge_) + "\n";
+    parameters_ += "average max hunger: " + QString::number(averageMaxHunger_) + "\n";
+    parameters_ += "average hunger: " + QString::number(averageHunger_) + "\n";
+    parameters_ += "average thirst: " + QString::number(averageThirst_) + "\n";
+    parameters_ += "average attack: " + QString::number(averageAttack_) + "\n";
 }
 
 void StatisticsVisitor::visit(Predator& predator) {
-    *(--averageSpeed_.end()) += predator.speed();
-    *(--averageAge_.end()) += predator.age();
-    *(--averageMaxHunger_.end()) += predator.maxHunger();
-    *(--averageHunger_.end()) += predator.hunger();
-    *(--averageThirst_.end()) += predator.thirst();
-    *(--alive_.end()) += 1;
-    *(--averageAttack_.end()) += predator.attack();
+    averageSpeed_ += predator.speed();
+    averageAge_ += predator.age();
+    averageMaxHunger_ += predator.maxHunger();
+    averageHunger_ += predator.hunger();
+    averageThirst_ += predator.thirst();
+    alive_ += 1;
+    averageAttack_ += predator.attack();
 }
 
 void StatisticsVisitor::visit(Prey& prey) {
-    *(--averageSpeed_.end()) += prey.speed();
-    *(--averageAge_.end()) += prey.age();
-    *(--averageMaxHunger_.end()) += prey.maxHunger();
-    *(--averageHunger_.end()) += prey.hunger();
-    *(--averageThirst_.end()) += prey.thirst();
-    *(--alive_.end()) += 1;
-    *(--averageDefence_.end()) += prey.defence();
+    averageSpeed_ += prey.speed();
+    averageAge_ += prey.age();
+    averageMaxHunger_ += prey.maxHunger();
+    averageHunger_ += prey.hunger();
+    averageThirst_ += prey.thirst();
+    alive_ += 1;
+    averageDefence_ += prey.defence();
 }

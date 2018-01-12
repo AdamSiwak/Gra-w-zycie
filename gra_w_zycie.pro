@@ -5,8 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui\
-            multimedia
-
+            multimedia\
+            charts
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = gra_w_zycie
@@ -40,7 +40,8 @@ SOURCES += \
     tree.cpp \
     timer.cpp \
     cloud.cpp \
-    statistics_visitor.cpp
+    statistics_visitor.cpp \
+    chart.cpp
 
 HEADERS += \
     predator.h \
@@ -61,7 +62,8 @@ HEADERS += \
     lake.h \
     tree.h \
     timer.h \
-    cloud.h
+    cloud.h \
+    chart.h
 
 FORMS += \
         applicationwindow.ui
