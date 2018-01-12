@@ -2,7 +2,7 @@
 #include "predator.h"
 #include "prey.h"
 
-StatisticsVisitor::StatisticsVisitor(Chart* chart) : chart_(chart), chartCounter(0) {}
+StatisticsVisitor::StatisticsVisitor(Chart* chart) : chart_(chart) {}
 
 QString& StatisticsVisitor::toString() {
     return parameters_;
@@ -27,11 +27,7 @@ void StatisticsVisitor::TimeMomentEnd() {
     averageThirst_ /= alive_;
     averageAttack_ /= alive_;
 
-    ++chartCounter;
-    if (chartCounter >= ChartUpdateCounterValue) {
-        chart_->addData(averageAge_, averageSpeed_, averageMaxHunger_, averageHunger_, averageThirst_, alive_);
-        chartCounter = 0;
-    }
+    chart_->addData(averageAge_, averageSpeed_, averageMaxHunger_, averageHunger_, averageThirst_, alive_);
 
     parameters_ = "alive: " + QString::number(alive_) + "\n";
     parameters_ += "average speed: " + QString::number(averageSpeed_) + "\n";

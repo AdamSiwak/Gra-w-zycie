@@ -32,22 +32,7 @@ private:
     Map& operator=(const Map&) = delete;
     ~Map(){}
 
-    void showStatistics() {
-        QMessageBox msgBox;
-        msgBox.setText("Statistics");
-        QString text = predatorsStatistics_->toString();
-        text.append(preysStatistics_->toString());
-        msgBox.setInformativeText(text);
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        int ret = msgBox.exec();
-    }
-
-    void keyPressEvent(QKeyEvent *event){
-        if (event->key() == Qt::Key_Tab){
-                showStatistics();
-        }
-    }
+    static const int TimerPeriod = 20; // ms
 
     static Map* instance_;
     std::vector<Dinosaur_sharedPtr> predators_;
@@ -70,6 +55,9 @@ private:
 
     Chart* preysChart;
     QChartView* preysChartView;
+
+    int chartUpdateCounter;
+    static const int chartUpdateValue = (1000)/TimerPeriod; // ms
 
     Object_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
     Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge = false);

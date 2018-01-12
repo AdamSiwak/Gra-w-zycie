@@ -135,7 +135,7 @@ void Chart::addData(int age, int speed, int maxHunger, int hunger, int thirst, i
 {
     qreal x = plotArea().width() / m_axis->tickCount();
     qreal y = (m_axis->max() - m_axis->min()) / m_axis->tickCount();
-    m_x += y;
+    m_x += 1;
 
     ageSeries->append(m_x, age);
     speedSeries->append(m_x, speed);

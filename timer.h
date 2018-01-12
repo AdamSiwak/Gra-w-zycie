@@ -14,7 +14,7 @@ public slots:
     void myfunction();
 
 public:
-    Timer();
+    Timer(int period);
     QTimer * timer_;
 };
 

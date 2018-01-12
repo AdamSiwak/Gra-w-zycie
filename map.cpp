@@ -25,7 +25,7 @@
 
 Map* Map::instance_ = 0;
 
-Map::Map(){
+Map::Map() : chartUpdateCounter(0) {
     qDebug()<<"Hello Debug";
 
     scene_ = QGraphicsScene_sharedPtr(new QGraphicsScene());
@@ -69,7 +69,7 @@ void Map::startAnimation(){
     backgroundSound_ = Sound_sharedPtr(new Sound(BACKGROUND));
     // backgroundSound_->play(); //TODO: uncomment
 
-    timer_ = Timer_sharedPtr(new Timer());
+    timer_ = Timer_sharedPtr(new Timer(TimerPeriod));
 }
 
 void Map::stopAnimation(){
@@ -269,25 +269,32 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 }
 
 void Map::timerCallBack(){
-    preysStatistics_->TimeMomentBegin();
-    predatorsStatistics_->TimeMomentBegin();
+    ++chartUpdateCounter;
+    if (chartUpdateCounter >= chartUpdateValue) {
+        preysStatistics_->TimeMomentBegin();
+        predatorsStatistics_->TimeMomentBegin();
+    }
 
     for (auto it = preys_.begin(); it != preys_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
         (*it)->makeADecision();
         (*it)->behaviour();
-        (*it)->accept(*preysStatistics_);
+        if (chartUpdateCounter >= chartUpdateValue) {
+            (*it)->accept(*preysStatistics_);
+        }
     }
     for (auto it = predators_.begin(); it != predators_.end(); ++it) {
 //        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
         (*it)->makeADecision();
         (*it)->behaviour();
-        (*it)->accept(*predatorsStatistics_);
+        if (chartUpdateCounter >= chartUpdateValue) {
+            (*it)->accept(*predatorsStatistics_);
+        }
     }
 
-    preysStatistics_->TimeMomentEnd();
-    predatorsStatistics_->TimeMomentEnd();
-
-//    qDebug() << "preys: \n" << preysStatistics_->toString();
-//    qDebug() << "predators: \n" << predatorsStatistics_->toString();
+    if (chartUpdateCounter >= chartUpdateValue) {
+        preysStatistics_->TimeMomentEnd();
+        predatorsStatistics_->TimeMomentEnd();
+        chartUpdateCounter = 0;
+    }
 }
