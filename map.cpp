@@ -36,25 +36,23 @@ Map::Map(){
 
 void Map::startAnimation(){
 
-    predatorsChart = new Chart;
-    predatorsChart->setTitle("Dynamic spline chart");
-    predatorsChart->legend()->hide();
+    predatorsChart = new Chart();
+    predatorsChart->setTitle("Predators statistics");
     predatorsChart->setAnimationOptions(QChart::AllAnimations);
     predatorsChartView = new QChartView(predatorsChart);
     predatorsChartView->setRenderHint(QPainter::Antialiasing);
-    predatorsWindow.setCentralWidget(predatorsChartView);
-    predatorsWindow.resize(400, 300);
-    predatorsWindow.show();
+    predatorsChartView->resize(500,300);
 
-    preysChart = new Chart;
-    preysChart->setTitle("Dynamic spline chart");
-    preysChart->legend()->hide();
+    scene_->addWidget(predatorsChartView,Qt::WindowFlags(Qt::AlignLeft));
+
+    preysChart = new Chart();
+    preysChart->setTitle("Preys statistics");
     preysChart->setAnimationOptions(QChart::AllAnimations);
-    preysChartView = new QChartView(predatorsChart);
+    preysChartView = new QChartView(preysChart);
     preysChartView->setRenderHint(QPainter::Antialiasing);
-    preysWindow.setCentralWidget(preysChartView);
-    preysWindow.resize(400, 300);
-    preysWindow.show();
+    preysChartView->resize(500,300);
+
+    scene_->addWidget(preysChartView,Qt::WindowFlags(Qt::AlignLeft));
 
     predatorsStatistics_ = new StatisticsVisitor(predatorsChart);
     preysStatistics_ = new StatisticsVisitor(preysChart);

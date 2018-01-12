@@ -28,8 +28,8 @@ void StatisticsVisitor::TimeMomentEnd() {
     averageAttack_ /= alive_;
 
     ++chartCounter;
-    if (chartCounter >= 100) {
-        chart_->addData(averageAge_);
+    if (chartCounter >= ChartUpdateCounterValue) {
+        chart_->addData(averageAge_, averageSpeed_, averageMaxHunger_, averageHunger_, averageThirst_, alive_);
         chartCounter = 0;
     }
 

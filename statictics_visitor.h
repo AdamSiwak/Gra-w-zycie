@@ -32,6 +32,8 @@ private:
 
     Chart* chart_;
     int chartCounter;
+
+    static const int ChartUpdateCounterValue = 10;
 };
 
 #endif // STATICTICS_VISITOR_H

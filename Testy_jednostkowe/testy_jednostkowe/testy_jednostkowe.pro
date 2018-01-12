@@ -1,7 +1,8 @@
 QT += testlib
 QT += widgets
 QT += gui\
-      multimedia
+      multimedia\
+      charts
 
 CONFIG += qt warn_on depend_includepath testcase
 
@@ -22,7 +23,8 @@ SOURCES +=  tst_gra_w_zycie_test.cpp \
     ../../timer.cpp \
     ../../tree.cpp \
     ../../cloud.cpp \
-    ../../statistics_visitor.cpp
+    ../../statistics_visitor.cpp \
+    ../../chart.cpp
 
 SUBDIRS += \
     ../../gra_w_zycie.pro
@@ -64,4 +66,5 @@ HEADERS += \
     ../../timer.cpp.autosave \
     ../../timer.h \
     ../../tree.h \
-    ../../visitor.h
+    ../../visitor.h \
+    ../../chart.h

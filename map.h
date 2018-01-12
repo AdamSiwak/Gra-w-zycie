@@ -65,11 +65,9 @@ private:
     StatisticsVisitor* predatorsStatistics_;
     StatisticsVisitor* preysStatistics_;
 
-    QMainWindow predatorsWindow;
     Chart* predatorsChart;
     QChartView* predatorsChartView;
 
-    QMainWindow preysWindow;
     Chart* preysChart;
     QChartView* preysChartView;
 
