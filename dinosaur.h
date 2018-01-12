@@ -11,6 +11,10 @@
 #include "cloud.h"
 
 class DinosaurGUI;
+class Dinosaur;
+
+typedef boost::shared_ptr<Dinosaur> Dinosaur_sharedPtr;
+typedef boost::weak_ptr<Dinosaur> Dinosaur_weakPtr;
 
 class Dinosaur : public Object {
 protected:
@@ -69,7 +73,8 @@ protected:
     int hunger_;
     int thirst_;
 
-    Object_weakPtr target_;
+    Object_sharedPtr target_;
+    Dinosaur_sharedPtr target_dino_;
 
     static const int multiplier = 10000;
     static const int maxMaxEnergy = 1 * multiplier;
@@ -81,11 +86,10 @@ protected:
     static const int criticalThirst = 0.5 * maxThirst;
     static const int criticalHunger = 0.5 * maxMaxHunger;
     static const int maxAge = 100 * multiplier;
-    static const int reproductiveAge = 0.5 * maxAge;
+    static const int reproductiveAge = 0.005 * maxAge;
 
 };
 
-typedef boost::shared_ptr<Dinosaur> Dinosaur_sharedPtr;
-typedef boost::weak_ptr<Dinosaur> Dinosaur_weakPtr;
+
 
 #endif // DINOSAUR_H

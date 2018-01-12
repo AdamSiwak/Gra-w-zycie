@@ -1,5 +1,6 @@
 #include "prey.h"
 #include "visitor.h"
+#include "map.h"
 
 Prey::Prey(): Dinosaur(), defence_(rand()%100), hearingDistance_(rand()%10), isChased_(false) {
     gui_ = DinosaurGUI_sharedPtr(new DinosaurGUI(picture_,0.15));
@@ -38,10 +39,12 @@ Dinosaur::hungerStates Prey::eating()
 
 void Prey::go2nearestEating()
 {
-
+    target_ = Map::getInstance()->getNearestTree(*this);
+    move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
 }
 
 void Prey::go2Partner()
 {
-
+    target_dino_ = Map::getInstance()->getNearestPrey(*this);
+    move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
 }

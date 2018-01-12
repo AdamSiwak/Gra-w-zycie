@@ -13,8 +13,7 @@ Predator::Predator(Predator& parent1, Predator& parent2) {
     maxHunger_ = (parent1.maxHunger_ + parent2.maxHunger_)/2;
     hunger_ = 0;
     thirst_ = 0;
-    currentDestination_->setXcoordinate(rand()%currentDestination_->MAX_X_-currentDestination_->MAX_X_/2);
-    currentDestination_->setYcoordinate(rand()%currentDestination_->MAX_Y_-currentDestination_->MAX_Y_/2);
+    currentDestination_->setRandomCoordiantes();
 
     attack_ = (parent1.attack_ + parent2.attack_)/2;
     loudness_ = (parent1.loudness_ + parent2.loudness_)/2;
@@ -36,14 +35,14 @@ Dinosaur::hungerStates Predator::eating()
 
 void Predator::go2nearestEating()
 {
-//    target_ = Map::getInstance()->getNearestPrey(this);
-//    move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
+    target_dino_ = Map::getInstance()->getNearestPrey(*this);
+    move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
 }
 
 void Predator::go2Partner()
 {
-//    target_ = Map::getInstance()->getNearestPredator(this);
-//    move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
+    target_ = Map::getInstance()->getNearestPredator(*this);
+    move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
 }
 
 void Predator::createGUIElement(){

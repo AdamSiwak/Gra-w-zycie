@@ -152,16 +152,16 @@ void Dinosaur::behaviour()
 
     if(thirst()<criticalThirst || thirstState_ == DRINKING){
         go2nearestLake();
-        if(*target_.lock()->position_ == *gui_->position_ ){
+        if(*target_->position_ == *gui_->position_ ){
             thirstState_=drinking();
         }
     }
-//    else if(hunger()<criticalHunger){
-//        go2nearestEating();
-//    }
-//    else if(age()>reproductiveAge){
-//        go2Partner();
-//    }
+    else if(hunger()<criticalHunger){
+        go2nearestEating();
+    }
+    else if(age()>reproductiveAge){
+        go2Partner();
+    }
     else {
         if(*currentDestination_== *gui_->position_){
             drawLotsPosition();
@@ -196,7 +196,7 @@ void Dinosaur::go2nearestLake()
 {
     target_ = Map::getInstance()->getNearestLake(*this);
 
-    move2position(target_.lock()->position_->getXcoordinate(),target_.lock()->position_->getYcoordinate());
+    move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
 
 }
 

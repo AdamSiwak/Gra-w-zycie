@@ -140,37 +140,37 @@ void Map::deleteAllObjects()
     }
 }
 
-Lake_weakPtr Map::getNearestLake(Dinosaur& dino)
+Lake_sharedPtr Map::getNearestLake(Dinosaur& dino)
 {
-    ObjectGUI_sharedPtr object = getNearestObject(dino,getLakes());
+    Object_sharedPtr object = getNearestObject(dino,static_cast<std::vector<ObjectGUI_sharedPtr>>(getLakes()));
     return boost::dynamic_pointer_cast<Lake>(object);
 }
 
-Tree_weakPtr Map::getNearestTree(Dinosaur& dino)
+Tree_sharedPtr Map::getNearestTree(Dinosaur& dino)
 {
-    ObjectGUI_sharedPtr object = getNearestObject(dino,getTrees());
+    Object_sharedPtr object = getNearestObject(dino,(getTrees()));
     return boost::dynamic_pointer_cast<Tree>(object);
 }
 
-Cave_weakPtr Map::getNearestCave(Dinosaur& dino)
+Cave_sharedPtr Map::getNearestCave(Dinosaur& dino)
 {
-    ObjectGUI_sharedPtr object = getNearestObject(dino,getCaves());
+    Object_sharedPtr object = getNearestObject(dino,getCaves());
     return boost::dynamic_pointer_cast<Cave>(object);
 }
 
-Predator_weakPtr Map::getNearestPredator(Dinosaur& dino)
+Predator_sharedPtr Map::getNearestPredator(Dinosaur& dino)
 {
-    Dinosaur_sharedPtr object = getNearestObject(dino,getPredators());
+    Object_sharedPtr object = getNearestObject(dino,getPredators());
     return boost::dynamic_pointer_cast<Predator>(object);
 }
 
-Prey_weakPtr Map::getNearestPrey(Dinosaur& dino)
+Prey_sharedPtr Map::getNearestPrey(Dinosaur& dino)
 {
-    Dinosaur_sharedPtr object = getNearestObject(dino,getPreys());
+    Object_sharedPtr object = getNearestObject(dino,getPreys());
     return boost::dynamic_pointer_cast<Prey>(object);
 }
 
-ObjectGUI_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> objects)
+Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> objects)
 {
     ObjectGUI_sharedPtr object;
     int dinoX = dino.gui_->position_->getRealXcoordinate();

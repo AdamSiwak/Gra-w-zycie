@@ -61,7 +61,7 @@ private:
     StatisticsVisitor predatorsStatistics_;
     StatisticsVisitor preysStatistics_;
 
-    ObjectGUI_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
+    Object_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
     Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs);
 
 public:
@@ -95,11 +95,11 @@ public:
     int get_n_caves() { return caves_.size(); }
     int get_n_trees() { return trees_.size(); }
 
-    Lake_weakPtr getNearestLake(Dinosaur& dino);
-    Tree_weakPtr getNearestTree(Dinosaur& dino);
-    Cave_weakPtr getNearestCave(Dinosaur& dino);
-    Predator_weakPtr getNearestPredator(Dinosaur& dino);
-    Prey_weakPtr getNearestPrey(Dinosaur& dino);
+    Lake_sharedPtr getNearestLake(Dinosaur& dino);
+    Tree_sharedPtr getNearestTree(Dinosaur& dino);
+    Cave_sharedPtr getNearestCave(Dinosaur& dino);
+    Predator_sharedPtr getNearestPredator(Dinosaur& dino);
+    Prey_sharedPtr getNearestPrey(Dinosaur& dino);
 
     std::vector<ObjectGUI_sharedPtr>& getLakes(){return lakes_;}
     std::vector<ObjectGUI_sharedPtr>& getTrees(){return trees_;}

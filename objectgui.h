@@ -9,7 +9,7 @@
 
 #include "object.h"
 
-class ObjectGUI : public QGraphicsPixmapItem, public Object
+class ObjectGUI : public Object, public QGraphicsPixmapItem
 {
 public:
     ObjectGUI(QString pictureName, const qreal skale);
