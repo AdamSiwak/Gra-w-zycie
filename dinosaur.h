@@ -113,10 +113,8 @@ protected:
     static const int criticalThirst = 0.5 * maxThirst;
     static const int criticalHunger = 0.5 * maxMaxHunger;
     static const int maxAge = 100 * multiplier;
-    static const int reproductiveAge = 0.5 * maxAge;
-
+    static const int reproductiveAge = 0.0005 * maxAge;
 };
-
 
 
 #endif // DINOSAUR_H

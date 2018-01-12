@@ -25,6 +25,7 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale, Dinosaur* parent):
     }
 
     cloud_ = new Cloud("cloud.png",0.3);
+    cloud_->setVisible(false);
 }
 
 void DinosaurGUI :: keyPressEvent(QKeyEvent *event){

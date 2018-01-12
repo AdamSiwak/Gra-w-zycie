@@ -45,6 +45,7 @@ Dinosaur::behaviourStates Predator::eating()
 void Predator::findTheNearestEating()
 {
     target_dino_ = Map::getInstance()->getNearestPrey(*this); 
+
     target_dino_->setCased(true);
 }
 
@@ -69,8 +70,8 @@ void Predator::reproducing()
 
 Dinosaur::behaviourStates Predator::findPartner()
 {
-    if(Map::getInstance()->getNearestReproductivePredator(*this)!=nullptr){
-        target_dino_ = Map::getInstance()->getNearestPredator(*this);
+    target_dino_ = Map::getInstance()->getNearestReproductivePredator(*this);
+    if(target_dino_!=nullptr){
         return GO2PARTNER;
     }
     else{

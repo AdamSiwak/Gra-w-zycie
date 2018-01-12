@@ -62,8 +62,8 @@ Dinosaur::behaviourStates Prey::go2eating()
 
 Dinosaur::behaviourStates Prey::findPartner()
 {
-    if(Map::getInstance()->getNearestReproductivePredator(*this)!=nullptr){
-        target_dino_ = Map::getInstance()->getNearestPrey(*this);
+    target_dino_ = Map::getInstance()->getNearestReproductivePrey(*this);
+    if(target_dino_!=nullptr){
         return GO2PARTNER;
     }
     else{

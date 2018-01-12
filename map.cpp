@@ -248,6 +248,9 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
     int minDistance = __INT_MAX__;
 
     for (auto it = dinosurs.begin(); it != dinosurs.end(); ++it) {
+        if (&dino == &(**it)) {
+            continue;
+        }
 
         dinosurX=(*it)->gui_->position_->getRealXcoordinate();
         dinosurY=(*it)->gui_->position_->getRealYcoordinate();
@@ -269,6 +272,8 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 }
 
 void Map::timerCallBack(){
+    while(!predators_.empty())
+        predators_.pop_back();
     ++chartUpdateCounter;
     if (chartUpdateCounter >= chartUpdateValue) {
         preysStatistics_->TimeMomentBegin();
