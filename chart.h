@@ -51,7 +51,6 @@ public:
 
 private:
     QTimer m_timer;
-    QSplineSeries *m_series;
     QSplineSeries *ageSeries;
     QSplineSeries *speedSeries;
     QSplineSeries *maxHungerSeries;

@@ -38,21 +38,19 @@ void Map::startAnimation(){
 
     predatorsChart = new Chart();
     predatorsChart->setTitle("Predators statistics");
-    predatorsChart->legend()->hide();
     predatorsChart->setAnimationOptions(QChart::AllAnimations);
     predatorsChartView = new QChartView(predatorsChart);
     predatorsChartView->setRenderHint(QPainter::Antialiasing);
-    predatorsChartView->resize(400,300);
+    predatorsChartView->resize(500,300);
 
     scene_->addWidget(predatorsChartView,Qt::WindowFlags(Qt::AlignLeft));
 
     preysChart = new Chart();
     preysChart->setTitle("Preys statistics");
-    preysChart->legend()->hide();
     preysChart->setAnimationOptions(QChart::AllAnimations);
     preysChartView = new QChartView(preysChart);
     preysChartView->setRenderHint(QPainter::Antialiasing);
-    preysChartView->resize(400,300);
+    preysChartView->resize(500,300);
 
     scene_->addWidget(preysChartView,Qt::WindowFlags(Qt::AlignLeft));
 
