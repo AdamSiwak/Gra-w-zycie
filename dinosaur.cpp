@@ -169,9 +169,8 @@ void Dinosaur::behaviour()
     case WANT2EAT:
         switch (behaviourState_){
             case SERCH4EATING:
-                findTheNearestEating();
-                behaviourState_ = GO2EATING;
-                break;
+                behaviourState_ = findTheNearestEating();
+            break;
             case GO2EATING:
                 behaviourState_ = go2eating();
                 break;

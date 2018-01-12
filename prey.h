@@ -15,7 +15,7 @@ public:
     virtual ~Prey(){}
     virtual void accept(Visitor &v);
     virtual Dinosaur::behaviourStates eating();
-    virtual void findTheNearestEating();
+    virtual Dinosaur::behaviourStates  findTheNearestEating();
     virtual Dinosaur::behaviourStates go2eating();
     virtual Dinosaur::behaviourStates findPartner();
     virtual void reproducing();

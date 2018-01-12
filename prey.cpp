@@ -43,10 +43,10 @@ Dinosaur::behaviourStates Prey::eating()
     }
 }
 
-void Prey::findTheNearestEating()
+Dinosaur::behaviourStates Prey::findTheNearestEating()
 {
     target_ = Map::getInstance()->getNearestTree(*this);
-
+    return GO2EATING;
 }
 
 Dinosaur::behaviourStates Prey::go2eating()

@@ -61,7 +61,7 @@ void Map::startAnimation(){
     createTrees(2);
     createCaves(2);
     createPredatorsPopulation(1);
-    createPreysPopulation(1);
+    createPreysPopulation(0);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
@@ -272,8 +272,8 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 }
 
 void Map::timerCallBack(){
-    while(!predators_.empty())
-        predators_.pop_back();
+//    while(!predators_.empty())
+//        predators_.pop_back();
     ++chartUpdateCounter;
     if (chartUpdateCounter >= chartUpdateValue) {
         preysStatistics_->TimeMomentBegin();

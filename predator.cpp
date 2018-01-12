@@ -42,11 +42,17 @@ Dinosaur::behaviourStates Predator::eating()
     }
 }
 
-void Predator::findTheNearestEating()
+Dinosaur::behaviourStates Predator::findTheNearestEating()
 {
-    target_dino_ = Map::getInstance()->getNearestPrey(*this); 
+    target_dino_ = Map::getInstance()->getNearestPrey(*this);
+    if (target_dino_ == nullptr) {
+        hunger_--;
+        return SERCH4EATING;
+    }else{
+        target_dino_->setCased(true);
+        return GO2EATING;
+    }
 
-    target_dino_->setCased(true);
 }
 
 Dinosaur::behaviourStates Predator::go2eating()
