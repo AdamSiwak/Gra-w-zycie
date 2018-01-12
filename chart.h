@@ -47,11 +47,18 @@ class Chart: public QChart
 public:
     Chart(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
     virtual ~Chart() {}
-    void addData(int value);
+    void addData(int age, int speed, int maxHunger, int hunger, int thirst, int alive);
 
 private:
     QTimer m_timer;
     QSplineSeries *m_series;
+    QSplineSeries *ageSeries;
+    QSplineSeries *speedSeries;
+    QSplineSeries *maxHungerSeries;
+    QSplineSeries *hungerSeries;
+    QSplineSeries *thirstSeries;
+    QSplineSeries *aliveSeries;
+
     QStringList m_titles;
     QValueAxis *m_axis;
     qreal m_step;
