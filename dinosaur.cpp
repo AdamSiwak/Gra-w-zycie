@@ -95,6 +95,7 @@ void Dinosaur::findCave()
 void Dinosaur::isDevoured()
 {
     gui_->setRotation(180);
+    gui_->setTransformOriginPoint(20,50);
 }
 
 int Dinosaur::getReproductiveAge()
@@ -238,7 +239,7 @@ void Dinosaur::behaviour()
                 }
                 break;
             case IS_DEVOURED:
-
+                isDevoured();
                 break;
             default:
                 break;
@@ -255,33 +256,6 @@ void Dinosaur::behaviour()
     default:
         break;
     }
-
-//    age_++;
-//    showMyStatistics();
-
-//    if(thirst()<criticalThirst || behaviourState_ == DRINKING){
-//        go2nearestLake();
-//        if(*target_->position_ == *gui_->position_ ){
-//            behaviourState_=drinking();
-//        }
-//    }
-//    else if(hunger()<criticalHunger){
-//        go2nearestEating();
-//    }
-//    else if(age()>reproductiveAge){
-//        go2Partner();
-//    }
-//    else {
-//        if(*currentDestination_== *gui_->position_){
-//            drawLotsPosition();
-
-//        }
-//        else{
-//            move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
-
-//        }
-//    }
-
 }
 
 QString Dinosaur::toString()
