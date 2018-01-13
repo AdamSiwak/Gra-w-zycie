@@ -29,8 +29,8 @@ public:
         return !(*this==right);
     }
 
-    static const int MAX_X_=1000;
-    static const int MAX_Y_=1000;
+    static const int MAX_X_=10000;
+    static const int MAX_Y_=10000;
 
 private:
     int x_;

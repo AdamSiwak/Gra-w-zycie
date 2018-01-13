@@ -57,18 +57,18 @@ void Map::startAnimation(){
     predatorsStatistics_ = new StatisticsVisitor(predatorsChart);
     preysStatistics_ = new StatisticsVisitor(preysChart);
 
-    createLakes(2);
-    createTrees(2);
+    createLakes(20);
+    createTrees(20);
 
-    createPredatorsPopulation(3);
-    createPreysPopulation(6);
-    createCaves(2);
+    createPredatorsPopulation(30);
+    createPreysPopulation(60);
+    createCaves(20);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
 
     backgroundSound_ = Sound_sharedPtr(new Sound(BACKGROUND));
-    // backgroundSound_->play(); //TODO: uncomment
+    backgroundSound_->play();
 
     timer_ = Timer_sharedPtr(new Timer(TimerPeriod));
 
