@@ -15,7 +15,7 @@ public:
 
     virtual void accept(Visitor& v) = 0; // implementacja wzorca wizytatora
 
-    Coordinates* position_;
+    Coordinates_sharedPtr position_;
 
 };
 

@@ -14,7 +14,7 @@ Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-m
     prevNeeds_ = DONT_HAVE_ANY_NEEDS;
     needs_ = DONT_HAVE_ANY_NEEDS;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
-    currentDestination_ = new Coordinates();
+    currentDestination_ = Coordinates_sharedPtr(new Coordinates()); // inicjowane z DinosaurGUI
     currentDestination_->setRandomCoordiantes();
 
 }
@@ -29,7 +29,7 @@ Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
     maxHunger_ = (parent1.maxHunger_ + parent2.maxHunger_)/2;
     hunger_ = rand()%maxHunger();
     thirst_ = rand()%maxThirst;
-    currentDestination_ = new Coordinates();
+    currentDestination_ = Coordinates_sharedPtr(new Coordinates());
     currentDestination_->setRandomCoordiantes();
 }
 

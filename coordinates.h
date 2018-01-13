@@ -2,6 +2,8 @@
 #define COORDINATES_H
 
 #include <cstdlib>
+#include <boost/weak_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 class Coordinates
 {
@@ -36,5 +38,8 @@ private:
     int xRealCoordinate_;
     int yRealCoordinate_;
 };
+
+typedef boost::shared_ptr<Coordinates> Coordinates_sharedPtr;
+typedef boost::weak_ptr<Coordinates> Coordinates_weakPtr;
 
 #endif // COORDINATES_H
