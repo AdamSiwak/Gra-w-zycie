@@ -14,7 +14,7 @@ class ObjectGUI : public Object, public QGraphicsPixmapItem
 public:
     ObjectGUI(QString pictureName, const qreal skale);
     virtual ~ObjectGUI() {}
-    virtual void accept(Visitor& v){}
+    virtual void accept(Visitor& v){Q_UNUSED(v);}
     qreal mySkale() const;
     void setMySkale(const qreal scale);
 private:

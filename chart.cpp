@@ -105,7 +105,7 @@ Chart::Chart(QGraphicsItem *parent, Qt::WindowFlags wFlags):
 void Chart::addData(int age, int speed, int maxHunger, int hunger, int thirst, int alive)
 {
     qreal x = plotArea().width() / m_axis->tickCount();
-    qreal y = (m_axis->max() - m_axis->min()) / m_axis->tickCount();
+//    qreal y = (m_axis->max() - m_axis->min()) / m_axis->tickCount();
     m_x += 1;
 
     ageSeries->append(m_x, age);

@@ -23,7 +23,7 @@ class DinosaurGUI : public ObjectGUI
 public:
     DinosaurGUI(QString pictureName, const qreal skale, Dinosaur* parent);
     virtual ~DinosaurGUI() {}
-    virtual void accept(Visitor& v){}
+    virtual void accept(Visitor& v){Q_UNUSED(v);}
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);

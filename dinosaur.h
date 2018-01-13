@@ -23,7 +23,7 @@ public:
     Dinosaur();
     Dinosaur(Dinosaur& parent1, Dinosaur& parent2);
     virtual ~Dinosaur() {}
-    virtual void accept(Visitor& v){}
+    virtual void accept(Visitor& v){Q_UNUSED(v);}
 
     enum behaviourStates{SERCH4LAKE, GO2LAKE, DRUNK, DRINKING,
                          SERCH4EATING, GO2EATING, FULL, EATING,

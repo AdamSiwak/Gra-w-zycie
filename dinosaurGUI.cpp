@@ -50,6 +50,7 @@ void DinosaurGUI :: keyPressEvent(QKeyEvent *event){
 
 void DinosaurGUI::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED(event);
     dinoSound->play();
     dinoSound->setVolume(30);
 }
