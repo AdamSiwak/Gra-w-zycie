@@ -11,9 +11,13 @@ Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-m
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
+    prevBehaviourState_ = OTHER;
+    prevNeeds_ = DONT_HAVE_ANY_NEEDS;
+    needs_ = DONT_HAVE_ANY_NEEDS;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
     currentDestination_ = new Coordinates();
     currentDestination_->setRandomCoordiantes();
+
 }
 
 Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
@@ -75,7 +79,6 @@ void Dinosaur::showMyStatistics()
 {
 
     if (gui_->isSelected()){
-        //qDebug()<<toString();
         gui_->cloud_->writeText(toString());
         gui_->cloud_->setX(gui_->x());
         gui_->cloud_->setY(gui_->y());
@@ -168,7 +171,6 @@ Dinosaur::behaviourStates Dinosaur::drinking()
     gui_->beginDrinking();
     if(thirst()<maxThirst){
         thirst_+=100;
-
         return DRINKING;
     }
     else{
@@ -187,16 +189,19 @@ void Dinosaur::behaviour()
     case WANT2DRINK:
         switch (behaviourState_) {
         case SERCH4LAKE:
+//            qDebug() << "SERCH4LAKE";
             target_ = Map::getInstance()->getNearestLake(*this);
             behaviourState_ = GO2LAKE;
             break;
         case GO2LAKE:
+//            qDebug() << "GO2LAKE";
             move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
             if(*target_->position_==*position_){
                 behaviourState_ = DRINKING;
             }
             break;
         case DRINKING:
+//            qDebug() << "DRINKING";
             behaviourState_ = drinking();
             break;
         case DRUNK:
@@ -210,15 +215,19 @@ void Dinosaur::behaviour()
     case WANT2EAT:
         switch (behaviourState_){
             case SERCH4EATING:
+//                qDebug() << "SERCH4EATING";
                 behaviourState_ = findTheNearestEating();
             break;
             case GO2EATING:
+//                qDebug() << "GO2EATING";
                 behaviourState_ = go2eating();
                 break;
             case EATING:
+//                qDebug() << "EATING";
                 behaviourState_ = eating();
                 break;
             case FULL:
+//                qDebug() << "FULL";
                 if(target_dino_!=nullptr){
                     target_dino_->setChased(false);
                     target_dino_->setIsDevoured(false);
@@ -233,29 +242,35 @@ void Dinosaur::behaviour()
     case WANT2REPRODUCE:
         switch (behaviourState_) {
             case SERCH4PARTNER:
+//                qDebug() << "SERCH4PARTNER";
                 behaviourState_ = findPartner();
                 break;
             case GO2PARTNER:
+//                qDebug() << "GO2PARTNER";
                 move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
                 if(*target_dino_->position_ == *position_){
                     behaviourState_ = REPRODUCING;
                 }
                 break;
             case REPRODUCING:
-                reproducing();
+//                qDebug() << "REPRODUCING";
+                behaviourState_ = reproducing();
                 target_dino_ = nullptr;
                 break;
             default:
                 behaviourState_ = SERCH4PARTNER;
                 break;
         }
+        break;
     case IS_DANGERED:
         switch (behaviourState_) {
             case SERCH4CAVE:
+//                qDebug() << "SERCH4CAVE";
                 findCave();
                 behaviourState_= GO2CAVE;
                 break;
             case GO2CAVE:
+//                qDebug() << "GO2CAVE";
                 move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
                 if(*target_->position_ == *position_){
                     behaviourState_ = HIDING;
@@ -266,6 +281,7 @@ void Dinosaur::behaviour()
                 // do nothing
                 break;
             case IS_DEVOURED:
+//                qDebug() << "IS_DEVOURED";
                 isDevoured();
                 break;
             default:
@@ -274,6 +290,7 @@ void Dinosaur::behaviour()
             }
             break;
     case DONT_HAVE_ANY_NEEDS:
+//        qDebug() << "DONT_HAVE_ANY_NEEDS";
         if(*currentDestination_== *gui_->position_){
             drawLotsPosition();
         }
@@ -308,7 +325,7 @@ void Dinosaur::makeADecision()
     if(age_>maxAge_){
         needs_ = IS2OLD;
     }
-    else if(chased() || getIsDevoured()){ // TODO: impementacja w predator eating
+    else if(chased() || getIsDevoured() || getIsHiden()){ // TODO: impementacja w predator eating
         needs_ = IS_DANGERED;
     }
     else if(thirst_<criticalThirst || behaviourState_ == DRINKING){
@@ -323,4 +340,11 @@ void Dinosaur::makeADecision()
     else {
         needs_ = DONT_HAVE_ANY_NEEDS;
     }
+
+    if (needs_ != prevNeeds_) {
+        target_dino_ = nullptr;
+        target_ = nullptr;
+    }
+
+    prevNeeds_ = needs_;
 }

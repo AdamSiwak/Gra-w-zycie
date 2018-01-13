@@ -22,7 +22,8 @@ boost::shared_ptr<Predator> Predator::reproduce(Predator &pred)
 
 Dinosaur::behaviourStates Predator::eating()
 {
-    if(!target_dino_->getIsHiden()){
+
+    if (target_dino_.use_count() != 0 || !target_dino_->getIsHiden()) {
         if(hunger()<maxHunger()){
             hunger_+=10;
             if (target_dino_->hunger() <= 10) {
@@ -41,8 +42,8 @@ Dinosaur::behaviourStates Predator::eating()
             target_dino_ = nullptr;
             return FULL;
         }
-    }
-    else{
+    } else {
+        qDebug() << "USE COUNT == 0 - eating predator";
         return SERCH4EATING;
     }
 }
@@ -61,21 +62,32 @@ Dinosaur::behaviourStates Predator::findTheNearestEating()
 
 Dinosaur::behaviourStates Predator::go2eating()
 {
-    move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
-    if(*target_dino_->gui_->position_==*position_){
-        return EATING;
-    }
-    else{
-        return GO2EATING;
+    if (target_dino_.use_count() != 0) {
+        move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
+        if(*target_dino_->gui_->position_==*position_){
+            return EATING;
+        }
+        else{
+            return GO2EATING;
+        }
+    } else {
+        qDebug() << "USE COUNT == 0 - go2eating predator";
+        return SERCH4EATING;
     }
 }
 
-void Predator::reproducing()
+Dinosaur::behaviourStates Predator::reproducing()
 {
-    hunger_ -= 0.3*maxHunger();
-    thirst_ -= 0.3*maxThirst;
-    Predator_sharedPtr newDino = reproduce(dynamic_cast<Predator&>(*target_dino_));
-    Map::getInstance()->addNewPredator(static_cast<Dinosaur_sharedPtr>(newDino));
+    if (target_dino_.use_count() != 0) {
+        hunger_ -= 0.3*maxHunger();
+        thirst_ -= 0.3*maxThirst;
+        Predator_sharedPtr newDino = reproduce(dynamic_cast<Predator&>(*target_dino_));
+        Map::getInstance()->addNewPredator(static_cast<Dinosaur_sharedPtr>(newDino));
+        return REPRODUCING;
+    } else {
+        qDebug() << "USE COUNT == 0 - reproducing predator";
+        return SERCH4PARTNER;
+    }
 }
 
 Dinosaur::behaviourStates Predator::findPartner()

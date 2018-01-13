@@ -59,7 +59,7 @@ private:
     int chartUpdateCounter;
     static const int chartUpdateValue = (1000)/TimerPeriod; // ms
 
-    Object_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
+    Object_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr>& object);
     Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge = false, bool ifIsNotHiden = false);
 
 public:

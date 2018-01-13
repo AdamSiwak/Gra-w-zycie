@@ -18,7 +18,7 @@ public:
     virtual Dinosaur::behaviourStates  findTheNearestEating();
     virtual Dinosaur::behaviourStates go2eating();
     virtual Dinosaur::behaviourStates findPartner();
-    virtual void reproducing();
+    virtual Dinosaur::behaviourStates reproducing();
 
     boost::shared_ptr<Prey> reproduce(Prey &prey);
     bool is_being_chased() { return isChased_; }

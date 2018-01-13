@@ -16,10 +16,10 @@ public:
     boost::shared_ptr<Predator> reproduce(Predator &pred);
     void attack(Prey& prey);
     virtual Dinosaur::behaviourStates eating();
-    virtual Dinosaur::behaviourStates  findTheNearestEating();
+    virtual Dinosaur::behaviourStates findTheNearestEating();
     virtual Dinosaur::behaviourStates go2eating();
     virtual Dinosaur::behaviourStates findPartner();
-    virtual void reproducing();
+    virtual Dinosaur::behaviourStates reproducing();
 
 private:
     virtual void createGUIElement();
