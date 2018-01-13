@@ -6,18 +6,24 @@
 
 
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
-    // TODO: zmienic kolejnosc w liscie inicjalizacyjnej
-    // TODO: ograniczenia jednych parametrów względem innych
+
     behaviourState_ = OTHER;
-    speed_=rand() % (maxSpeed - minSpeed) + minSpeed;
+    speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
     currentDestination_ = new Coordinates();
     currentDestination_->setRandomCoordiantes();
 }
 
-
-//Dinosaur::Dinosaur() {
-
-//}
+Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
+{
+    behaviourState_ = OTHER;
+    age_ = 0;
+    speed_ = (parent1.speed_ + parent2.speed_)/2;
+    maxHunger_ = (parent1.maxHunger_ + parent2.maxHunger_)/2;
+    hunger_ = rand()%maxHunger();
+    thirst_ = rand()%maxThirst;
+    currentDestination_ = new Coordinates();
+    currentDestination_->setRandomCoordiantes();
+}
 
 void Dinosaur::stepRight(){
     if(!gui_->isSelected()){

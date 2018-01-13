@@ -21,6 +21,7 @@ protected:
 
 public:
     Dinosaur();
+    Dinosaur(Dinosaur& parent1, Dinosaur& parent2);
     virtual ~Dinosaur() {}
     virtual void accept(Visitor& v){}
 

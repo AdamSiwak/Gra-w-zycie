@@ -21,13 +21,8 @@ public:
     virtual Dinosaur::behaviourStates findPartner();
     virtual void reproducing();
 
-    int attack() { return attack_; }
-
 private:
     virtual void createGUIElement();
-
-    int attack_;
-    int loudness_;
 
     const QString picture_ = "dinosaur-brown.png";
 };

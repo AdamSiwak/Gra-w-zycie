@@ -15,8 +15,6 @@ void StatisticsVisitor::TimeMomentBegin() {
     averageHunger_ = 0;
     averageThirst_ = 0;
     alive_ = 0;
-    averageAttack_ = 0;
-    averageDefence_ = 0;
 }
 
 void StatisticsVisitor::TimeMomentEnd() {
@@ -25,7 +23,6 @@ void StatisticsVisitor::TimeMomentEnd() {
     averageMaxHunger_ /= alive_;
     averageHunger_ /= alive_;
     averageThirst_ /= alive_;
-    averageAttack_ /= alive_;
 
     chart_->addData(averageAge_, averageSpeed_, averageMaxHunger_, averageHunger_, averageThirst_, alive_);
 
@@ -35,7 +32,6 @@ void StatisticsVisitor::TimeMomentEnd() {
     parameters_ += "average max hunger: " + QString::number(averageMaxHunger_) + "\n";
     parameters_ += "average hunger: " + QString::number(averageHunger_) + "\n";
     parameters_ += "average thirst: " + QString::number(averageThirst_) + "\n";
-    parameters_ += "average attack: " + QString::number(averageAttack_) + "\n";
 }
 
 void StatisticsVisitor::visit(Predator& predator) {
@@ -45,7 +41,6 @@ void StatisticsVisitor::visit(Predator& predator) {
     averageHunger_ += predator.hunger();
     averageThirst_ += predator.thirst();
     alive_ += 1;
-    averageAttack_ += predator.attack();
 }
 
 void StatisticsVisitor::visit(Prey& prey) {
@@ -55,5 +50,4 @@ void StatisticsVisitor::visit(Prey& prey) {
     averageHunger_ += prey.hunger();
     averageThirst_ += prey.thirst();
     alive_ += 1;
-    averageDefence_ += prey.defence();
 }
