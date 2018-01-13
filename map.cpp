@@ -170,13 +170,13 @@ void Map::deleteAllObjects()
 
 Lake_sharedPtr Map::getNearestLake(Dinosaur& dino)
 {
-    Object_sharedPtr object = getNearestObject(dino,static_cast<std::vector<ObjectGUI_sharedPtr>>(getLakes()));
+    Object_sharedPtr object = getNearestObject(dino,getLakes());
     return boost::dynamic_pointer_cast<Lake>(object);
 }
 
 Tree_sharedPtr Map::getNearestTree(Dinosaur& dino)
 {
-    Object_sharedPtr object = getNearestObject(dino,(getTrees()));
+    Object_sharedPtr object = getNearestObject(dino,getTrees());
     return boost::dynamic_pointer_cast<Tree>(object);
 }
 
@@ -208,7 +208,7 @@ Prey_sharedPtr Map::getNearestReproductivePrey(Dinosaur &dino)
     return boost::dynamic_pointer_cast<Prey>(getNearestObject(dino, getPreys(), true));
 }
 
-Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> objects)
+Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr>& objects)
 {
     ObjectGUI_sharedPtr object;
     int dinoX = dino.gui_->position_->getRealXcoordinate();
@@ -219,7 +219,6 @@ Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sha
 
     int distance = 0;
     int minDistance = __INT_MAX__;
-
 
     for (auto it = objects.begin(); it != objects.end(); ++it) {
 
@@ -237,7 +236,7 @@ Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sha
     return object;
 }
 
-Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge)
+Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr>& dinosurs, bool inReproductiveAge)
 {
     Dinosaur_sharedPtr dinosur = nullptr;
     int dinoX = dino.gui_->position_->getRealXcoordinate();
@@ -300,14 +299,22 @@ void Map::timerCallBack(){
     std::vector<Dinosaur_sharedPtr> preys_cpy = preys_;
     for (auto it = preys_cpy.begin(); it != preys_cpy.end(); ++it) {
         (*it)->makeADecision();
+        try{
         (*it)->behaviour();
+        } catch(...){
+            qDebug() << "error";
+        }
         if (chartUpdateCounter >= chartUpdateValue) {
             (*it)->accept(*preysStatistics_);
         }
     }
     for (auto it = predators_cpy.begin(); it != predators_cpy.end(); ++it) {
         (*it)->makeADecision();
+        try{
         (*it)->behaviour();
+        } catch(...){
+            qDebug() << "error";
+        }
         if (chartUpdateCounter >= chartUpdateValue) {
             (*it)->accept(*predatorsStatistics_);
         }

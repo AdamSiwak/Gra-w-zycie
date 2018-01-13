@@ -10,9 +10,13 @@ Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-m
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
+    prevBehaviourState_ = OTHER;
+    prevNeeds_ = DONT_HAVE_ANY_NEEDS;
+    needs_ = DONT_HAVE_ANY_NEEDS;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
     currentDestination_ = new Coordinates();
     currentDestination_->setRandomCoordiantes();
+
 }
 
 Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
@@ -154,7 +158,7 @@ Dinosaur::behaviourStates Dinosaur::drinking()
 {
     gui_->beginDrinking();
     if(thirst()<0.8*maxThirst){
-        thirst_+=10;
+        thirst_+=100;
 
         return DRINKING;
     }
@@ -174,16 +178,19 @@ void Dinosaur::behaviour()
     case WANT2DRINK:
         switch (behaviourState_) {
         case SERCH4LAKE:
+//            qDebug() << "SERCH4LAKE";
             target_ = Map::getInstance()->getNearestLake(*this);
             behaviourState_ = GO2LAKE;
             break;
         case GO2LAKE:
+//            qDebug() << "GO2LAKE";
             move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
             if(*target_->position_==*position_){
                 behaviourState_ = DRINKING;
             }
             break;
         case DRINKING:
+//            qDebug() << "DRINKING";
             behaviourState_ = drinking();
             break;
         case DRUNK:
@@ -197,15 +204,19 @@ void Dinosaur::behaviour()
     case WANT2EAT:
         switch (behaviourState_){
             case SERCH4EATING:
+//                qDebug() << "SERCH4EATING";
                 behaviourState_ = findTheNearestEating();
             break;
             case GO2EATING:
+//                qDebug() << "GO2EATING";
                 behaviourState_ = go2eating();
                 break;
             case EATING:
+//                qDebug() << "EATING";
                 behaviourState_ = eating();
                 break;
             case FULL:
+//                qDebug() << "FULL";
                 if(target_dino_!=nullptr){
                     target_dino_->setChased(false);
                     target_dino_->setIsDevoured(false);
@@ -220,16 +231,19 @@ void Dinosaur::behaviour()
     case WANT2REPRODUCE:
         switch (behaviourState_) {
             case SERCH4PARTNER:
+//                qDebug() << "SERCH4PARTNER";
                 behaviourState_ = findPartner();
                 break;
             case GO2PARTNER:
+//                qDebug() << "GO2PARTNER";
                 move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
                 if(*target_dino_->position_ == *position_){
                     behaviourState_ = REPRODUCING;
                 }
                 break;
             case REPRODUCING:
-                reproducing();
+//                qDebug() << "REPRODUCING";
+                behaviourState_ = reproducing();
                 target_dino_ = nullptr;
                 break;
             default:
@@ -239,23 +253,27 @@ void Dinosaur::behaviour()
     case IS_DANGERED:
         switch (behaviourState_) {
             case SERCH4CAVE:
+//                qDebug() << "SERCH4CAVE";
                 findCave();
                 break;
             case GO2CAVE:
+//                qDebug() << "GO2CAVE";
                 move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
                 if(*target_->position_ == *position_){
                     behaviourState_ = HIDING;
                 }
                 break;
             case IS_DEVOURED:
+//                qDebug() << "IS_DEVOURED";
                 isDevoured();
                 break;
             default:
-//                behaviourState_=SERCH4CAVE;
+                behaviourState_=SERCH4CAVE;
                 break;
             }
             break;
     case DONT_HAVE_ANY_NEEDS:
+//        qDebug() << "DONT_HAVE_ANY_NEEDS";
         if(*currentDestination_== *gui_->position_){
             drawLotsPosition();
         }
@@ -305,4 +323,11 @@ void Dinosaur::makeADecision()
     else {
         needs_ = DONT_HAVE_ANY_NEEDS;
     }
+
+    if (needs_ != prevNeeds_) {
+        target_dino_ = nullptr;
+        target_ = nullptr;
+    }
+
+    prevNeeds_ = needs_;
 }

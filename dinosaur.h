@@ -81,8 +81,8 @@ public:
 
 protected:
     Coordinates* currentDestination_;
-    behaviourStates behaviourState_;
-    dinosaurNeeds needs_;
+    behaviourStates behaviourState_, prevBehaviourState_;
+    dinosaurNeeds needs_, prevNeeds_;
     virtual void createGUIElement() = 0;
 
     void drawLotsPosition();
@@ -91,7 +91,7 @@ protected:
     virtual behaviourStates findTheNearestEating() = 0;
     virtual behaviourStates go2eating() = 0;
     virtual behaviourStates findPartner() = 0;
-    virtual void reproducing() = 0;
+    virtual behaviourStates reproducing() = 0;
 
     void makeAdecision();
     void energyBurning();

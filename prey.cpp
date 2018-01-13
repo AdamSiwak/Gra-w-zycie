@@ -22,7 +22,7 @@ void Prey::accept(Visitor &v) {
 Dinosaur::behaviourStates Prey::eating()
 {
     if(hunger()<maxHunger()){
-        hunger_+=10;
+        hunger_+=100;
         return EATING;
     }
     else{
@@ -58,12 +58,18 @@ Dinosaur::behaviourStates Prey::findPartner()
     }
 }
 
-void Prey::reproducing()
+Dinosaur::behaviourStates Prey::reproducing()
 {
-    hunger_ -= 0.3*maxHunger();
-    thirst_ -= 0.3*maxThirst;
-    Prey_sharedPtr newDino = reproduce(dynamic_cast<Prey&>(*target_dino_));
-    Map::getInstance()->addNewPrey(static_cast<Dinosaur_sharedPtr>(newDino));
+    if (target_dino_.use_count() != 0) {
+        hunger_ -= 0.3*maxHunger();
+        thirst_ -= 0.3*maxThirst;
+        Prey_sharedPtr newDino = reproduce(dynamic_cast<Prey&>(*target_dino_));
+        Map::getInstance()->addNewPrey(static_cast<Dinosaur_sharedPtr>(newDino));
+        return REPRODUCING;
+    } else {
+        qDebug() << "USE COUNT == 0 - reproducing prey" + QString::number(maxHunger_);
+        return SERCH4PARTNER;
+    }
 }
 
 boost::shared_ptr<Prey> Prey::reproduce(Prey& prey)
