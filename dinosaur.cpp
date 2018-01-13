@@ -7,6 +7,8 @@
 
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
 
+    isDevoured_ = false;
+    cased_ = false;
     behaviourState_ = OTHER;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
     currentDestination_ = new Coordinates();
@@ -248,6 +250,7 @@ void Dinosaur::behaviour()
                 isDevoured();
                 break;
             default:
+                behaviourState_=SERCH4CAVE;
                 break;
             }
             break;
@@ -286,9 +289,9 @@ void Dinosaur::makeADecision()
     if(age()>maxAge){
         needs_ = IS2OLD;
     }
-    else if(cased() || getIsDevoured()){ // TODO: impementacja w predator eating
-        needs_ = IS_DANGERED;
-    }
+//    else if(cased() || getIsDevoured()){ // TODO: impementacja w predator eating
+//        needs_ = IS_DANGERED;
+//    }
     else if(thirst()<criticalThirst || behaviourState_ == DRINKING){
         needs_ = WANT2DRINK;
     }

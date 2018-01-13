@@ -279,17 +279,16 @@ void Map::timerCallBack(){
         preysStatistics_->TimeMomentBegin();
         predatorsStatistics_->TimeMomentBegin();
     }
-
-    for (auto it = preys_.begin(); it != preys_.end(); ++it) {
-//        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+    std::vector<Dinosaur_sharedPtr> predators_cpy = predators_;
+    std::vector<Dinosaur_sharedPtr> preys_cpy = preys_;
+    for (auto it = preys_cpy.begin(); it != preys_cpy.end(); ++it) {
         (*it)->makeADecision();
         (*it)->behaviour();
         if (chartUpdateCounter >= chartUpdateValue) {
             (*it)->accept(*preysStatistics_);
         }
     }
-    for (auto it = predators_.begin(); it != predators_.end(); ++it) {
-//        (*it)->move2position((*it)->currentDestination_->getXcoordinate(),(*it)->currentDestination_->getXcoordinate());
+    for (auto it = predators_cpy.begin(); it != predators_cpy.end(); ++it) {
         (*it)->makeADecision();
         (*it)->behaviour();
         if (chartUpdateCounter >= chartUpdateValue) {

@@ -101,8 +101,8 @@ protected:
     void showMyStatistics();
 
     int speed_;
-    int maxHunger_;
     int age_;
+    int maxHunger_;
     int hunger_;
     int thirst_;
 
