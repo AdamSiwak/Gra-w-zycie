@@ -4,11 +4,13 @@
 
 Prey::Prey(): Dinosaur(), isChased_(false) {
     gui_ = DinosaurGUI_sharedPtr(new DinosaurGUI(picture_,0.15,this));
+    setIsHiden(false);
 
 }
 
 Prey::Prey(Prey& parent1, Prey& parent2):Dinosaur(parent1, parent2), isChased_(false) {
     gui_ = DinosaurGUI_sharedPtr(new DinosaurGUI(picture_,0.15,this));
+    setIsHiden(false);
 }
 
 void Prey::createGUIElement() {
@@ -67,6 +69,10 @@ Dinosaur::behaviourStates Prey::reproducing()
         Map::getInstance()->addNewPrey(static_cast<Dinosaur_sharedPtr>(newDino));
         return REPRODUCING;
     } else {
+        if (*currentDestination_ == *position_) {
+            drawLotsPosition();
+        }
+        move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
         qDebug() << "USE COUNT == 0 - reproducing prey" + QString::number(maxHunger_);
         return SERCH4PARTNER;
     }

@@ -7,7 +7,6 @@
 
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
 
-    setIsHiden(false);
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
@@ -17,12 +16,10 @@ Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-m
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
     currentDestination_ = Coordinates_sharedPtr(new Coordinates()); // inicjowane z DinosaurGUI
     currentDestination_->setRandomCoordiantes();
-
 }
 
 Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
 {
-    setIsHiden(false);
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
@@ -77,16 +74,21 @@ void Dinosaur::move2position(int x, int y)
 
 void Dinosaur::showMyStatistics()
 {
-
-    if (gui_->isSelected()){
-        gui_->cloud_->writeText(toString());
-        gui_->cloud_->setX(gui_->x());
-        gui_->cloud_->setY(gui_->y());
-        gui_->cloud_->setVisible(true);
-    }
-    else{
-        gui_->cloud_->setVisible(false);
-    }
+       gui_->cloud_->writeText("behaviourStates: " + QString::number(behaviourState_) + ",dinosaurNeeds: " + QString::number(needs_)
+                               + ", hiden: "+ QString::number(getIsHiden()) + ", eat: " + QString::number(hunger_));
+       gui_->cloud_->setX(gui_->x());
+       gui_->cloud_->setY(gui_->y());
+       gui_->cloud_->setVisible(true);
+//    if (gui_->isSelected()){
+//        //qDebug()<<toString();
+//        gui_->cloud_->writeText(toString());
+//        gui_->cloud_->setX(gui_->x());
+//        gui_->cloud_->setY(gui_->y());
+//        gui_->cloud_->setVisible(true);
+//    }
+//    else{
+//        gui_->cloud_->setVisible(false);
+//    }
 }
 
 bool Dinosaur::getIsHiden() const
@@ -96,6 +98,12 @@ bool Dinosaur::getIsHiden() const
 
 void Dinosaur::setIsHiden(bool isHiden)
 {
+    if(isHiden){
+        gui_->setOpacity(0.5);
+    }
+    else{
+        gui_->setOpacity(1);
+    }
     isHiden_ = isHiden;
 }
 
@@ -325,7 +333,7 @@ void Dinosaur::makeADecision()
     if(age_>maxAge_){
         needs_ = IS2OLD;
     }
-    else if(chased() || getIsDevoured() || getIsHiden()){ // TODO: impementacja w predator eating
+    else if(chased() || getIsDevoured()){ // TODO: impementacja w predator eating
         needs_ = IS_DANGERED;
     }
     else if(thirst_<criticalThirst || behaviourState_ == DRINKING){

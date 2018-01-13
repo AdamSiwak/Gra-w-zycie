@@ -4,10 +4,12 @@
 
 Predator::Predator() : Dinosaur() {
     gui_ = DinosaurGUI_sharedPtr(new DinosaurGUI(picture_,0.15,this));
+    setIsHiden(false);
 }
 
 Predator::Predator(Predator& parent1, Predator& parent2):Dinosaur(parent1, parent2) {
     gui_ = DinosaurGUI_sharedPtr(new DinosaurGUI(picture_,0.15,this));
+    setIsHiden(false);
 }
 
 void Predator::accept(Visitor &v) {
@@ -23,7 +25,7 @@ boost::shared_ptr<Predator> Predator::reproduce(Predator &pred)
 Dinosaur::behaviourStates Predator::eating()
 {
 
-    if (target_dino_.use_count() != 0 || !target_dino_->getIsHiden()) {
+    if (target_dino_.use_count() != 0 && !target_dino_->getIsHiden()) {
         if(hunger()<maxHunger()){
             hunger_+=10;
             if (target_dino_->hunger() <= 10) {
@@ -43,6 +45,10 @@ Dinosaur::behaviourStates Predator::eating()
             return FULL;
         }
     } else {
+        if (*currentDestination_ == *position_) {
+            drawLotsPosition();
+        }
+        move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
         qDebug() << "USE COUNT == 0 - eating predator";
         return SERCH4EATING;
     }
@@ -50,19 +56,23 @@ Dinosaur::behaviourStates Predator::eating()
 
 Dinosaur::behaviourStates Predator::findTheNearestEating()
 {
-    target_dino_ = Map::getInstance()->getNearestNotHidenPrey(*this);
-    if (target_dino_ == nullptr) {
-        return SERCH4EATING;
-    }else{
-        target_dino_->setChased(true);
-        return GO2EATING;
-    }
+   target_dino_ = Map::getInstance()->getNearestPrey(*this);
+   if (target_dino_ == nullptr) {
+       if (*currentDestination_ == *position_) {
+           drawLotsPosition();
+       }
+       move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
 
+       return SERCH4EATING;
+   }else{
+       target_dino_->setChased(true);
+       return GO2EATING;
+   }
 }
 
 Dinosaur::behaviourStates Predator::go2eating()
 {
-    if (target_dino_.use_count() != 0) {
+    if (target_dino_.use_count() != 0 && !target_dino_->getIsHiden()) {
         move2position(target_dino_->gui_->position_->getXcoordinate(),target_dino_->gui_->position_->getYcoordinate());
         if(*target_dino_->gui_->position_==*position_){
             return EATING;
@@ -71,6 +81,10 @@ Dinosaur::behaviourStates Predator::go2eating()
             return GO2EATING;
         }
     } else {
+        if (*currentDestination_ == *position_) {
+            drawLotsPosition();
+        }
+        move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
         qDebug() << "USE COUNT == 0 - go2eating predator";
         return SERCH4EATING;
     }
@@ -85,6 +99,10 @@ Dinosaur::behaviourStates Predator::reproducing()
         Map::getInstance()->addNewPredator(static_cast<Dinosaur_sharedPtr>(newDino));
         return REPRODUCING;
     } else {
+        if (*currentDestination_ == *position_) {
+            drawLotsPosition();
+        }
+        move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
         qDebug() << "USE COUNT == 0 - reproducing predator";
         return SERCH4PARTNER;
     }
