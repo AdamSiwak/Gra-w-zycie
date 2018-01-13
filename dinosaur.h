@@ -49,6 +49,9 @@ public:
     int hunger() const { return hunger_; }
     int maxHunger() const { return maxHunger_; }
     int thirst() const { return thirst_; }
+    int maxAge() const { return maxAge_; }
+
+    void setHunger(int hunger) { hunger_ = hunger; }
 
     void stepRight();
     void stepLeft();
@@ -62,8 +65,8 @@ public:
 
     QString toString();
 
-    bool cased() const;
-    void setCased(bool cased);
+    bool chased() const;
+    void setChased(bool chased);
 
     behaviourStates behaviourState() const;
     void setBehaviourState(const behaviourStates &behaviourState);
@@ -106,7 +109,7 @@ protected:
     int hunger_;
     int thirst_;
 
-    bool cased_;
+    bool chased_;
     bool isDevoured_;
 
     Object_sharedPtr target_;
@@ -121,8 +124,8 @@ protected:
     static const int maxThirst = 1 * multiplier;
     static const int criticalThirst = 0.5 * maxThirst;
     static const int criticalHunger = 0.5 * maxMaxHunger;
-    static const int maxAge = 100 * multiplier;
-    static const int reproductiveAge = 0.0005 * maxAge;
+    static const int maxAge_ = 100 * multiplier;
+    static const int reproductiveAge = 0.0005 * maxAge_;
 };
 
 

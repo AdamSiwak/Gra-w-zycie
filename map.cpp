@@ -274,6 +274,21 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 void Map::timerCallBack(){
 //    while(!predators_.empty())
 //        predators_.pop_back();
+
+    for(auto it = preys_.begin(); it != preys_.end(); /*nothing*/) {
+        if(((*it)->hunger()) <= 0 || ((*it)->age() >= (*it)->maxAge())) {
+            it = preys_.erase(it);
+        }
+        else ++it;
+    }
+
+    for(auto it = predators_.begin(); it != predators_.end(); /*nothing*/) {
+        if(((*it)->hunger()) <= 0 || ((*it)->age() >= (*it)->maxAge())) {
+            it = predators_.erase(it);
+        }
+        else ++it;
+    }
+
     ++chartUpdateCounter;
     if (chartUpdateCounter >= chartUpdateValue) {
         preysStatistics_->TimeMomentBegin();

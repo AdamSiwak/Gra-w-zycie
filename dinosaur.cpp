@@ -8,7 +8,7 @@
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
 
     isDevoured_ = false;
-    cased_ = false;
+    chased_ = false;
     behaviourState_ = OTHER;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
     currentDestination_ = new Coordinates();
@@ -17,6 +17,8 @@ Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-m
 
 Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
 {
+    isDevoured_ = false;
+    chased_ = false;
     behaviourState_ = OTHER;
     age_ = 0;
     speed_ = (parent1.speed_ + parent2.speed_)/2;
@@ -111,14 +113,14 @@ int Dinosaur::getReproductiveAge()
     return reproductiveAge;
 }
 
-bool Dinosaur::cased() const
+bool Dinosaur::chased() const
 {
-    return cased_;
+    return chased_;
 }
 
-void Dinosaur::setCased(bool cased)
+void Dinosaur::setChased(bool chased)
 {
-    cased_ = cased;
+    chased_ = chased;
 }
 
 Dinosaur::behaviourStates Dinosaur::behaviourState() const
@@ -208,8 +210,9 @@ void Dinosaur::behaviour()
                 break;
             case FULL:
                 if(target_dino_!=nullptr){
-                    target_dino_->setCased(false);
+                    target_dino_->setChased(false);
                     target_dino_->setIsDevoured(false);
+                    target_dino_ = nullptr;
                 }
                 break;
             default:
@@ -230,6 +233,7 @@ void Dinosaur::behaviour()
                 break;
             case REPRODUCING:
                 reproducing();
+                target_dino_ = nullptr;
                 break;
             default:
                 behaviourState_ = SERCH4PARTNER;
@@ -286,19 +290,19 @@ void Dinosaur::toDie()
 
 void Dinosaur::makeADecision()
 {
-    if(age()>maxAge){
+    if(age_>maxAge_){
         needs_ = IS2OLD;
     }
-//    else if(cased() || getIsDevoured()){ // TODO: impementacja w predator eating
+//    else if(chased() || getIsDevoured()){ // TODO: impementacja w predator eating
 //        needs_ = IS_DANGERED;
 //    }
-    else if(thirst()<criticalThirst || behaviourState_ == DRINKING){
+    else if(thirst_<criticalThirst || behaviourState_ == DRINKING){
         needs_ = WANT2DRINK;
     }
-    else if(hunger()<criticalHunger || behaviourState_ == EATING){
+    else if(hunger_<criticalHunger || behaviourState_ == EATING){
         needs_ = WANT2EAT;
     }
-    else if(age()>reproductiveAge || behaviourState_ == REPRODUCING){
+    else if(age_>reproductiveAge || behaviourState_ == REPRODUCING){
         needs_ = WANT2REPRODUCE;
     }
     else {

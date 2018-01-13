@@ -24,6 +24,11 @@ Dinosaur::behaviourStates Predator::eating()
 {
     if(hunger()<maxHunger()){
         hunger_+=10;
+        if (target_dino_->hunger() <= 10) {
+            target_dino_->setHunger(0);
+        } else {
+            target_dino_->setHunger(target_dino_->hunger() - 10);
+        }
         target_dino_->setBehaviourState(IS_DEVOURED);
         return EATING;
     }
@@ -40,7 +45,7 @@ Dinosaur::behaviourStates Predator::findTheNearestEating()
         hunger_--;
         return SERCH4EATING;
     }else{
-        target_dino_->setCased(true);
+        target_dino_->setChased(true);
         return GO2EATING;
     }
 
