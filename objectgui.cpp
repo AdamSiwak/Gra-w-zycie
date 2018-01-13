@@ -6,16 +6,16 @@
 
 ObjectGUI::ObjectGUI(QString pictureName, const qreal scale)
 {
-    QPixmap *pixmap = new QPixmap();
+    pixmap_ = QPixmap_sharedPtr(new QPixmap());
 
     setMySkale(scale);
-    pixmap->load(":/pictures/"+pictureName);
+    pixmap_->load(":/pictures/"+pictureName);
 
-    this->setPixmap(*pixmap);
+    this->setPixmap(*pixmap_);
 
     QGraphicsItem::setScale(scale);
 
-    position_ = new Coordinates();
+    position_ = Coordinates_sharedPtr(new Coordinates());
     position_->setRandomCoordiantes();
     setPos(x()+position_->getXcoordinate(),y()+position_->getYcoordinate());
 

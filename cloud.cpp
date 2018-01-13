@@ -4,7 +4,7 @@
 
 Cloud::Cloud(QString picture, const qreal scale):ObjectGUI(picture, scale)
 {
-    pixmap_ = new QPixmap();
+    pixmap_ = QPixmap_sharedPtr(new QPixmap());
     setMySkale(scale);
     pixmap_->load(":/pictures/"+picture);
     QGraphicsItem::setScale(scale);
@@ -28,7 +28,7 @@ void Cloud::writeText(QString s){
         }
     }
 
-    QPainter painter( pixmap_ );
+    QPainter painter(&(*pixmap_));
     painter.setPen( Qt::black );
     painter.setFont(QFont("Times", 40, QFont::Bold));
 

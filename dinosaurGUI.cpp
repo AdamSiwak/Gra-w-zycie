@@ -24,7 +24,7 @@ DinosaurGUI::DinosaurGUI(QString dinoName, const qreal scale, Dinosaur* parent):
         dinoSound = Sound_sharedPtr(new Sound(PREDATOR_SOUND));
     }
 
-    cloud_ = new Cloud("cloud.png",0.3);
+    cloud_ = Cloud_sharedPtr(new Cloud("cloud.png",0.3));
     cloud_->setVisible(false);
 }
 

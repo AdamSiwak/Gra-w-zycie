@@ -9,6 +9,9 @@
 
 #include "object.h"
 
+
+typedef boost::shared_ptr<QPixmap> QPixmap_sharedPtr;
+
 class ObjectGUI : public Object, public QGraphicsPixmapItem
 {
 public:
@@ -19,6 +22,7 @@ public:
     void setMySkale(const qreal scale);
 private:
     qreal scale_;
+    QPixmap_sharedPtr pixmap_;
 };
 
 typedef boost::shared_ptr<ObjectGUI> ObjectGUI_sharedPtr;

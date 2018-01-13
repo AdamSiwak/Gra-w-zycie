@@ -83,7 +83,7 @@ public:
     void setIsHiden(bool isHiden);
 
 protected:
-    Coordinates* currentDestination_;
+    Coordinates_sharedPtr currentDestination_;
     behaviourStates behaviourState_, prevBehaviourState_;
     dinosaurNeeds needs_, prevNeeds_;
     virtual void createGUIElement() = 0;

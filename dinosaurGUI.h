@@ -36,7 +36,7 @@ public:
     void beginDrinking();
     void endDrinking();
 
-    Cloud* cloud_;
+    Cloud_sharedPtr cloud_;
 private:
     Sound_sharedPtr dinoSound;
 
