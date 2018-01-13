@@ -61,7 +61,7 @@ void Map::startAnimation(){
     createTrees(2);
     createCaves(2);
     createPredatorsPopulation(3);
-    createPreysPopulation(3);
+    createPreysPopulation(6);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
@@ -208,6 +208,11 @@ Prey_sharedPtr Map::getNearestReproductivePrey(Dinosaur &dino)
     return boost::dynamic_pointer_cast<Prey>(getNearestObject(dino, getPreys(), true));
 }
 
+Prey_sharedPtr Map::getNearestNotHidenPrey(Dinosaur &dino)
+{
+    return boost::dynamic_pointer_cast<Prey>(getNearestObject(dino, getPreys(), false, true));
+}
+
 Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> objects)
 {
     ObjectGUI_sharedPtr object;
@@ -237,7 +242,7 @@ Object_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sha
     return object;
 }
 
-Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge)
+Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge, bool ifIsNotHiden)
 {
     Dinosaur_sharedPtr dinosur = nullptr;
     int dinoX = dino.gui_->position_->getRealXcoordinate();
@@ -265,6 +270,11 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
                     dinosur = (*it);
                 }
             }
+            if (ifIsNotHiden){
+                if(!(*it)->Dinosaur::getIsHiden()){
+                    dinosur = (*it);
+                }
+            }
             else{
                 dinosur = (*it);
             }
@@ -274,8 +284,6 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 }
 
 void Map::timerCallBack(){
-//    while(!predators_.empty())
-//        predators_.pop_back();
 
     for(auto it = preys_.begin(); it != preys_.end(); /*nothing*/) {
         if(((*it)->hunger()) <= 0 || ((*it)->age() >= (*it)->maxAge())) {

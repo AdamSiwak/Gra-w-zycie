@@ -60,7 +60,7 @@ private:
     static const int chartUpdateValue = (1000)/TimerPeriod; // ms
 
     Object_sharedPtr getNearestObject(Dinosaur& dino, std::vector<ObjectGUI_sharedPtr> object);
-    Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge = false);
+    Dinosaur_sharedPtr getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sharedPtr> dinosurs, bool inReproductiveAge = false, bool ifIsNotHiden = false);
 
 public:
     static Map* getInstance(){
@@ -101,6 +101,8 @@ public:
 
     Predator_sharedPtr getNearestReproductivePredator(Dinosaur& dino);
     Prey_sharedPtr getNearestReproductivePrey(Dinosaur& dino);
+
+    Prey_sharedPtr getNearestNotHidenPrey(Dinosaur& dino);
 
     std::vector<ObjectGUI_sharedPtr>& getLakes(){return lakes_;}
     std::vector<ObjectGUI_sharedPtr>& getTrees(){return trees_;}

@@ -7,6 +7,7 @@
 
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
 
+    setIsHiden(false);
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
@@ -17,6 +18,7 @@ Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-m
 
 Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
 {
+    setIsHiden(false);
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
@@ -52,6 +54,7 @@ void Dinosaur::stepDown(){
 
 void Dinosaur::move2position(int x, int y)
 {
+    setIsHiden(false);
     for(int i=0; i<speed(); ++i){
         if (x<gui_->position_->getXcoordinate()){
             stepLeft();
@@ -81,6 +84,16 @@ void Dinosaur::showMyStatistics()
     else{
         gui_->cloud_->setVisible(false);
     }
+}
+
+bool Dinosaur::getIsHiden() const
+{
+    return isHiden_;
+}
+
+void Dinosaur::setIsHiden(bool isHiden)
+{
+    isHiden_ = isHiden;
 }
 
 bool Dinosaur::getIsDevoured() const
@@ -153,8 +166,8 @@ Dinosaur::behaviourStates Dinosaur::eating()
 Dinosaur::behaviourStates Dinosaur::drinking()
 {
     gui_->beginDrinking();
-    if(thirst()<0.8*maxThirst){
-        thirst_+=10;
+    if(thirst()<maxThirst){
+        thirst_+=100;
 
         return DRINKING;
     }
@@ -240,18 +253,23 @@ void Dinosaur::behaviour()
         switch (behaviourState_) {
             case SERCH4CAVE:
                 findCave();
+                behaviourState_= GO2CAVE;
                 break;
             case GO2CAVE:
                 move2position(target_->position_->getXcoordinate(),target_->position_->getYcoordinate());
                 if(*target_->position_ == *position_){
                     behaviourState_ = HIDING;
+                    setIsHiden(true);
                 }
+                break;
+            case HIDING:
+                // do nothing
                 break;
             case IS_DEVOURED:
                 isDevoured();
                 break;
             default:
-//                behaviourState_=SERCH4CAVE;
+                behaviourState_=SERCH4CAVE;
                 break;
             }
             break;
@@ -290,9 +308,9 @@ void Dinosaur::makeADecision()
     if(age_>maxAge_){
         needs_ = IS2OLD;
     }
-//    else if(chased() || getIsDevoured()){ // TODO: impementacja w predator eating
-//        needs_ = IS_DANGERED;
-//    }
+    else if(chased() || getIsDevoured()){ // TODO: impementacja w predator eating
+        needs_ = IS_DANGERED;
+    }
     else if(thirst_<criticalThirst || behaviourState_ == DRINKING){
         needs_ = WANT2DRINK;
     }

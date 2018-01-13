@@ -79,6 +79,9 @@ public:
     void findCave();
     void isDevoured();
 
+    bool getIsHiden() const;
+    void setIsHiden(bool isHiden);
+
 protected:
     Coordinates* currentDestination_;
     behaviourStates behaviourState_;
@@ -111,6 +114,7 @@ protected:
 
     bool chased_;
     bool isDevoured_;
+    bool isHiden_;
 
     Object_sharedPtr target_;
     Dinosaur_sharedPtr target_dino_;
