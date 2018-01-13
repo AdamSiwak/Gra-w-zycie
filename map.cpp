@@ -70,6 +70,8 @@ void Map::startAnimation(){
     // backgroundSound_->play(); //TODO: uncomment
 
     timer_ = Timer_sharedPtr(new Timer(TimerPeriod));
+
+    srand(time(NULL));
 }
 
 void Map::stopAnimation(){

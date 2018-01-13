@@ -32,25 +32,21 @@ Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
 void Dinosaur::stepRight(){
     if(!gui_->isSelected()){
         gui_->stepRight();
-        energyBurning();
     }
 }
 void Dinosaur::stepLeft(){
     if(!gui_->isSelected()){
         gui_->stepLeft();
-        energyBurning();
     }
 }
 void Dinosaur::stepUp(){
     if(!gui_->isSelected()){
         gui_->stepUp();
-        energyBurning();
     }
 }
 void Dinosaur::stepDown(){
     if(!gui_->isSelected()){
         gui_->stepDown();
-        energyBurning();
     }
 }
 
@@ -170,7 +166,8 @@ Dinosaur::behaviourStates Dinosaur::drinking()
 void Dinosaur::behaviour()
 {
 
-    age_++;
+    ++age_;
+    energyBurning();
     showMyStatistics();
 
     switch (needs_) {
@@ -254,7 +251,7 @@ void Dinosaur::behaviour()
                 isDevoured();
                 break;
             default:
-                behaviourState_=SERCH4CAVE;
+//                behaviourState_=SERCH4CAVE;
                 break;
             }
             break;

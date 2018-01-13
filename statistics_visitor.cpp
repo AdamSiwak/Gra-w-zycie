@@ -18,11 +18,13 @@ void StatisticsVisitor::TimeMomentBegin() {
 }
 
 void StatisticsVisitor::TimeMomentEnd() {
-    averageSpeed_ /= alive_;
-    averageAge_ /= alive_;
-    averageMaxHunger_ /= alive_;
-    averageHunger_ /= alive_;
-    averageThirst_ /= alive_;
+    if (alive_ > 0) {
+        averageSpeed_ /= alive_;
+        averageAge_ /= alive_;
+        averageMaxHunger_ /= alive_;
+        averageHunger_ /= alive_;
+        averageThirst_ /= alive_;
+    }
 
     chart_->addData(averageAge_, averageSpeed_, averageMaxHunger_, averageHunger_, averageThirst_, alive_);
 

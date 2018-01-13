@@ -124,8 +124,8 @@ protected:
     static const int maxThirst = 1 * multiplier;
     static const int criticalThirst = 0.5 * maxThirst;
     static const int criticalHunger = 0.5 * maxMaxHunger;
-    static const int maxAge_ = 100 * multiplier;
-    static const int reproductiveAge = 0.0005 * maxAge_;
+    static const int maxAge_ = 1 * multiplier;
+    static const int reproductiveAge = 0.05 * maxAge_;
 };
 
 

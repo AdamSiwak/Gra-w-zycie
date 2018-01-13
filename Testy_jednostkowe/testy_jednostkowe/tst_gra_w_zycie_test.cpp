@@ -380,9 +380,7 @@ void Gra_w_zycie_test::dinosaur_test_reproduce()
     QVERIFY(child != nullptr);
     QCOMPARE(child->age(),0);
     QVERIFY(child->speed() != parent1.speed());
-    QCOMPARE(child->hunger(),0);
     QVERIFY(child->maxHunger() != parent1.maxHunger());
-    QCOMPARE(child->thirst(),0);
 }
 
 ///////////////////////////////////////////////////
