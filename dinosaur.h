@@ -20,9 +20,24 @@ class Dinosaur : public Object {
 protected:
 
 public:
+    /**
+     * @brief Dinosaur Constructor
+     */
     Dinosaur();
+    /**
+     * @brief Dinosaur Constructor
+     * @param parent1
+     * @param parent2
+     */
     Dinosaur(Dinosaur& parent1, Dinosaur& parent2);
+    /**
+     * @brief ~Dinosaur Destructor
+     */
     virtual ~Dinosaur() {}
+    /**
+     * @brief accept Visitor
+     * @param v
+     */
     virtual void accept(Visitor& v){Q_UNUSED(v);}
 
     enum behaviourStates{SERCH4LAKE, GO2LAKE, DRUNK, DRINKING,

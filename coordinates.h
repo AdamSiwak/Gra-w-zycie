@@ -4,11 +4,17 @@
 #include <cstdlib>
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
-
+/**
+ * @brief The Coordinates class
+ */
 class Coordinates
 {
 public:
+    /**
+     * @brief Coordinates constructor
+     */
     Coordinates();
+
     int getXcoordinate();
     void setXcoordinate(int xCoordinate);
     int getYcoordinate();
@@ -19,18 +25,31 @@ public:
     int getRealYcoordinate(){return yRealCoordinate_;}
     void setRealYcoordinate(int yCoordinate){yRealCoordinate_ = yCoordinate;}
 
+    /**
+     * @brief setRandomCoordiantes draw lots coordinates between -MAX_/2 and MAX_/2
+     */
     void setRandomCoordiantes();
 
+    /**
+     * @brief operator ==
+     * @param right
+     * @return true when coordinates are same and false otherwise
+     */
     bool operator==(const Coordinates& right){
         if( x_ == right.x_ && y_ == right.y_) return true;
         else return false;}
 
+    /**
+     * @brief operator !=
+     * @param right
+     * @return true when coordinates are different and false otherwise
+     */
     bool operator!=(const Coordinates&right){
         return !(*this==right);
     }
 
-    static const int MAX_X_=10000;
-    static const int MAX_Y_=10000;
+    static const int MAX_X_=2000;
+    static const int MAX_Y_=2000;
 
 private:
     int x_;

@@ -45,12 +45,32 @@ QT_CHARTS_USE_NAMESPACE
 typedef boost::shared_ptr<QSplineSeries> QSplineSeries_sharedPtr;
 typedef boost::shared_ptr<QValueAxis> QValueAxis_sharedPtr;
 
+/**
+ * @brief The Chart class
+ */
 class Chart: public QChart
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Chart constructor
+     * @param parent
+     * @param wFlags
+     */
     Chart(QGraphicsItem *parent = 0, Qt::WindowFlags wFlags = 0);
+    /**
+     * @brief ~Chart destructor
+     */
     virtual ~Chart() {}
+    /**
+     * @brief addData to chart
+     * @param age
+     * @param speed
+     * @param maxHunger
+     * @param hunger
+     * @param thirst
+     * @param alive
+     */
     void addData(int age, int speed, int maxHunger, int hunger, int thirst, int alive);
 
 private:
