@@ -32,6 +32,8 @@
 
 #include <QtCharts/QChart>
 #include <QtCore/QTimer>
+#include <boost/weak_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 QT_CHARTS_BEGIN_NAMESPACE
 class QSplineSeries;
@@ -40,6 +42,8 @@ QT_CHARTS_END_NAMESPACE
 
 QT_CHARTS_USE_NAMESPACE
 
+typedef boost::shared_ptr<QSplineSeries> QSplineSeries_sharedPtr;
+typedef boost::shared_ptr<QValueAxis> QValueAxis_sharedPtr;
 
 class Chart: public QChart
 {
@@ -51,18 +55,21 @@ public:
 
 private:
     QTimer m_timer;
-    QSplineSeries *ageSeries;
-    QSplineSeries *speedSeries;
-    QSplineSeries *maxHungerSeries;
-    QSplineSeries *hungerSeries;
-    QSplineSeries *thirstSeries;
-    QSplineSeries *aliveSeries;
+    QSplineSeries_sharedPtr ageSeries;
+    QSplineSeries_sharedPtr speedSeries;
+    QSplineSeries_sharedPtr maxHungerSeries;
+    QSplineSeries_sharedPtr hungerSeries;
+    QSplineSeries_sharedPtr thirstSeries;
+    QSplineSeries_sharedPtr aliveSeries;
 
     QStringList m_titles;
-    QValueAxis *m_axis;
+    QValueAxis_sharedPtr m_axis;
+    QValueAxis_sharedPtr axisY1;
+    QValueAxis_sharedPtr axisY2;
     qreal m_step;
     qreal m_x;
     qreal m_y;
+    int y_min, y_max;
 };
 
 #endif /* CHART_H */
