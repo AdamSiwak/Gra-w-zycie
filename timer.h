@@ -7,6 +7,8 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 
+typedef boost::shared_ptr<QTimer> QTimer_sharedPtr;
+
 class Timer : QObject
 {
     Q_OBJECT
@@ -15,7 +17,7 @@ public slots:
 
 public:
     Timer(int period);
-    QTimer * timer_;
+    QTimer_sharedPtr timer_;
 };
 
 typedef boost::shared_ptr<Timer> Timer_sharedPtr;

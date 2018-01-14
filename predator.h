@@ -14,7 +14,6 @@ public:
     Predator(Predator& parent1, Predator& parent2);
     virtual void accept(Visitor &v);
     boost::shared_ptr<Predator> reproduce(Predator &pred);
-    void attack(Prey& prey);
     virtual Dinosaur::behaviourStates eating();
     virtual Dinosaur::behaviourStates findTheNearestEating();
     virtual Dinosaur::behaviourStates go2eating();

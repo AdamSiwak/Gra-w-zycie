@@ -26,8 +26,6 @@
 Map* Map::instance_ = 0;
 
 Map::Map() : chartUpdateCounter(0) {
-    qDebug()<<"Hello Debug";
-
     scene_ = QGraphicsScene_sharedPtr(new QGraphicsScene());
 
     BackgroundGUI back;

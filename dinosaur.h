@@ -89,7 +89,6 @@ protected:
     virtual void createGUIElement() = 0;
 
     void drawLotsPosition();
-    void toDie();
     void go2nearestLake();
     virtual behaviourStates findTheNearestEating() = 0;
     virtual behaviourStates go2eating() = 0;

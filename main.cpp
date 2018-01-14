@@ -1,7 +1,6 @@
 #include <QApplication>
 
 #include "map.h"
-#include "timer.h"
 
 int main(int argc, char *argv[])
 {
