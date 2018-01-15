@@ -56,11 +56,6 @@ private:
     float averageThirst_;
     float alive_;
 
-    float averageAttack_; // predators only
-    float averageDefence_; // preys only
-
-    QString parameters_;
-
     Chart* chart_;
 };
 

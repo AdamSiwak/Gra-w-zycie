@@ -6,7 +6,6 @@
 
 
 Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
-
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
@@ -14,12 +13,13 @@ Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-m
     prevNeeds_ = DONT_HAVE_ANY_NEEDS;
     needs_ = DONT_HAVE_ANY_NEEDS;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
-    currentDestination_ = Coordinates_sharedPtr(new Coordinates()); // inicjowane z DinosaurGUI
+    currentDestination_ = Coordinates_sharedPtr(new Coordinates());
     currentDestination_->setRandomCoordiantes();
+    iAmHiddenByTime_ = 0;
 }
 
-Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
-{
+
+Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2) {
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
@@ -30,6 +30,7 @@ Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2)
     thirst_ = rand()%maxThirst;
     currentDestination_ = Coordinates_sharedPtr(new Coordinates());
     currentDestination_->setRandomCoordiantes();
+    iAmHiddenByTime_ = 0;
 }
 
 void Dinosaur::stepRight(){
@@ -83,6 +84,16 @@ void Dinosaur::showMyStatistics()
     else{
         gui_->cloud_->setVisible(false);
     }
+}
+
+int Dinosaur::getIAmHiddenByTime() const
+{
+    return iAmHiddenByTime_;
+}
+
+void Dinosaur::setIAmHiddenByTime(int iAmHiddenByTime)
+{
+    iAmHiddenByTime_ = iAmHiddenByTime;
 }
 
 bool Dinosaur::getIsHiden() const
@@ -216,7 +227,7 @@ void Dinosaur::behaviour()
             case SERCH4EATING:
                 behaviourState_ = findTheNearestEating();
             break;
-            case GO2EATING:;
+            case GO2EATING:
                 behaviourState_ = go2eating();
                 break;
             case EATING:
@@ -308,7 +319,7 @@ void Dinosaur::makeADecision()
     if(age_>maxAge_){
         needs_ = IS2OLD;
     }
-    else if(chased() || getIsDevoured()){ // TODO: impementacja w predator eating
+    else if(chased() || getIsDevoured()){
         needs_ = IS_DANGERED;
     }
     else if(thirst_<criticalThirst || behaviourState_ == DRINKING){

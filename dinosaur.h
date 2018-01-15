@@ -65,6 +65,9 @@ public:
                         DONT_HAVE_ANY_NEEDS
                         };
 
+    int getIAmHiddenByTime() const;
+    void setIAmHiddenByTime(int iAmHiddenByTime);
+
     ///seters
     int age() const { return age_; }
     int speed() const { return speed_; }
@@ -165,6 +168,8 @@ protected:
     bool chased_;
     bool isDevoured_;
     bool isHiden_;
+
+    int iAmHiddenByTime_;
 
     Object_sharedPtr target_;
     Dinosaur_sharedPtr target_dino_;

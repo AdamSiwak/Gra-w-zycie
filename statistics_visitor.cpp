@@ -4,10 +4,6 @@
 
 StatisticsVisitor::StatisticsVisitor(Chart* chart) : chart_(chart) {}
 
-QString& StatisticsVisitor::toString() {
-    return parameters_;
-}
-
 void StatisticsVisitor::TimeMomentBegin() {
     averageSpeed_ = 0;
     averageAge_ = 0;
@@ -27,13 +23,6 @@ void StatisticsVisitor::TimeMomentEnd() {
     }
 
     chart_->addData(averageAge_, averageSpeed_, averageMaxHunger_, averageHunger_, averageThirst_, alive_);
-
-    parameters_ = "alive: " + QString::number(alive_) + "\n";
-    parameters_ += "average speed: " + QString::number(averageSpeed_) + "\n";
-    parameters_ += "average age: " + QString::number(averageAge_) + "\n";
-    parameters_ += "average max hunger: " + QString::number(averageMaxHunger_) + "\n";
-    parameters_ += "average hunger: " + QString::number(averageHunger_) + "\n";
-    parameters_ += "average thirst: " + QString::number(averageThirst_) + "\n";
 }
 
 void StatisticsVisitor::visit(Predator& predator) {

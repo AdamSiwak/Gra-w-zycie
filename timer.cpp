@@ -3,8 +3,8 @@
 
 Timer::Timer(int period)
 {
-    timer_ = new QTimer(this);
-    connect(timer_, SIGNAL(timeout()), this, SLOT(timesUp()));
+    timer_ = QTimer_sharedPtr(new QTimer(this));
+    connect(&(*timer_), SIGNAL(timeout()), this, SLOT(timesUp()));
     timer_->start(period); //period in ms
 }
 

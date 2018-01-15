@@ -56,12 +56,12 @@ void Map::startAnimation(){
     predatorsStatistics_ = new StatisticsVisitor(predatorsChart);
     preysStatistics_ = new StatisticsVisitor(preysChart);
 
-    createLakes(4);
-    createTrees(4);
+    createLakes(3);
+    createTrees(3);
 
-    createPredatorsPopulation(5);
-    createPreysPopulation(5);
-    createCaves(4);
+    createPredatorsPopulation(4);
+    createPreysPopulation(7);
+    createCaves(3);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
@@ -308,22 +308,23 @@ void Map::timerCallBack(){
     std::vector<Dinosaur_sharedPtr> preys_cpy = preys_;
     for (auto it = preys_cpy.begin(); it != preys_cpy.end(); ++it) {
         (*it)->makeADecision();
-        try{
         (*it)->behaviour();
-        } catch(...){
-            qDebug() << "error";
-        }
         if (chartUpdateCounter >= chartUpdateValue) {
             (*it)->accept(*preysStatistics_);
+        }
+        if ((*it)->getIsHiden()){
+            (*it)->setIAmHiddenByTime((*it)->getIAmHiddenByTime()+1);
+            if((*it)->getIAmHiddenByTime()>=100){
+                (*it)->setBehaviourState(Dinosaur::OTHER);
+                (*it)->setIsHiden(false);
+                (*it)->setChased(false);
+                (*it)->setIAmHiddenByTime(0);
+            }
         }
     }
     for (auto it = predators_cpy.begin(); it != predators_cpy.end(); ++it) {
         (*it)->makeADecision();
-        try{
         (*it)->behaviour();
-        } catch(...){
-            qDebug() << "error";
-        }
         if (chartUpdateCounter >= chartUpdateValue) {
             (*it)->accept(*predatorsStatistics_);
         }

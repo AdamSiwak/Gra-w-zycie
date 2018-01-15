@@ -48,8 +48,8 @@ public:
         return !(*this==right);
     }
 
-    static const int MAX_X_=2000;
-    static const int MAX_Y_=2000;
+    static const int MAX_X_=1500;
+    static const int MAX_Y_=1500;
 
 private:
     int x_;
