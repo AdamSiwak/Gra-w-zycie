@@ -14,6 +14,7 @@ Dinosaur::Dinosaur() : age_(0), thirst_(rand()%maxThirst) {
     needs_ = DONT_HAVE_ANY_NEEDS;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
     maxHunger_ = static_cast<int>((multiplier*7)/speed_);
+    mutate(&maxHunger_);
     hunger_ = rand()%maxHunger_;
     criticalHunger_ = 0.5* maxHunger_;
     currentDestination_ = Coordinates_sharedPtr(new Coordinates());
@@ -22,19 +23,21 @@ Dinosaur::Dinosaur() : age_(0), thirst_(rand()%maxThirst) {
 }
 
 
-Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2) {
-    isDevoured_ = false;
-    chased_ = false;
-    behaviourState_ = OTHER;
-    age_ = 0;
+Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2) : Dinosaur() {
     speed_ = static_cast<int>((parent1.speed_ + parent2.speed_)/2);
     maxHunger_ = static_cast<int>((multiplier*7)/speed_);
+    mutate(&maxHunger_);
     hunger_ = rand()%maxHunger_;
     criticalHunger_ = 0.5* maxHunger_;
-    thirst_ = rand()%maxThirst;
-    currentDestination_ = Coordinates_sharedPtr(new Coordinates());
-    currentDestination_->setRandomCoordiantes();
-    iAmHiddenByTime_ = 0;
+}
+
+void Dinosaur::mutate(int* parameter){
+   int i = rand()%100;
+   if (i < mutationPobabilityPercent_) { // 2%
+       i = rand()%40; // mutation: -20% - 20%
+
+       *parameter = (*parameter) + (*parameter)*(i-20)/100;
+   }
 }
 
 void Dinosaur::stepRight(){

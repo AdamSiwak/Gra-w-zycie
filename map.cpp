@@ -34,6 +34,14 @@ Map::Map() : chartUpdateCounter(0) {
 }
 
 void Map::startAnimation(){
+    srand(time(NULL));
+
+    createLakes(3);
+    createTrees(3);
+
+    createPredatorsPopulation(5);
+    createPreysPopulation(8);
+    createCaves(3);
 
     predatorsChart = new Chart();
     predatorsChart->setTitle("Predators statistics");
@@ -41,6 +49,7 @@ void Map::startAnimation(){
     predatorsChartView = new QChartView(predatorsChart);
     predatorsChartView->setRenderHint(QPainter::Antialiasing);
     predatorsChartView->resize(500,300);
+    predatorsChartView->move(-1000,-150);
 
     scene_->addWidget(predatorsChartView,Qt::WindowFlags(Qt::AlignLeft));
 
@@ -50,18 +59,12 @@ void Map::startAnimation(){
     preysChartView = new QChartView(preysChart);
     preysChartView->setRenderHint(QPainter::Antialiasing);
     preysChartView->resize(500,300);
+    preysChartView->move(-1000,150);
 
     scene_->addWidget(preysChartView,Qt::WindowFlags(Qt::AlignLeft));
 
     predatorsStatistics_ = new StatisticsVisitor(predatorsChart);
     preysStatistics_ = new StatisticsVisitor(preysChart);
-
-    createLakes(3);
-    createTrees(3);
-
-    createPredatorsPopulation(5);
-    createPreysPopulation(8);
-    createCaves(3);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();
@@ -71,7 +74,6 @@ void Map::startAnimation(){
 
     timer_ = Timer_sharedPtr(new Timer(TimerPeriod));
 
-    srand(time(NULL));
 }
 
 void Map::stopAnimation(){

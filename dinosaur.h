@@ -68,7 +68,7 @@ public:
     int getIAmHiddenByTime() const;
     void setIAmHiddenByTime(int iAmHiddenByTime);
 
-    ///seters
+    ///setters
     int age() const { return age_; }
     int speed() const { return speed_; }
     int hunger() const { return hunger_; }
@@ -87,7 +87,7 @@ public:
     DinosaurGUI_sharedPtr gui_;
 
     /**
-     * @brief makeADecision In this function the dinosaur decide what should now do. A result is save in needs_:dinosaurNeeds variable.
+     * @brief makeADecision In this function the dinosaur decide what should now do. A result is saved in needs_:dinosaurNeeds variable.
      */
     void makeADecision();
 
@@ -155,9 +155,15 @@ protected:
     void move2position(int x, int y);
 
     /**
-     * @brief showMyStatistics hen dinosaurs gui is selected (by mouse) this function displays dinosaur basic vistal parmeters in a cloud
+     * @brief showMyStatistics when dinosaurs gui is selected (by mouse) this function displays dinosaur basic vistal parmeters in a cloud
      */
     void showMyStatistics();
+
+    /**
+     * @brief mutate mutates choosen parameter with 2% probability. If mutated, changes value of the parameter by -20% - 20%
+     * @param parameter
+     */
+    void mutate(int* parameter);
 
     static const int maxSpeed = 8;
     static const int minSpeed = 3;
@@ -182,6 +188,8 @@ protected:
 
     static const int maxAge_ = 1 * multiplier;
     static const int reproductiveAge = 0.5 * maxAge_;
+
+    static const int mutationPobabilityPercent_ = 2;
 
     int maxHunger_;
     int hunger_;
