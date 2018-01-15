@@ -1,6 +1,8 @@
 #ifndef PREY_H
 #define PREY_H
 
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include "dinosaur.h"
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>

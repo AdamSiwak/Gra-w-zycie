@@ -1,3 +1,5 @@
+//author: Adam Siwak
+
 #include "chart.h"
 #include <QtCharts/QAbstractAxis>
 #include <QtCharts/QSplineSeries>

@@ -1,6 +1,8 @@
 #ifndef SOUND_H
 #define SOUND_H
 
+//author: Andrzej Dzwinski
+
 #include <QMediaPlayer>
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>

@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski
+
 #include "coordinates.h"
 
 Coordinates::Coordinates()

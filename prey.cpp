@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include "prey.h"
 #include "visitor.h"
 #include "map.h"

@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski
+
 #include "cloud.h"
 #include <QPainter>
 

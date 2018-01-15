@@ -1,6 +1,8 @@
 #ifndef LAKE_H
 #define LAKE_H
 
+//author: Andrzej Dzwinski
+
 #include "objectgui.h"
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>

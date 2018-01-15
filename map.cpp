@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include <QTime>
 #include <cstdlib>
 #include <ctime>

@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include <QApplication>
 
 #include "map.h"

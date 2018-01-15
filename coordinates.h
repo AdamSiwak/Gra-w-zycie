@@ -1,6 +1,8 @@
 #ifndef COORDINATES_H
 #define COORDINATES_H
 
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include <cstdlib>
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>

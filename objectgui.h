@@ -1,6 +1,8 @@
 #ifndef OBJECTGUI_H
 #define OBJECTGUI_H
 
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include <QObject>
 #include <QPixmap>
 #include <QGraphicsPixmapItem>

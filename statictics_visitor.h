@@ -1,3 +1,5 @@
+//author: Adam Siwak
+
 #ifndef STATICTICS_VISITOR_H
 #define STATICTICS_VISITOR_H
 

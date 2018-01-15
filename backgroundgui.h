@@ -1,6 +1,8 @@
 #ifndef BACKGROUNDGUI_H
 #define BACKGROUNDGUI_H
 
+//author: Andrzej Dzwinski
+
 #include <QBrush>
 #include <QDebug>
 

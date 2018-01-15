@@ -1,3 +1,5 @@
+//author: Adam Siwak
+
 #ifndef VISITOR_H
 #define VISITOR_H
 

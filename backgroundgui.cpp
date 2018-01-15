@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski
+
 #include "backgroundgui.h"
 
 #include <QListView>

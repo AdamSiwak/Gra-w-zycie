@@ -1,6 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include <QGraphicsScene>
 #include <QTimer>
 #include <QMainWindow>

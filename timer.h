@@ -1,6 +1,8 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include <QDebug>
 #include <QTimer>
 #include <QObject>

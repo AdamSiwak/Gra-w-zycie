@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski, Adam Siwak
+
 #ifndef DINOSAUR_H
 #define DINOSAUR_H
 

@@ -1,5 +1,8 @@
 #ifndef CLOUD_H
 #define CLOUD_H
+
+//author: Andrzej Dzwinski
+
 #include "objectgui.h"
 
 /**

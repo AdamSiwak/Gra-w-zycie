@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include "dinosaurGUI.h"
 #include <QDebug>
 #include <QDir>

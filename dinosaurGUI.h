@@ -1,6 +1,8 @@
 #ifndef DINOSAURGUI_H
 #define DINOSAURGUI_H
 
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include "sound.h"
 #include "objectgui.h"
 #include "coordinates.h"

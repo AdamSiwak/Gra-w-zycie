@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include "dinosaur.h"
 #include "map.h"
 

@@ -1,3 +1,5 @@
+//author: Adam Siwak
+
 #include "statictics_visitor.h"
 #include "predator.h"
 #include "prey.h"

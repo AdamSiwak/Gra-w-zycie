@@ -1,3 +1,5 @@
+//author: Andrzej Dzwinski, Adam Siwak
+
 #include "objectgui.h"
 #include "QGraphicsItem"
 #include <QPainter>
