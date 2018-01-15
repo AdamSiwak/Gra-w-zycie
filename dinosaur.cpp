@@ -5,7 +5,7 @@
 #include <QTimer>
 
 
-Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-minMaxHunger)), hunger_(rand()%maxHunger()), thirst_(rand()%maxThirst) {
+Dinosaur::Dinosaur() : age_(0), thirst_(rand()%maxThirst) {
     isDevoured_ = false;
     chased_ = false;
     behaviourState_ = OTHER;
@@ -13,6 +13,8 @@ Dinosaur::Dinosaur() : age_(0), maxHunger_(minMaxHunger + rand()%(maxMaxHunger-m
     prevNeeds_ = DONT_HAVE_ANY_NEEDS;
     needs_ = DONT_HAVE_ANY_NEEDS;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
+    maxHunger_ = static_cast<int>((multiplier*10)/speed_);
+    hunger_ = rand()%maxHunger_;
     currentDestination_ = Coordinates_sharedPtr(new Coordinates());
     currentDestination_->setRandomCoordiantes();
     iAmHiddenByTime_ = 0;
@@ -24,9 +26,9 @@ Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2) {
     chased_ = false;
     behaviourState_ = OTHER;
     age_ = 0;
-    speed_ = (parent1.speed_ + parent2.speed_)/2;
-    maxHunger_ = (parent1.maxHunger_ + parent2.maxHunger_)/2;
-    hunger_ = rand()%maxHunger();
+    speed_ = static_cast<int>((parent1.speed_ + parent2.speed_)/2);
+    maxHunger_ = static_cast<int>((multiplier*10)/speed_);
+    hunger_ = rand()%maxHunger_;
     thirst_ = rand()%maxThirst;
     currentDestination_ = Coordinates_sharedPtr(new Coordinates());
     currentDestination_->setRandomCoordiantes();

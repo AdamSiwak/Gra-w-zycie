@@ -159,10 +159,11 @@ protected:
      */
     void showMyStatistics();
 
+    static const int maxSpeed = 8;
+    static const int minSpeed = 3;
+
     int speed_;
     int age_;
-    int maxHunger_;
-    int hunger_;
     int thirst_;
 
     bool chased_;
@@ -176,8 +177,6 @@ protected:
 
     static const int multiplier = 10000;
     static const int maxMaxEnergy = 1 * multiplier;
-    static const int maxSpeed = 8;
-    static const int minSpeed = 3;
     static const int minMaxHunger = 1 * multiplier;
     static const int maxMaxHunger = 3 * multiplier;
     static const int maxThirst = 1 * multiplier;
@@ -185,6 +184,9 @@ protected:
     static const int criticalHunger = 0.5 * maxMaxHunger;
     static const int maxAge_ = 1 * multiplier;
     static const int reproductiveAge = 0.5 * maxAge_;
+
+    int maxHunger_;
+    int hunger_;
 };
 
 
