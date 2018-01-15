@@ -49,7 +49,6 @@ Dinosaur::behaviourStates Predator::eating()
             drawLotsPosition();
         }
         move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
-        qDebug() << "USE COUNT == 0 - eating predator";
         return SERCH4EATING;
     }
 }
@@ -85,7 +84,6 @@ Dinosaur::behaviourStates Predator::go2eating()
             drawLotsPosition();
         }
         move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
-        qDebug() << "USE COUNT == 0 - go2eating predator";
         return SERCH4EATING;
     }
 }
@@ -103,7 +101,6 @@ Dinosaur::behaviourStates Predator::reproducing()
             drawLotsPosition();
         }
         move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
-        qDebug() << "USE COUNT == 0 - reproducing predator";
         return SERCH4PARTNER;
     }
 }
@@ -119,7 +116,3 @@ Dinosaur::behaviourStates Predator::findPartner()
     }
 }
 
-
-void Predator::createGUIElement(){
-
-}

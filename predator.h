@@ -6,10 +6,19 @@
 #include <boost/shared_ptr.hpp>
 
 class Prey;
-
+/**
+ * @brief The Predator class
+ */
 class Predator : public Dinosaur {
 public:
+    /**
+     * @brief Predator constructor
+     */
     Predator();
+
+    /**
+     * @brief ~Predator destructor
+     */
     virtual ~Predator(){}
     Predator(Predator& parent1, Predator& parent2);
     virtual void accept(Visitor &v);

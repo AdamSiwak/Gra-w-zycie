@@ -7,14 +7,27 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 
+/**
+ * @brief The Timer class
+ */
 class Timer : QObject
 {
     Q_OBJECT
 public slots:
-    void myfunction();
+
+    /**
+     * @brief timesUp slot wich is called when is timeout signal
+     */
+    void timesUp();
 
 public:
+
+    /**
+     * @brief Timer constructor
+     * @param period
+     */
     Timer(int period);
+
     QTimer * timer_;
 };
 
