@@ -26,7 +26,7 @@ Dinosaur::behaviourStates Predator::eating()
 {
 
     if (target_dino_.use_count() != 0 && !target_dino_->getIsHiden()) {
-        if(hunger()<maxHunger()){
+        if(hunger()<maxHunger_){
             hunger_+=10;
             if (target_dino_->hunger() <= 10) {
                 target_dino_->setHunger(0);
@@ -39,8 +39,8 @@ Dinosaur::behaviourStates Predator::eating()
             return EATING;
         }
         else{
-            target_dino_->setBehaviourState(TO_DIE);
-            target_dino_->setHunger(0); // BUGGED - 2 predators are eating the same prey - if one of them is full, the prey dies
+   //         target_dino_->setBehaviourState(TO_DIE);
+ //           target_dino_->setHunger(0); // BUGGED - 2 predators are eating the same prey - if one of them is full, the prey dies
             target_dino_ = nullptr;
             return FULL;
         }

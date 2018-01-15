@@ -59,8 +59,8 @@ void Map::startAnimation(){
     createLakes(3);
     createTrees(3);
 
-    createPredatorsPopulation(4);
-    createPreysPopulation(7);
+    createPredatorsPopulation(3);
+    createPreysPopulation(3);
     createCaves(3);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));

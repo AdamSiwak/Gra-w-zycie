@@ -177,16 +177,15 @@ protected:
 
     static const int multiplier = 10000;
     static const int maxMaxEnergy = 1 * multiplier;
-    static const int minMaxHunger = 1 * multiplier;
-    static const int maxMaxHunger = 3 * multiplier;
     static const int maxThirst = 1 * multiplier;
     static const int criticalThirst = 0.5 * maxThirst;
-    static const int criticalHunger = 0.5 * maxMaxHunger;
+
     static const int maxAge_ = 1 * multiplier;
     static const int reproductiveAge = 0.5 * maxAge_;
 
     int maxHunger_;
     int hunger_;
+    int criticalHunger_;
 };
 
 

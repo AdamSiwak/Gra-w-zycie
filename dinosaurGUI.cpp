@@ -62,6 +62,7 @@ void DinosaurGUI::stepRight()
         position_->setXcoordinate(position_->getXcoordinate()+1);
         setRotation(0);
         setTransform(QTransform::fromScale(-1, 1));
+        setTransformOriginPoint(0,0);
     }
 }
 
@@ -72,6 +73,7 @@ void DinosaurGUI::stepLeft()
         position_->setXcoordinate(position_->getXcoordinate()-1);
         setTransform(QTransform::fromScale(1, 1));
         setRotation(0);
+        setTransformOriginPoint(0,0);
     }
 }
 
@@ -81,6 +83,7 @@ void DinosaurGUI::stepUp()
         position_->setYcoordinate(position_->getYcoordinate()-1);
         setPos(x(),y()-STEP_SIZE_);
         setRotation(0);
+        setTransformOriginPoint(0,0);
     }
 }
 
@@ -90,6 +93,7 @@ void DinosaurGUI::stepDown()
         position_->setYcoordinate(position_->getYcoordinate()+1);
         setPos(x(),y()+STEP_SIZE_);
         setRotation(0);
+        setTransformOriginPoint(0,0);
     }
 }
 

@@ -13,8 +13,9 @@ Dinosaur::Dinosaur() : age_(0), thirst_(rand()%maxThirst) {
     prevNeeds_ = DONT_HAVE_ANY_NEEDS;
     needs_ = DONT_HAVE_ANY_NEEDS;
     speed_=rand() % (maxSpeed - minSpeed) + minSpeed; // speed in range
-    maxHunger_ = static_cast<int>((multiplier*10)/speed_);
+    maxHunger_ = static_cast<int>((multiplier*7)/speed_);
     hunger_ = rand()%maxHunger_;
+    criticalHunger_ = 0.5* maxHunger_;
     currentDestination_ = Coordinates_sharedPtr(new Coordinates());
     currentDestination_->setRandomCoordiantes();
     iAmHiddenByTime_ = 0;
@@ -27,8 +28,9 @@ Dinosaur::Dinosaur(Dinosaur &parent1, Dinosaur &parent2) {
     behaviourState_ = OTHER;
     age_ = 0;
     speed_ = static_cast<int>((parent1.speed_ + parent2.speed_)/2);
-    maxHunger_ = static_cast<int>((multiplier*10)/speed_);
+    maxHunger_ = static_cast<int>((multiplier*7)/speed_);
     hunger_ = rand()%maxHunger_;
+    criticalHunger_ = 0.5* maxHunger_;
     thirst_ = rand()%maxThirst;
     currentDestination_ = Coordinates_sharedPtr(new Coordinates());
     currentDestination_->setRandomCoordiantes();
@@ -77,15 +79,20 @@ void Dinosaur::move2position(int x, int y)
 
 void Dinosaur::showMyStatistics()
 {
-    if (gui_->isSelected()){
-        gui_->cloud_->writeText(toString());
-        gui_->cloud_->setX(gui_->x());
-        gui_->cloud_->setY(gui_->y());
-        gui_->cloud_->setVisible(true);
-    }
-    else{
-        gui_->cloud_->setVisible(false);
-    }
+           gui_->cloud_->writeText("behaviourStates: " + QString::number(behaviourState_) + ",dinosaurNeeds: " + QString::number(needs_)
+                                   + ", hiden: "+ QString::number(getIsHiden()) + ", eat: " + QString::number(hunger_));
+           gui_->cloud_->setX(gui_->x());
+           gui_->cloud_->setY(gui_->y());
+           gui_->cloud_->setVisible(true);
+//    if (gui_->isSelected()){
+//        gui_->cloud_->writeText(toString());
+//        gui_->cloud_->setX(gui_->x());
+//        gui_->cloud_->setY(gui_->y());
+//        gui_->cloud_->setVisible(true);
+//    }
+//    else{
+//        gui_->cloud_->setVisible(false);
+//    }
 }
 
 int Dinosaur::getIAmHiddenByTime() const
@@ -217,7 +224,8 @@ void Dinosaur::behaviour()
             behaviourState_ = drinking();
             break;
         case DRUNK:
-            //do nothing
+            behaviourState_ = OTHER;
+            needs_ = DONT_HAVE_ANY_NEEDS;
             break;
         default:
             behaviourState_ = SERCH4LAKE;
@@ -236,6 +244,8 @@ void Dinosaur::behaviour()
                 behaviourState_ = eating();
                 break;
             case FULL:
+                behaviourState_ = OTHER;
+                needs_ = DONT_HAVE_ANY_NEEDS;
                 if(target_dino_!=nullptr){
                     target_dino_->setChased(false);
                     target_dino_->setIsDevoured(false);
@@ -327,7 +337,7 @@ void Dinosaur::makeADecision()
     else if(thirst_<criticalThirst || behaviourState_ == DRINKING){
         needs_ = WANT2DRINK;
     }
-    else if(hunger_<criticalHunger || behaviourState_ == EATING){
+    else if(hunger_<criticalHunger_ || behaviourState_ == EATING){
         needs_ = WANT2EAT;
     }
     else if(age_>reproductiveAge || behaviourState_ == REPRODUCING){
