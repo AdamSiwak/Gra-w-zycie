@@ -26,7 +26,6 @@
 Map* Map::instance_ = 0;
 
 Map::Map() : chartUpdateCounter(0) {
-    qDebug()<<"Hello Debug";
 
     scene_ = QGraphicsScene_sharedPtr(new QGraphicsScene());
 
@@ -57,12 +56,12 @@ void Map::startAnimation(){
     predatorsStatistics_ = new StatisticsVisitor(predatorsChart);
     preysStatistics_ = new StatisticsVisitor(preysChart);
 
-    createLakes(20);
-    createTrees(20);
+    createLakes(4);
+    createTrees(4);
 
-    createPredatorsPopulation(30);
-    createPreysPopulation(60);
-    createCaves(20);
+    createPredatorsPopulation(5);
+    createPreysPopulation(5);
+    createCaves(4);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
     view_->showMaximized();

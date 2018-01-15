@@ -15,7 +15,9 @@ class Dinosaur;
 
 typedef boost::shared_ptr<Dinosaur> Dinosaur_sharedPtr;
 typedef boost::weak_ptr<Dinosaur> Dinosaur_weakPtr;
-
+/**
+ * @brief The Dinosaur class
+ */
 class Dinosaur : public Object {
 protected:
 
@@ -40,6 +42,9 @@ public:
      */
     virtual void accept(Visitor& v){Q_UNUSED(v);}
 
+    /**
+     * @brief The behaviourStates enum
+     */
     enum behaviourStates{SERCH4LAKE, GO2LAKE, DRUNK, DRINKING,
                          SERCH4EATING, GO2EATING, FULL, EATING,
                          SERCH4PARTNER, GO2PARTNER, REPRODUCING,
@@ -48,6 +53,9 @@ public:
                          OTHER
                          };
 
+    /**
+     * @brief The dinosaurNeeds enum
+     */
     enum dinosaurNeeds{
                         WANT2DRINK,
                         WANT2EAT,
@@ -57,8 +65,7 @@ public:
                         DONT_HAVE_ANY_NEEDS
                         };
 
-
-    
+    ///seters
     int age() const { return age_; }
     int speed() const { return speed_; }
     int hunger() const { return hunger_; }
@@ -68,6 +75,7 @@ public:
 
     void setHunger(int hunger) { hunger_ = hunger; }
 
+    ///functions for move one step in different directions
     void stepRight();
     void stepLeft();
     void stepUp();
@@ -75,9 +83,20 @@ public:
 
     DinosaurGUI_sharedPtr gui_;
 
+    /**
+     * @brief makeADecision In this function the dinosaur decide what should now do. A result is save in needs_:dinosaurNeeds variable.
+     */
     void makeADecision();
+
+    /**
+     * @brief behaviour function is proper algorithm of dinosaur behaviour. It is based on state machine where main level is needs_:dinosaurNeeds variable and secondary is behaviourState_:behaviourStates variable;
+     */
     void behaviour();
 
+    /**
+     * @brief toString
+     * @return basic fields of the class are converted to QString
+     */
     QString toString();
 
     bool chased() const;
@@ -91,7 +110,13 @@ public:
     bool getIsDevoured() const;
     void setIsDevoured(bool value);
 
+    /**
+     * @brief findCave function look for nearest cave and sets it as target_:Object_sharedPtr
+     */
     void findCave();
+    /**
+     * @brief isDevoured function rotete the picture at 180 degree when dhe dinosaur is devourted
+     */
     void isDevoured();
 
     bool getIsHiden() const;
@@ -103,22 +128,33 @@ protected:
     dinosaurNeeds needs_, prevNeeds_;
     virtual void createGUIElement() = 0;
 
+    /**
+     * @brief drawLotsPosition
+     */
     void drawLotsPosition();
-    void toDie();
-    void go2nearestLake();
+
     virtual behaviourStates findTheNearestEating() = 0;
     virtual behaviourStates go2eating() = 0;
     virtual behaviourStates findPartner() = 0;
     virtual behaviourStates reproducing() = 0;
 
-    void makeAdecision();
+    /**
+     * @brief energyBurning decrements hunger_:int, and thirst_:int in every call(every timer tick)
+     */
     void energyBurning();
     virtual behaviourStates eating() = 0;
     behaviourStates drinking();
 
+    /**
+     * @brief move2position moves the dinosaur one step in x axis and one step in y axis in x,y set direction.
+     * @param x coordinate
+     * @param y coordinate
+     */
     void move2position(int x, int y);
-    void move();
 
+    /**
+     * @brief showMyStatistics hen dinosaurs gui is selected (by mouse) this function displays dinosaur basic vistal parmeters in a cloud
+     */
     void showMyStatistics();
 
     int speed_;
