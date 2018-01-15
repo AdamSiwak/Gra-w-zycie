@@ -91,8 +91,8 @@ Dinosaur::behaviourStates Predator::go2eating()
 Dinosaur::behaviourStates Predator::reproducing()
 {
     if (target_dino_.use_count() != 0) {
-        hunger_ -= 0.3*maxHunger();
-        thirst_ -= 0.3*maxThirst;
+        hunger_ -= 0.5*maxHunger();
+        thirst_ -= 0.5*maxThirst;
         Predator_sharedPtr newDino = reproduce(dynamic_cast<Predator&>(*target_dino_));
         Map::getInstance()->addNewPredator(static_cast<Dinosaur_sharedPtr>(newDino));
         return REPRODUCING;
