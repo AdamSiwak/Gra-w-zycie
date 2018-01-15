@@ -4,11 +4,19 @@
 #include "visitor.h"
 #include "map.h"
 
+/**
+ * @brief interact
+ * @param a
+ * @param b
+ */
 void interact(Object& a, Dinosaur& b) {
     InteractVisitor visitor(a);
     b.accept(visitor);
 }
 
+/**
+ * @brief The InteractVisitor class
+ */
 class InteractVisitor : public Visitor { //rozstrzyga dwa typy
     InteractVisitor(Object& obj) : obj_(obj) {}
     virtual void visit(Predator& pred) {
@@ -23,10 +31,17 @@ class InteractVisitor : public Visitor { //rozstrzyga dwa typy
     Object& obj_;
 };
 
+/**
+ * @brief The PredatorVisitor class
+ */
 class PredatorVisitor : public Visitor {
+    /**
+     * @brief PredatorVisitor constructor
+     * @param pred
+     */
     PredatorVisitor(Predator& pred) : pred_(pred) {}
     virtual void visit(Predator& pred) { // predator x predator - new predator
-        Map::getInstance().add_new_dinosaur(pred_.reproduce(pred);
+        Map::getInstance().add_new_dinosaur(pred_.reproduce(pred));
     }
     virtual void visit(Prey& prey) { // predator x prey - attack
         pred_.attack(prey);
@@ -40,7 +55,14 @@ class PredatorVisitor : public Visitor {
     Predator& pred_;
 };
 
+/**
+ * @brief The PreyVisitor class
+ */
 class PreyVisitor : public Visitor {
+    /**
+     * @brief PreyVisitor constructor
+     * @param prey
+     */
     PreyVisitor(Prey& prey) : prey_(prey) {}
     virtual void visit(Predator& pred) { // prey x predator - attack
         pred.attack(prey_);

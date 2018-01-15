@@ -107,14 +107,14 @@ void Map::addNewPrey(Dinosaur_sharedPtr dinosaur) {
     preys_.push_back(dinosaur);
 }
 
-void Map::createPredatorsPopulation(int size) {
-    for (int i = 0; i < size; ++i) {
+void Map::createPredatorsPopulation(int amount) {
+    for (int i = 0; i < amount; ++i) {
         Dinosaur_sharedPtr p(new Predator() );
         addNewPredator(p);
     }
 }
 
-void Map::createPreysPopulation(int size) {
+void Map::createPreysPopulation(int amount) {
     for (int i = 0; i < size; ++i) {
         Dinosaur_sharedPtr p(new Prey() );
         addNewPrey(p);

@@ -5,10 +5,17 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 
-
+/**
+ * @brief The Lake class
+ */
 class Lake : public ObjectGUI
 {
 public:
+    /**
+     * @brief Lake constructor
+     * @param picture
+     * @param scale
+     */
     Lake(QString picture, const qreal scale);
     const QString picture_ = "lake.png";
 };

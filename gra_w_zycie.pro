@@ -50,7 +50,6 @@ HEADERS += \
     visitor.h \
     statictics_visitor.h \
     map.h \
-    map_block.h \
     object.h \
     sound.h \
     interact_visitor.h \

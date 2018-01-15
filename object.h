@@ -7,13 +7,19 @@
 
 class Visitor;
 
+/**
+ * @brief The Object class
+ */
 class Object {
 public:
+    /**
+     * @brief ~Object destrctor
+     */
     virtual ~Object() {}
     int getX() { return position_->getXcoordinate(); }
     int getY() { return position_->getYcoordinate(); }
 
-    virtual void accept(Visitor& v) = 0; // implementacja wzorca wizytatora
+    virtual void accept(Visitor& v) = 0; // visitor pattern implementation
 
     Coordinates_sharedPtr position_;
 
