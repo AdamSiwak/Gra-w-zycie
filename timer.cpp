@@ -4,11 +4,11 @@
 Timer::Timer(int period)
 {
     timer_ = new QTimer(this);
-    connect(timer_, SIGNAL(timeout()), this, SLOT(myfunction()));
+    connect(timer_, SIGNAL(timeout()), this, SLOT(timesUp()));
     timer_->start(period); //period in ms
 }
 
-void Timer::myfunction()
+void Timer::timesUp()
 {
     Map::getInstance()->timerCallBack();
 }

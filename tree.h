@@ -5,9 +5,18 @@
 #include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 
+
+/**
+ * @brief The Tree class
+ */
 class Tree : public ObjectGUI
 {
 public:
+    /**
+     * @brief Tree constructor
+     * @param picture
+     * @param scale
+     */
     Tree(QString picture, const qreal scale);
     const QString picture_ = "tree.png";
 };

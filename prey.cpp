@@ -13,10 +13,6 @@ Prey::Prey(Prey& parent1, Prey& parent2):Dinosaur(parent1, parent2), isChased_(f
     setIsHiden(false);
 }
 
-void Prey::createGUIElement() {
-
-}
-
 void Prey::accept(Visitor &v) {
     v.visit(*this);
 }
@@ -73,7 +69,6 @@ Dinosaur::behaviourStates Prey::reproducing()
             drawLotsPosition();
         }
         move2position(currentDestination_->getXcoordinate(),currentDestination_->getYcoordinate());
-        qDebug() << "USE COUNT == 0 - reproducing prey" + QString::number(maxHunger_);
         return SERCH4PARTNER;
     }
 }

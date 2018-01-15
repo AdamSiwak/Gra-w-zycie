@@ -115,7 +115,7 @@ void Map::createPredatorsPopulation(int amount) {
 }
 
 void Map::createPreysPopulation(int amount) {
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < amount; ++i) {
         Dinosaur_sharedPtr p(new Prey() );
         addNewPrey(p);
     }

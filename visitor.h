@@ -9,6 +9,9 @@ class Lake;
 class Tree;
 class Cave;
 
+/**
+ * @brief The Visitor class (abstract)
+ */
 class Visitor { //wizytator bazowy
 public:
     virtual void visit(Predator&) = 0;

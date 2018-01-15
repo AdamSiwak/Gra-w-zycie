@@ -13,7 +13,7 @@
 typedef boost::shared_ptr<QPixmap> QPixmap_sharedPtr;
 
 /**
- * @brief The ObjectGUI class
+ * @brief The ObjectGUI class (abstract)
  */
 class ObjectGUI : public Object, public QGraphicsPixmapItem
 {

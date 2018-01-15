@@ -8,7 +8,7 @@
 class Visitor;
 
 /**
- * @brief The Object class
+ * @brief The Object class (abstract)
  */
 class Object {
 public:

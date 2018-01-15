@@ -16,7 +16,7 @@ class Dinosaur;
 typedef boost::shared_ptr<Dinosaur> Dinosaur_sharedPtr;
 typedef boost::weak_ptr<Dinosaur> Dinosaur_weakPtr;
 /**
- * @brief The Dinosaur class
+ * @brief The Dinosaur class (abstract)
  */
 class Dinosaur : public Object {
 protected:
@@ -126,7 +126,6 @@ protected:
     Coordinates_sharedPtr currentDestination_;
     behaviourStates behaviourState_, prevBehaviourState_;
     dinosaurNeeds needs_, prevNeeds_;
-    virtual void createGUIElement() = 0;
 
     /**
      * @brief drawLotsPosition
