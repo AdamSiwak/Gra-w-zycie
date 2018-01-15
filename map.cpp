@@ -59,8 +59,8 @@ void Map::startAnimation(){
     createLakes(3);
     createTrees(3);
 
-    createPredatorsPopulation(3);
-    createPreysPopulation(3);
+    createPredatorsPopulation(5);
+    createPreysPopulation(8);
     createCaves(3);
 
     view_ = QGraphicsView_sharedPtr(new QGraphicsView(&(*scene_)));
@@ -286,14 +286,14 @@ Dinosaur_sharedPtr Map::getNearestObject(Dinosaur& dino, std::vector<Dinosaur_sh
 void Map::timerCallBack(){
 
     for(auto it = preys_.begin(); it != preys_.end(); /*nothing*/) {
-        if(((*it)->hunger()) <= 0 || ((*it)->age() >= (*it)->maxAge())) {
+        if(((*it)->hunger()) <= 0 || ((*it)->thirst()) <= 0 ||((*it)->age() >= (*it)->maxAge())) {
             it = preys_.erase(it);
         }
         else ++it;
     }
 
     for(auto it = predators_.begin(); it != predators_.end(); /*nothing*/) {
-        if(((*it)->hunger()) <= 0 || ((*it)->age() >= (*it)->maxAge())) {
+        if(((*it)->hunger()) <= 0 || ((*it)->thirst()) <= 0 || ((*it)->age() >= (*it)->maxAge())) {
             it = predators_.erase(it);
         }
         else ++it;

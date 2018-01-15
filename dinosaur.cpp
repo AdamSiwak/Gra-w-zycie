@@ -79,20 +79,20 @@ void Dinosaur::move2position(int x, int y)
 
 void Dinosaur::showMyStatistics()
 {
-           gui_->cloud_->writeText("behaviourStates: " + QString::number(behaviourState_) + ",dinosaurNeeds: " + QString::number(needs_)
-                                   + ", hiden: "+ QString::number(getIsHiden()) + ", eat: " + QString::number(hunger_));
-           gui_->cloud_->setX(gui_->x());
-           gui_->cloud_->setY(gui_->y());
-           gui_->cloud_->setVisible(true);
-//    if (gui_->isSelected()){
-//        gui_->cloud_->writeText(toString());
-//        gui_->cloud_->setX(gui_->x());
-//        gui_->cloud_->setY(gui_->y());
-//        gui_->cloud_->setVisible(true);
-//    }
-//    else{
-//        gui_->cloud_->setVisible(false);
-//    }
+//   gui_->cloud_->writeText("behaviourStates: " + QString::number(behaviourState_) + ",dinosaurNeeds: " + QString::number(needs_)
+//                           + ", hiden: "+ QString::number(getIsHiden()) + ", eat: " + QString::number(hunger_));
+//   gui_->cloud_->setX(gui_->x());
+//   gui_->cloud_->setY(gui_->y());
+//   gui_->cloud_->setVisible(true);
+    if (gui_->isSelected()){
+        gui_->cloud_->writeText(toString());
+        gui_->cloud_->setX(gui_->x());
+        gui_->cloud_->setY(gui_->y());
+        gui_->cloud_->setVisible(true);
+    }
+    else{
+        gui_->cloud_->setVisible(false);
+    }
 }
 
 int Dinosaur::getIAmHiddenByTime() const
