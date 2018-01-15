@@ -55,7 +55,6 @@ HEADERS += \
     ../../dinosaurGUI.h \
     ../../interact_visitor.h \
     ../../lake.h \
-    ../../map_block.h \
     ../../map.h \
     ../../object.h \
     ../../objectgui.h \
@@ -63,7 +62,6 @@ HEADERS += \
     ../../prey.h \
     ../../sound.h \
     ../../statictics_visitor.h \
-    ../../timer.cpp.autosave \
     ../../timer.h \
     ../../tree.h \
     ../../visitor.h \
