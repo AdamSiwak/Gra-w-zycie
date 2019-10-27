@@ -3,17 +3,22 @@
 ## Establishments
 
 The goal of this project is to implement an interesting "play in life" scenario. According to the traditional approach, on the unlimited board divided into square cells there are individuals whose state changes in subsequent moments. Each cell can be "alive" or "dead", and its condition in the next moment depends only on the number of its neighbors (if there are too few - the cell dies from "loneliness", too much - dies from "overpopulation"). If the dead cell has three neighbors - in the next unit of time it will become alive ("born").
+
 The new approach will involve the presence of 2 groups: herbivores and carnivores. In addition, there will be other elements on the board: water sources, plants (food for herbivores). The traditional approach will preserve the existence of time units and the slightly modified life cycle of individuals. If two individuals from the same group meet, a new individual is born, which inherits the characteristics of the parents (after crossing and mutation). Herbivores die if they are killed by predators, from hunger or thirst, and carnivores - from hunger or thirst. Both groups can also die of old age. A herbivore can hide from a predator in a cave, but must leave it to drink or get food.
+
 The user will be able to track the development of both populations (in the form of graphs), and view the characteristics of the selected individual (its condition and parameters). It will also decide on the initial state of these populations.
 
 ## Description of application
 
 The scenario of the proposed simulation of a "game of life" assumes the struggle for survival of two dinosaur populations: herbivores and carnivores. Animals that do not eat meat (green coloration) feed on trees and can be eaten by predators (brown coloration). A rescue for herbivores is to escape to the cave. At this point, the meat eater gives up the attack and is looking for another target. Individuals from both populations must eat and drink cyclically to survive. When they have basic needs met and have reached adulthood, they can reproduce. Reproduction consumes some of the energy dinosaurs have, so they must satisfy hunger and thirst again. The newborn dinosaur inherits the parents' characteristics as an arithmetic mean. However, a mutation of up to 10% in parameter deviation may occur. The probability of its occurrence is 2%.
+
 Individuals differ in speed of movement. However, faster-moving dinosaurs have smaller stomach capacities, so they need to eat more often. This approach leads to equal opportunities for reproduction of individuals with different characteristics.
+
 Death of a dinosaur can occur naturally (from old age), from hunger or from thirst. Herbivores can also be eaten by predators.
+
 In order to facilitate statistical analysis, the basic life parameters of both populations are presented in charts. In addition, you can also display the data of individual individuals by selecting the left mouse button. This action produces a sound and displays a "cloud" with the basic life parameters of the dinosaur, and the individual enters the manual control mode (arrows on the keyboard). Clicking on the field outside the dinosaur causes a return to automatic control and hides the "cloud".
 
-## Installation
+## To run the application
 
 In order to apply the application on the Ubuntu 16.04 operating system, the following packages must be introduced:
 - qtbase5-dev
@@ -33,8 +38,8 @@ Qt 5.9.3 -> Qt charts
 Then, after applying the installation, apply the application without starting the environment.
 
 Go to Game-in-life consideration and run the commands:
-<folder_to_ktorego_z installed_Qt> /5.9.3/gcc_64/bin/qmake
-do
+<Qt_folder> /5.9.3/gcc_64/bin/qmake
+make
 
 The procedures should be repeated for the unit test project - in the folder Game-in-life / Tests_stand / test_stand.
 
