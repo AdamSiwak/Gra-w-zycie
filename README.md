@@ -58,9 +58,12 @@ Użytkownik będzie miał możliwość śledzenia rozwoju obu populacji (w posta
 
 ## Opis progaramu
 
-Scenariusz zaproponowanej symulacji „gry w życie” zakłada walkę o przetrwanie dwóch populacji dinozaurów: roślinożerców i mięsożerców. Zwierzęta niejedzące mięsa (ubarwienie zielone) odżywiają się drzewami i mogą być pożarte przez drapieżniki (ubarwienie brązowe). Ratunkiem dla roślinożercy jest ucieczka do jaskini. W tym momencie mięsożerca rezygnuje z ataku i poszukuje innego celu. Osobniki obu populacji muszą się cyklicznie odżywiać i pić aby przetrwać. Gdy mają zaspokojone podstawowe potrzeby i osiągnął wiek dojrzałości mogą się rozmnażać. Reprodukcja pochłania część energii jaką dysponują dinozaury, więc znowu muszą zaspokoić głód i pragnienie. Nowonarodzony dinozaur dziedziczy cechy rodziców jako średnią arytmetyczną. Może jednak zajść mutacja do 10 % odchylania parametrów. Prawdopodobieństwo jej wystąpienia to 2 %. 
-Osobniki różnią się miedzy sobą prędkością poruszania się. Dinozaury szybciej przemieszczające się charakteryzuje jednak mniejsza pojemność żołądka, więc muszą częściej się odżywiać. Takie podejście prowadzi do wyrównania szans na reprodukcję osobników o różnych cechach. 
-Śmierć dinozaura może nastąpić w sposób naturalny (ze starości), z głodu lub z pragnienia. Roślinożercy mogą być również pożarci przez drapieżniki. 
+Scenariusz zaproponowanej symulacji „gry w życie” zakłada walkę o przetrwanie dwóch populacji dinozaurów: roślinożerców i mięsożerców. Zwierzęta niejedzące mięsa (ubarwienie zielone) odżywiają się drzewami i mogą być pożarte przez drapieżniki (ubarwienie brązowe). Ratunkiem dla roślinożercy jest ucieczka do jaskini. W tym momencie mięsożerca rezygnuje z ataku i poszukuje innego celu. Osobniki obu populacji muszą się cyklicznie odżywiać i pić aby przetrwać. Gdy mają zaspokojone podstawowe potrzeby i osiągnął wiek dojrzałości mogą się rozmnażać. Reprodukcja pochłania część energii jaką dysponują dinozaury, więc znowu muszą zaspokoić głód i pragnienie. Nowonarodzony dinozaur dziedziczy cechy rodziców jako średnią arytmetyczną. Może jednak zajść mutacja do 10% odchylania parametrów. Prawdopodobieństwo jej wystąpienia to 2%.
+
+Osobniki różnią się miedzy sobą prędkością poruszania się. Dinozaury szybciej przemieszczające się charakteryzuje jednak mniejsza pojemność żołądka, więc muszą częściej się odżywiać. Takie podejście prowadzi do wyrównania szans na reprodukcję osobników o różnych cechach.
+
+Śmierć dinozaura może nastąpić w sposób naturalny (ze starości), z głodu lub z pragnienia. Roślinożercy mogą być również pożarci przez drapieżniki.
+
 W calu ułatwienia analizy statystycznej podstawowe parametry życiowe obu populacji przedstawiono na wykresach. Ponadto można również wyświetlić dane poszczególnych osobników po wybraniu lewym klawiszem myszy. Akcja ta powoduje wydanie dźwięku i wyświetlenie „chmurki” z podstawowymi parametrami życiowymi dinozaura, a sam osobnik przechodzi w tryb sterowania ręcznego (strzałki na klawiaturze). Klikniecie na pole poza dinozaurem powoduje powrót do automatycznego sterowania i ukrycie „chmurki”. 
 
 ## Instalacja
